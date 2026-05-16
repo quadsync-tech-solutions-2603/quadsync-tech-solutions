@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="Logo.png" type="image/x-icon">
+<title>QuadSync Tech Solutions | Synchronizing Innovations with Success</title>
+<meta name="description" content="QuadSync Tech Solutions is a technology-driven platform dedicated to empowering students with practical knowledge, industry-relevant skills, and opportunities.">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --blue: #4dabff;
+  --blue-dark: #1e88e5;
+  --blue-deeper: #0d47a1;
+  --bg: #050f1a;
+  --bg2: #071624;
+  --bg3: #0a1e35;
+  --bg4: #0d2340;
+  --text: #e6edf6;
+  --muted: #8fa8c4;
+  --border: rgba(77,171,255,0.18);
+  --glow: rgba(77,171,255,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;}
+
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);
+  background-size:60px 60px;opacity:0.4;pointer-events:none;z-index:0;
+}
+
+/* ===== NAVBAR ===== */
+header{position:fixed;width:100%;z-index:1000;top:0;transition:.3s;}
+header.scrolled{background:rgba(5,15,26,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:10px 7%;transition:.3s;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo img{height:48px;width:auto;border-radius:8px;}
+.logo-text{font-family:'Sora',sans-serif;font-size:25px;font-weight:700;color:var(--blue);letter-spacing:-0.3px;line-height:1.2;}
+.nav-links{list-style:none;display:flex;gap:4px;align-items:center;}
+.nav-links a{text-decoration:none;color:#fff;padding:6px 12px;border-radius:6px;font-size:15px;font-weight:500;transition:.2s;letter-spacing:0.2px;}
+.nav-links a:hover{color:var(--blue);background:var(--glow);}
+.nav-cta{background:var(--blue)!important;color:#fff!important;border-radius:8px!important;padding:7px 16px!important;}
+.nav-cta:hover{background:var(--blue-dark)!important;transform:translateY(-1px);}
+.menu-toggle{display:none;font-size:20px;cursor:pointer;color:var(--text);background:none;border:none;padding:4px;}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 7% 80px;position:relative;overflow:hidden;}
+.hero-bg-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(77,171,255,0.12),transparent 70%);top:-100px;left:50%;transform:translateX(-50%);}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,rgba(29,110,213,0.08),transparent 70%);bottom:0;right:-100px;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(77,171,255,0.1);border:1px solid rgba(77,171,255,0.25);border-radius:100px;padding:6px 16px;font-size:13px;color:var(--blue);margin-bottom:24px;font-weight:500;letter-spacing:0.3px;}
+.hero-badge span{width:7px;height:7px;background:var(--blue);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
+.hero h1{font-family:'Sora',sans-serif;font-size:clamp(36px,5.5vw,68px);font-weight:700;line-height:1.1;letter-spacing:-1.5px;margin-bottom:22px;}
+.hero h1 .accent{color:var(--blue);position:relative;display:inline-block;}
+.hero h1 .accent::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),transparent);border-radius:2px;}
+.hero p{max-width:620px;margin:0 auto 36px;color:var(--muted);font-size:17px;line-height:1.75;font-weight:400;}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{background:var(--blue);color:#fff;padding:13px 28px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px;transition:.25s;display:inline-flex;align-items:center;gap:8px;letter-spacing:0.2px;}
+.btn-primary:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 12px 30px rgba(77,171,255,0.25);}
+.btn-outline{background:transparent;color:var(--blue);padding:13px 28px;border-radius:10px;text-decoration:none;font-weight:600;font-size:15px;border:1.5px solid rgba(77,171,255,0.4);transition:.25s;display:inline-flex;align-items:center;gap:8px;}
+.btn-outline:hover{border-color:var(--blue);background:rgba(77,171,255,0.08);transform:translateY(-2px);}
+.hero-stats{display:flex;gap:40px;justify-content:center;margin-top:60px;flex-wrap:wrap;}
+.stat{text-align:center;}
+.stat-num{font-family:'Sora',sans-serif;font-size:32px;font-weight:700;color:var(--blue);}
+.stat-lbl{font-size:13px;color:var(--muted);margin-top:2px;letter-spacing:0.5px;}
+
+/* ===== SECTION BASE ===== */
+.section{padding:100px 7%;position:relative;z-index:1;}
+.section-label{font-size:12px;color:var(--blue);letter-spacing:3px;text-transform:uppercase;font-weight:600;margin-bottom:12px;}
+.section-title{font-family:'Sora',sans-serif;font-size:clamp(26px,3.5vw,40px);font-weight:700;letter-spacing:-0.8px;margin-bottom:16px;}
+.section-sub{color:var(--muted);font-size:16px;line-height:1.7;max-width:560px;}
+.section-header{margin-bottom:56px;}
+.section-header.center{text-align:center;}
+.section-header.center .section-sub{margin:0 auto;}
+.dark-section{background:var(--bg2);}
+
+/* ===== SERVICES ===== */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.service-card{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:32px;transition:.3s;position:relative;overflow:hidden;}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),transparent);opacity:0;transition:.3s;}
+.service-card:hover{transform:translateY(-6px);border-color:rgba(77,171,255,0.35);box-shadow:0 20px 50px rgba(0,0,0,0.3);}
+.service-card:hover::before{opacity:1;}
+.service-icon{width:52px;height:52px;background:rgba(77,171,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:22px;color:var(--blue);}
+.service-card h3{font-size:19px;font-weight:600;margin-bottom:10px;color:var(--text);}
+.service-card p{color:var(--muted);font-size:14.5px;line-height:1.75;}
+
+/* ===== INTERNSHIP CARDS ===== */
+.internship-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;}
+.internship-card{background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:0;overflow:hidden;transition:.35s;position:relative;display:flex;flex-direction:column;}
+.internship-card:hover{transform:translateY(-8px);border-color:rgba(77,171,255,0.4);box-shadow:0 24px 60px rgba(0,0,0,0.35);}
+.internship-card.featured{border-color:rgba(77,171,255,0.35);background:linear-gradient(160deg,var(--bg3),rgba(77,171,255,0.05));}
+.internship-card-header{padding:28px 28px 20px;border-bottom:1px solid var(--border);position:relative;}
+.internship-card-header::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--blue-dark),transparent);border-radius:20px 20px 0 0;}
+.internship-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:14px;}
+.badge-featured{background:rgba(77,171,255,0.15);color:var(--blue);border:1px solid rgba(77,171,255,0.3);}
+.badge-new{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.3);}
+.badge-hot{background:rgba(251,146,60,0.15);color:#fb923c;border:1px solid rgba(251,146,60,0.3);}
+.internship-icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;}
+.icon-da{background:linear-gradient(135deg,rgba(77,171,255,0.2),rgba(77,171,255,0.05));color:var(--blue);}
+.icon-py{background:linear-gradient(135deg,rgba(251,188,5,0.2),rgba(251,188,5,0.05));color:#fbbf24;}
+.icon-wd{background:linear-gradient(135deg,rgba(167,139,250,0.2),rgba(167,139,250,0.05));color:#a78bfa;}
+.icon-hr{background:linear-gradient(135deg,rgba(52,211,153,0.2),rgba(52,211,153,0.05));color:#34d399;}
+.internship-card-header h3{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;margin-bottom:6px;color:var(--text);}
+.internship-card-header p{font-size:14px;color:var(--muted);line-height:1.6;}
+.internship-highlights{padding:20px 28px;display:flex;flex-direction:column;gap:10px;flex:1;}
+.highlight-row{display:flex;align-items:center;justify-content:space-between;font-size:13.5px;}
+.highlight-label{color:var(--muted);display:flex;align-items:center;gap:8px;}
+.highlight-label i{color:var(--blue);width:16px;font-size:13px;}
+.highlight-value{font-weight:600;color:var(--text);}
+.highlight-value.price{color:var(--blue);font-family:'Sora',sans-serif;font-size:15px;}
+.internship-card-footer{padding:20px 28px;border-top:1px solid var(--border);display:flex;gap:10px;}
+.btn-card-primary{flex:1;background:var(--blue);color:#fff;padding:11px 16px;border-radius:9px;text-decoration:none;font-weight:600;font-size:13.5px;transition:.25s;display:inline-flex;align-items:center;justify-content:center;gap:6px;}
+.btn-card-primary:hover{background:var(--blue-dark);transform:translateY(-1px);}
+.btn-card-outline{flex:1;background:transparent;color:var(--blue);padding:11px 16px;border-radius:9px;text-decoration:none;font-weight:600;font-size:13.5px;border:1.5px solid rgba(77,171,255,0.35);transition:.25s;display:inline-flex;align-items:center;justify-content:center;gap:6px;}
+.btn-card-outline:hover{background:rgba(77,171,255,0.08);border-color:var(--blue);}
+.internship-card.da-special{grid-column:1/-1;}
+@media(min-width:900px){
+  .internship-card.da-special{grid-column:auto;grid-row:1/3;}
+}
+
+/* ===== FEATURES ===== */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;}
+.feature-card{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:28px;text-align:center;transition:.3s;}
+.feature-card:hover{transform:translateY(-5px);border-color:rgba(77,171,255,0.3);box-shadow:0 16px 40px rgba(0,0,0,0.25);}
+.feature-icon{width:60px;height:60px;background:rgba(77,171,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:24px;color:var(--blue);}
+.feature-card h4{font-size:16px;font-weight:600;margin-bottom:8px;}
+.feature-card p{font-size:13.5px;color:var(--muted);line-height:1.65;}
+
+/* ===== EVENTS ===== */
+.events-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;}
+.event-card{background:var(--bg4);border:1px solid var(--border);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px;transition:.3s;}
+.event-card:hover{transform:translateY(-4px);border-color:rgba(77,171,255,0.3);box-shadow:0 16px 40px rgba(0,0,0,0.3);}
+.event-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(77,171,255,0.1);border:1px solid rgba(77,171,255,0.2);color:var(--blue);font-size:12px;font-weight:600;padding:4px 12px;border-radius:100px;letter-spacing:0.5px;width:fit-content;}
+.event-card h3{font-size:18px;font-weight:600;color:var(--text);}
+.event-card p{color:var(--muted);font-size:14px;line-height:1.7;flex:1;}
+.event-date{font-size:13px;color:var(--blue);font-weight:600;display:flex;align-items:center;gap:6px;}
+.event-card .btn-sm{background:var(--blue);color:#fff;padding:9px 20px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;transition:.2s;display:inline-block;margin-top:4px;}
+.event-card .btn-sm:hover{background:var(--blue-dark);}
+.event-card .btn-sm.soon{background:var(--bg3);color:var(--muted);cursor:default;}
+
+/* ===== TESTIMONIALS ===== */
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;}
+.testimonial-card{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:28px;transition:.3s;position:relative;}
+.testimonial-card:hover{transform:translateY(-4px);border-color:rgba(77,171,255,0.3);}
+.testimonial-card::before{content:'\201C';position:absolute;top:20px;right:24px;font-size:64px;color:rgba(77,171,255,0.1);font-family:Georgia,serif;line-height:1;}
+.testimonial-stars{color:#fbbf24;font-size:14px;margin-bottom:14px;display:flex;gap:3px;}
+.testimonial-text{font-size:14.5px;color:var(--muted);line-height:1.8;margin-bottom:20px;font-style:italic;}
+.testimonial-author{display:flex;align-items:center;gap:12px;}
+.author-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue-dark));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff;flex-shrink:0;}
+.author-name{font-weight:600;font-size:14px;}
+.author-role{font-size:12px;color:var(--muted);}
+
+/* ===== ABOUT ===== */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.about-text-block p{color:var(--muted);font-size:16px;line-height:1.85;margin-bottom:20px;}
+.about-features{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px;}
+.about-feature{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted);}
+.about-feature i{color:var(--blue);font-size:15px;width:20px;}
+.about-visual{background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:36px;text-align:center;}
+.about-big-num{font-family:'Sora',sans-serif;font-size:56px;font-weight:700;color:var(--blue);line-height:1;}
+.about-big-lbl{font-size:14px;color:var(--muted);margin-top:6px;}
+.social-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px;}
+.social-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:8px;text-decoration:none;color:#fff;font-size:14px;font-weight:500;transition:.25s;}
+.social-btn:hover{transform:translateY(-2px);opacity:.9;}
+.linkedin{background:#0a66c2;}.instagram{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);}
+.youtube{background:#ff0000;}.github{background:#24292e;}
+
+/* ===== CTA ===== */
+.cta-box{background:linear-gradient(135deg,rgba(77,171,255,0.12),rgba(13,71,161,0.15));border:1px solid rgba(77,171,255,0.25);border-radius:20px;padding:56px;text-align:center;position:relative;overflow:hidden;}
+.cta-box::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at center,rgba(77,171,255,0.06),transparent 60%);pointer-events:none;}
+.cta-box h2{font-family:'Sora',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:700;margin-bottom:14px;}
+.cta-box p{color:var(--muted);font-size:16px;margin-bottom:28px;max-width:520px;margin-left:auto;margin-right:auto;}
+
+/* ===== FOOTER ===== */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 30px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:50px;}
+.footer-brand img{height:44px;border-radius:8px;margin-bottom:14px;}
+.footer-brand h3{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;margin-bottom:8px;}
+.footer-brand p{color:var(--muted);font-size:14px;line-height:1.7;max-width:260px;}
+.footer-col h4{font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--blue);margin-bottom:18px;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:10px;}
+.footer-col ul li a{text-decoration:none;color:var(--muted);font-size:14px;transition:.2s;}
+.footer-col ul li a:hover{color:var(--blue);}
+.footer-contact li{display:flex;align-items:flex-start;gap:10px;color:var(--muted);font-size:14px;margin-bottom:12px;}
+.footer-contact li i{color:var(--blue);margin-top:3px;width:16px;}
+.footer-contact a{color:var(--muted);text-decoration:none;transition:.2s;}
+.footer-contact a:hover{color:var(--blue);}
+.footer-social{display:flex;gap:10px;margin-top:16px;}
+.footer-social a{width:36px;height:36px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;font-size:15px;transition:.2s;}
+.footer-social a:hover{color:var(--blue);border-color:rgba(77,171,255,0.4);}
+.footer-bottom{border-top:1px solid var(--border);margin-top:50px;padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+.footer-bottom p{font-size:13px;color:var(--muted);}
+.footer-bottom-links a{font-size:13px;color:var(--muted);text-decoration:none;margin-left:20px;transition:.2s;}
+.footer-bottom-links a:hover{color:var(--blue);}
+
+/* ===== WHATSAPP ===== */
+.whatsapp-float{position:fixed;bottom:28px;right:20px;width:54px;height:54px;background:#25D366;color:#fff;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:26px;text-decoration:none;z-index:9999;transition:.3s;animation:wpulse 2.5s infinite;}
+.whatsapp-float:hover{transform:scale(1.12);background:#1ebe5d;}
+@keyframes wpulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.6);}70%{box-shadow:0 0 0 18px rgba(37,211,102,0);}100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}}
+
+/* ===== MOBILE ===== */
+@media(max-width:1024px){
+  .about-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:repeat(2,1fr);}
+  .services-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:768px){
+  .internship-grid{grid-template-columns:1fr!important;}
+  .services-grid{grid-template-columns:1fr!important;}
+  .events-grid{grid-template-columns:1fr!important;}
+  .nav-links{position:fixed;top:0;right:-280px;height:100vh;background:var(--bg2);flex-direction:column;width:260px;padding:80px 24px 24px;transition:.35s;border-left:1px solid var(--border);gap:4px;}
+  .nav-links.open{right:0;}
+  .nav-links a{width:100%;padding:12px 16px;}
+  .menu-toggle{display:block;}
+  .hero h1{font-size:36px;letter-spacing:-1px;}
+  .hero-stats{gap:24px;}
+  .about-features{grid-template-columns:1fr;}
+  .internship-card.da-special{grid-column:auto;}
+}
+@media(max-width:600px){
+  .footer-grid{grid-template-columns:1fr;text-align:center;}
+  .footer-brand p{max-width:100%;}
+  .footer-contact li{justify-content:center;}
+  .footer-bottom{flex-direction:column;text-align:center;}
+  .footer-bottom-links a{margin:0 10px;}
+  .cta-box{padding:36px 24px;}
+  .footer-social{justify-content:center;}
+}
+</style>
+</head>
+
+<a href="https://wa.me/917796988650" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<body>
+<header id="main-header">
+  <nav class="navbar">
+    <a href="#home" class="logo">
+      <img src="Logo.png" alt="QuadSync Logo">
+      <div>
+        <div class="logo-text">QuadSync Tech Solutions</div>
+      </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#internships">Internships</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="internshipdetails.html">Program Details</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-bg-orb orb1"></div>
+  <div class="hero-bg-orb orb2"></div>
+  <div style="position:relative;z-index:1;">
+    <div class="hero-badge"><span></span> Now Accepting Applications — May 2026 Batch</div>
+    <h1>Synchronizing Innovations<br><span class="accent">with Success</span></h1>
+    <p>Welcome to <strong>QuadSync Tech Solutions</strong> — a technology-driven platform empowering students with practical knowledge, industry-relevant skills, and career opportunities through structured internship programs.</p>
+    <div class="hero-btns">
+      <a href="#internships" class="btn-primary"><i class="fa-solid fa-graduation-cap"></i> Explore Internships</a>
+      <a href="internshipdetails.html" class="btn-outline"><i class="fa-solid fa-file-lines"></i> View Program Details</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">100+</div><div class="stat-lbl">Students Trained</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-lbl">Internship Programs</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-lbl">Certificates Issued</div></div>
+      <div class="stat"><div class="stat-num">5★</div><div class="stat-lbl">Student Reviews</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERNSHIP PROGRAMS -->
+<section id="internships" class="section dark-section">
+  <div class="section-header center">
+    <div class="section-label">Our Programs</div>
+    <h2 class="section-title">Internship Programs</h2>
+    <p class="section-sub">Choose from our industry-focused internship programs designed to make you job-ready with real-world skills and a certified portfolio.</p>
+  </div>
+
+  <div class="internship-grid" style="grid-template-columns:repeat(4,1fr);">
+
+    <!-- DATA ANALYST — 2 MONTHS (FEATURED) -->
+    <div class="internship-card featured" style="border-color:rgba(77,171,255,0.4);">
+      <div class="internship-card-header">
+        <div class="internship-badge badge-featured"><i class="fa-solid fa-star"></i> Most Popular</div>
+        <div class="internship-icon icon-da"><i class="fa-solid fa-chart-line"></i></div>
+        <h3>Data Analyst</h3>
+        <p>Master Excel, Power BI, SQL, and Python to become a complete data analyst in 8 intensive weeks.</p>
+      </div>
+      <div class="internship-highlights">
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-clock"></i> Duration</span>
+          <span class="highlight-value">2 Months (8 Weeks)</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-wifi"></i> Mode</span>
+          <span class="highlight-value">Online (Live + Recorded)</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-tools"></i> Tools</span>
+          <span class="highlight-value">Excel, Power BI, SQL, Python</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-certificate"></i> Certificates</span>
+          <span class="highlight-value">4 Certificates + LOR</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-indian-rupee-sign"></i> Fees</span>
+          <span class="highlight-value price">₹499 – ₹899</span>
+        </div>
+      </div>
+      <div class="internship-card-footer">
+        <a href="internshipdetails.html?program=da" class="btn-card-outline"><i class="fa-solid fa-eye"></i> View Details</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeCOC7fbpCwlBqYKdCurVnzDBVzRa8kyhKgD-OyqrLh7A5B7w/viewform?usp=header" target="_blank" class="btn-card-primary"><i class="fa-solid fa-paper-plane"></i> Apply Now</a>
+      </div>
+    </div>
+
+    <!-- PYTHON PROGRAMMING -->
+    <div class="internship-card">
+      <div class="internship-card-header">
+        <div class="internship-badge badge-featured"><i class="fa-brands fa-python"></i> Technical</div>
+        <div class="internship-icon icon-py"><i class="fa-brands fa-python"></i></div>
+        <h3>Python Programming</h3>
+        <p>Learn Python from scratch — variables, data structures, functions, file handling, and real-world projects.</p>
+      </div>
+      <div class="internship-highlights">
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-clock"></i> Duration</span>
+          <span class="highlight-value">1 Month (4 Weeks)</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-wifi"></i> Mode</span>
+          <span class="highlight-value">Online (Live + Recorded)</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-tools"></i> Tools</span>
+          <span class="highlight-value">Python, VS Code</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-certificate"></i> Certificates</span>
+          <span class="highlight-value">4 Certificates</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-indian-rupee-sign"></i> Fees</span>
+          <span class="highlight-value price">₹199 – ₹399</span>
+        </div>
+      </div>
+      <div class="internship-card-footer">
+        <a href="internshipdetails.html?program=py" class="btn-card-outline"><i class="fa-solid fa-eye"></i> View Details</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe6iwkarwiNxGyIxFLGreDmGdbgOBXaXYuj7K8WQKs9AUGpfg/viewform?usp=header" target="_blank" class="btn-card-primary"><i class="fa-solid fa-paper-plane"></i> Apply Now</a>
+      </div>
+    </div>
+
+    <!-- WEB DEVELOPMENT -->
+    <div class="internship-card">
+      <div class="internship-card-header">
+        <div class="internship-badge badge-featured"><i class="fa-solid fa-code"></i> Technical</div>
+        <div class="internship-icon icon-wd"><i class="fa-solid fa-code"></i></div>
+        <h3>Web Development</h3>
+        <p>Build real websites using HTML, CSS, and JavaScript with responsive design and interactive features.</p>
+      </div>
+      <div class="internship-highlights">
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-clock"></i> Duration</span>
+          <span class="highlight-value">1 Month (4 Weeks)</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-wifi"></i> Mode</span>
+          <span class="highlight-value">Online (Live + Recorded)</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-tools"></i> Tools</span>
+          <span class="highlight-value">HTML, CSS, JavaScript</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-certificate"></i> Certificates</span>
+          <span class="highlight-value">4 Certificates</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-indian-rupee-sign"></i> Fees</span>
+          <span class="highlight-value price">₹199 – ₹399</span>
+        </div>
+      </div>
+      <div class="internship-card-footer">
+        <a href="internshipdetails.html?program=wd" class="btn-card-outline"><i class="fa-solid fa-eye"></i> View Details</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeCOC7fbpCwlBqYKdCurVnzDBVzRa8kyhKgD-OyqrLh7A5B7w/viewform?usp=header" target="_blank" class="btn-card-primary"><i class="fa-solid fa-paper-plane"></i> Apply Now</a>
+      </div>
+    </div>
+
+    <!-- HR MANAGER -->
+    <div class="internship-card">
+      <div class="internship-card-header">
+        <div class="internship-badge badge-featured"><i class="fa-solid fa-users-gear"></i> Technical</div>
+        <div class="internship-icon icon-hr"><i class="fa-solid fa-users-gear"></i></div>
+        <h3>HR Manager</h3>
+        <p>Learn HR fundamentals, recruitment, resume screening, onboarding, LinkedIn posting, and candidate management.</p>
+      </div>
+      <div class="internship-highlights">
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-clock"></i> Duration</span>
+          <span class="highlight-value">1 Month (4 Weeks)</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-wifi"></i> Mode</span>
+          <span class="highlight-value">Online (Live + Recorded)</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-tools"></i> Tools</span>
+          <span class="highlight-value">LinkedIn, MS Office, ATS</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-certificate"></i> Certificates</span>
+          <span class="highlight-value">4 Certificates</span>
+        </div>
+        <div class="highlight-row">
+          <span class="highlight-label"><i class="fa-solid fa-indian-rupee-sign"></i> Fees</span>
+          <span class="highlight-value price">₹99 – ₹199</span>
+        </div>
+      </div>
+      <div class="internship-card-footer">
+        <a href="internshipdetails.html?program=hr" class="btn-card-outline"><i class="fa-solid fa-eye"></i> View Details</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeCOC7fbpCwlBqYKdCurVnzDBVzRa8kyhKgD-OyqrLh7A5B7w/viewform?usp=header" target="_blank" class="btn-card-primary"><i class="fa-solid fa-paper-plane"></i> Apply Now</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;margin-top:36px;">
+    <a href="internshipdetails.html" class="btn-primary"><i class="fa-solid fa-arrow-right"></i> View Full Program Details & Syllabus</a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="section-header center">
+    <div class="section-label">Why Choose Us</div>
+    <h2 class="section-title">Everything You Need to Succeed</h2>
+    <p class="section-sub">Our internship programs are built to give you real-world experience, mentorship, and credentials that stand out.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fa-solid fa-briefcase"></i></div>
+      <h4>Industry Projects</h4>
+      <p>Work on real business datasets and projects that you can showcase in your portfolio and resume.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+      <h4>Expert Mentorship</h4>
+      <p>Learn from experienced industry professionals who guide you through every step of the program.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fa-solid fa-certificate"></i></div>
+      <h4>Internship Certificate</h4>
+      <p>Receive up to 4 certificates including a completion certificate, performance cert, and appreciation award.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fa-solid fa-file-lines"></i></div>
+      <h4>Resume Building</h4>
+      <p>Build a strong resume with verified internship experience and skill-based certifications from QuadSync.</p>
+    </div>
+    <!-- <div class="feature-card">
+      <div class="feature-icon"><i class="fa-solid fa-handshake"></i></div>
+      <h4>Placement Support</h4>
+      <p>Get career guidance, profile reviews, and placement support to help you land your first role.</p>
+    </div> -->
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fa-solid fa-video"></i></div>
+      <h4>Live Sessions</h4>
+      <p>Attend daily live training sessions with doubt-solving support and recorded session access anytime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="section dark-section">
+  <div class="section-header center">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-sub">End-to-end solutions from structured training to professional consulting for students and businesses.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon"><i class="fa-solid fa-globe"></i></div>
+      <h3>Website Development</h3>
+      <p>Complete web solutions including a custom domain, 1-year hosting, full-year service support, and SEO optimization — everything you need to launch and grow your online presence.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><i class="fa-solid fa-layer-group"></i></div>
+      <h3>Structural Training Programs</h3>
+      <p>Industry-oriented programs designed to help students gain practical knowledge, real-world exposure, and develop job-ready technical skills through structured guided learning.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><i class="fa-solid fa-briefcase"></i></div>
+      <h3>IT Consultancy Services</h3>
+      <p>Professional consulting services to implement effective digital solutions, optimize business workflows, and drive sustainable technology-enabled growth for your organization.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><i class="fa-solid fa-palette"></i></div>
+      <h3>Creative & Media Services</h3>
+      <p>End-to-end creative solutions including graphic design, professional video editing, voice-over production, ad design, and branded content for all your digital marketing needs.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
+      <h3>Business Solutions & Analytics</h3>
+      <p>Data-driven business solutions covering dashboard development, data transformation, business intelligence reporting, and analytics to help you make smarter decisions faster.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon"><i class="fa-solid fa-bolt"></i></div>
+      <h3>Weekly Bootcamps</h3>
+      <p>Intensive weekly hands-on bootcamps covering tools like Power BI, Python, SQL, and more — ideal for rapid skill-building and staying ahead in today's tech-driven job market.</p>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events" class="section">
+  <div class="section-header center">
+    <div class="section-label">What's Coming</div>
+    <h2 class="section-title">Upcoming Events</h2>
+    <p class="section-sub">Join our hands-on bootcamps and internship programs to level up your skills and launch your career.</p>
+  </div>
+  <div class="events-grid" style="grid-template-columns:repeat(2,1fr);">
+
+    <!-- Event 1: New Internship Batch -->
+    <div class="event-card">
+      <div class="event-tag"><i class="fa-solid fa-graduation-cap"></i> New Batch</div>
+      <h3>New Internship Batch — All Programs Starting</h3>
+      <p>All 4 internship programs launching together — <strong style="color:var(--text);">Data Analyst (8 Weeks)</strong>, <strong style="color:var(--text);">Python Programming</strong>, <strong style="color:var(--text);">Web Development</strong> &amp; <strong style="color:var(--text);">HR Manager</strong> (4 Weeks each). Live daily sessions, Saturday doubt-solving, real-world projects &amp; 4 certificates for every participant.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;">
+        <span style="background:rgba(77,171,255,0.1);border:1px solid var(--border);color:var(--blue);padding:4px 12px;border-radius:100px;font-size:12px;font-weight:600;"><i class="fa-solid fa-chart-line"></i> Data Analyst</span>
+        <span style="background:rgba(251,188,5,0.1);border:1px solid rgba(251,188,5,0.2);color:#fbbf24;padding:4px 12px;border-radius:100px;font-size:12px;font-weight:600;"><i class="fa-brands fa-python"></i> Python</span>
+        <span style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2);color:#a78bfa;padding:4px 12px;border-radius:100px;font-size:12px;font-weight:600;"><i class="fa-solid fa-code"></i> Web Dev</span>
+        <span style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.2);color:#34d399;padding:4px 12px;border-radius:100px;font-size:12px;font-weight:600;"><i class="fa-solid fa-users-gear"></i> HR Manager</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:auto;padding-top:16px;border-top:1px solid var(--border);">
+        <div class="event-date"><i class="fa-regular fa-calendar"></i> June 01, 2026</div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeCOC7fbpCwlBqYKdCurVnzDBVzRa8kyhKgD-OyqrLh7A5B7w/viewform?usp=header" target="_blank" class="btn-sm">Register Now →</a>
+      </div>
+    </div>
+
+    <!-- Event 2: Power BI Bootcamp -->
+    <div class="event-card">
+      <div class="event-tag"><i class="fa-solid fa-bolt"></i> Live Bootcamp</div>
+      <h3>Power BI Bootcamp — 3 Hours</h3>
+      <p>An intensive hands-on bootcamp covering interactive dashboard building, Power Query transformations, DAX formulas, and core data analytics concepts using Power BI — perfect for beginners and working professionals looking to upskill fast.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;">
+        <span style="background:rgba(77,171,255,0.1);border:1px solid var(--border);color:var(--blue);padding:4px 12px;border-radius:100px;font-size:12px;font-weight:600;"><i class="fa-solid fa-clock"></i> 3 Hours</span>
+        <span style="background:rgba(77,171,255,0.1);border:1px solid var(--border);color:var(--blue);padding:4px 12px;border-radius:100px;font-size:12px;font-weight:600;"><i class="fa-solid fa-wifi"></i> Online Live</span>
+        <span style="background:rgba(77,171,255,0.1);border:1px solid var(--border);color:var(--blue);padding:4px 12px;border-radius:100px;font-size:12px;font-weight:600;"><i class="fa-solid fa-certificate"></i> Certificate</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:auto;padding-top:16px;border-top:1px solid var(--border);">
+        <div class="event-date"><i class="fa-regular fa-calendar"></i> June 07, 2026</div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeA9rWJKTSFfUXey1ekl1p6FTMn8Aw0axAxBC_qb-GghaZ_7w/viewform?usp=header" target="_blank" class="btn-sm">Register Now →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section dark-section">
+  <div class="section-header center">
+    <div class="section-label">Student Reviews</div>
+    <h2 class="section-title">What Our Students Say</h2>
+    <p class="section-sub">Real feedback from students who have completed our internship programs and launched their careers.</p>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+      <p class="testimonial-text">The Data Analyst internship was a game-changer for me. I went from knowing nothing about Power BI to building full dashboards in 8 weeks. The live sessions were super practical and the mentors were always available.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">P</div>
+        <div><div class="author-name">Priya Sharma</div><div class="author-role">Data Analyst — Pune, MH</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+      <p class="testimonial-text">I completed the Python internship and loved every session. The syllabus was structured perfectly — starting from basics and ending with a real project. The certification really helped boost my resume.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">R</div>
+        <div><div class="author-name">Rahul Patil</div><div class="author-role">Python Developer Trainee — Aurangabad, MH</div></div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+      <p class="testimonial-text">QuadSync is amazing! The SQL module completely changed how I look at data. The instructors break everything down clearly and the doubt-solving sessions on Saturdays were incredibly helpful.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">A</div>
+        <div><div class="author-name">Ananya Deshmukh</div><div class="author-role">Business Analyst Intern — Nagpur, MH</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="about-grid">
+    <div class="about-text-block">
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-title">About QuadSync Tech Solutions</h2>
+      <p>QuadSync Tech Solutions is a technology-driven organization focused on delivering innovative IT solutions, data analytics services, and industry-oriented training programs.</p>
+      <p>We bridge the gap between learning and real-world business needs by helping students and organizations grow through practical skills, intelligent solutions, and modern digital strategies.</p>
+      <div class="about-features">
+        <div class="about-feature"><i class="fa-solid fa-check-circle"></i> Live + Recorded Sessions</div>
+        <div class="about-feature"><i class="fa-solid fa-check-circle"></i> Real-World Projects</div>
+        <div class="about-feature"><i class="fa-solid fa-check-circle"></i> Industry Certifications</div>
+        <div class="about-feature"><i class="fa-solid fa-check-circle"></i> Doubt Solving Support</div>
+        <div class="about-feature"><i class="fa-solid fa-check-circle"></i> Letter of Recommendation</div>
+        <div class="about-feature"><i class="fa-solid fa-check-circle"></i> Scholarship Available</div>
+      </div>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/company/quadsynctechsolutions" target="_blank" class="social-btn linkedin"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
+        <a href="https://www.instagram.com/quadsynctechsolutions" target="_blank" class="social-btn instagram"><i class="fa-brands fa-instagram"></i> Instagram</a>
+        <a href="https://www.youtube.com/channel/UCi5KiF0xqmgYBEHAP5LLYIg" target="_blank" class="social-btn youtube"><i class="fa-brands fa-youtube"></i> YouTube</a>
+        <a href="https://github.com/quadsynctechsolutions" target="_blank" class="social-btn github"><i class="fa-brands fa-github"></i> GitHub</a>
+      </div>
+    </div>
+    <div>
+      <div class="about-visual" style="margin-bottom:20px;">
+        <div class="about-big-num">4+</div>
+        <div class="about-big-lbl">Industry Tools Covered</div>
+        <div style="height:1px;background:var(--border);margin:20px 0;"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div><div class="about-big-num" style="font-size:36px;">100+</div><div class="about-big-lbl">Students Trained</div></div>
+          <div><div class="about-big-num" style="font-size:36px;">5★</div><div class="about-big-lbl">Student Reviews</div></div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div style="font-size:14px;color:var(--muted);margin-bottom:16px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;">Tools You'll Master</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;">
+          <span style="background:rgba(77,171,255,0.1);border:1px solid var(--border);color:var(--blue);padding:6px 14px;border-radius:100px;font-size:13px;font-weight:500;">Excel</span>
+          <span style="background:rgba(77,171,255,0.1);border:1px solid var(--border);color:var(--blue);padding:6px 14px;border-radius:100px;font-size:13px;font-weight:500;">Power BI</span>
+          <span style="background:rgba(77,171,255,0.1);border:1px solid var(--border);color:var(--blue);padding:6px 14px;border-radius:100px;font-size:13px;font-weight:500;">SQL</span>
+          <span style="background:rgba(77,171,255,0.1);border:1px solid var(--border);color:var(--blue);padding:6px 14px;border-radius:100px;font-size:13px;font-weight:500;">Python</span>
+          <span style="background:rgba(77,171,255,0.1);border:1px solid var(--border);color:var(--blue);padding:6px 14px;border-radius:100px;font-size:13px;font-weight:500;">HTML/CSS/JS</span>
+          <span style="background:rgba(77,171,255,0.1);border:1px solid var(--border);color:var(--blue);padding:6px 14px;border-radius:100px;font-size:13px;font-weight:500;">LinkedIn</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section dark-section">
+  <div class="cta-box">
+    <div class="section-label" style="margin-bottom:12px;">Enroll Today</div>
+    <h2>Ready to Launch Your Tech Career?</h2>
+    <p>Explore our structured internship programs designed to help you master in-demand skills and land your dream role with real experience.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a href="internshipdetails.html" class="btn-primary"><i class="fa-solid fa-graduation-cap"></i> View All Programs</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeCOC7fbpCwlBqYKdCurVnzDBVzRa8kyhKgD-OyqrLh7A5B7w/viewform?usp=header" target="_blank" class="btn-outline"><i class="fa-solid fa-paper-plane"></i> Apply Now</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="Logo.png" alt="QuadSync Logo">
+      <h3>QuadSync Tech Solutions</h3>
+      <p>Synchronizing Innovations with Success — empowering students and businesses through technology and structured internships.</p>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/company/quadsynctechsolutions" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://www.instagram.com/quadsynctechsolutions" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.youtube.com/channel/UCi5KiF0xqmgYBEHAP5LLYIg" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://github.com/quadsynctechsolutions" target="_blank"><i class="fa-brands fa-github"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#internships">Internships</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="internshipdetails.html">Program Details</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <ul>
+        <li><a href="internshipdetails.html?program=da">Data Analyst — 2 Months</a></li>
+        <li><a href="internshipdetails.html?program=py">Python Programming — 1 Month</a></li>
+        <li><a href="internshipdetails.html?program=wd">Web Development — 1 Month</a></li>
+        <li><a href="internshipdetails.html?program=hr">HR Manager — 1 Month</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Info</h4>
+      <ul class="footer-contact">
+        <li><i class="fa-solid fa-location-dot"></i><span>Chh. Sambhajinagar, MH, India</span></li>
+        <li><i class="fa-solid fa-envelope"></i><a href="mailto:info@quadsynctechsolutions.in" style="color:var(--blue);text-decoration:none;">info@quadsynctechsolutions.in</a></li>
+        <li><i class="fa-solid fa-phone"></i><a href="tel:+917796988650" style="color:var(--muted);text-decoration:none;">+91 7796988650</a></li>
+        <li><i class="fa-brands fa-whatsapp"></i><a href="https://wa.me/917796988650" target="_blank" style="color:var(--blue);">Chat on WhatsApp</a></li>
+        <li><i class="fa-solid fa-link"></i><a href="https://docs.google.com/forms/d/e/1FAIpQLSeCOC7fbpCwlBqYKdCurVnzDBVzRa8kyhKgD-OyqrLh7A5B7w/viewform?usp=header" target="_blank" style="color:var(--blue);">Apply for Internship ↗</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 QuadSync Tech Solutions. All rights reserved.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const header = document.getElementById('main-header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 30);
+});
+document.getElementById('menuToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+</script>
+</body>
+</html>
