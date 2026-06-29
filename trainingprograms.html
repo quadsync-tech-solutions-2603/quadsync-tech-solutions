@@ -1263,156 +1263,139 @@ footer a { color: var(--blue); text-decoration: none; }
   <!-- ── SYLLABUS TABS ──────────────────────────────────────── -->
   <section class="section">
     <div class="section-label">Curriculum</div>
-    <h2 class="section-title" style="margin-bottom:6px;">Complete 90-Day Syllabus</h2>
+    <h2 class="section-title" style="margin-bottom:6px;">Complete 12-Week Syllabus</h2>
     <p style="color:var(--muted);font-size:15px;margin-bottom:28px;">
-      Week 1-2 Excel with AI → Weeks 3-4 SQL → Weeks 5–8 Python + EDA Tableau → Weeks 9–12 PowerBI + Tableau &amp; → Capstone Project (2 Industry Projects)
+      Week 1-2 Excel with AI → Weeks 3-4 SQL → Weeks 5–8 Python + EDA + Tableau → Weeks 9–12 Power BI + Tableau → Capstone Project (2 Industry Projects)
     </p>
 
     <!-- =====================================================
-         DA SYLLABUS TAB BUTTONS
-         Structure: Excel 5 days · SQL 10 days · Power BI + Tableau 10 days · Python/EDA/AI 15 days
-         Total = 40 days exactly. Last 2 days of Python section are final projects.
-         To rename a tab: edit the button text and matching showTab() call.
+         DA SYLLABUS TAB BUTTONS — WEEK-BASED
+         Excel: Wk 1-2 · SQL: Wk 3-4 · Python+EDA+Tableau: Wk 5-8 · Power BI+Tableau: Wk 9-12 · Capstone: Final
          ===================================================== -->
     <div class="tabs">
-      <button class="tab-btn active" onclick="showTab('da','excel',this)">📊 Excel — Days 1–5</button>
-      <button class="tab-btn" onclick="showTab('da','sql',this)">🗄️ SQL — Days 6–15</button>
-      <button class="tab-btn" onclick="showTab('da','powerbi',this)">📈 Power BI — Days 16–22</button>
-      <button class="tab-btn" onclick="showTab('da','tableau',this)">📉 Tableau — Days 23–25</button>
-      <button class="tab-btn" onclick="showTab('da','python',this)">🐍 Python, EDA &amp; AI — Days 26–40</button>
+      <button class="tab-btn active" onclick="showTab('da','excel',this)">📊 Excel — Week 1–2</button>
+      <button class="tab-btn" onclick="showTab('da','sql',this)">🗄️ SQL — Week 3–4</button>
+      <button class="tab-btn" onclick="showTab('da','python',this)">🐍 Python + EDA + Tableau — Week 5–8</button>
+      <button class="tab-btn" onclick="showTab('da','powerbi',this)">📈 Power BI + Tableau — Week 9–12</button>
+      <button class="tab-btn" onclick="showTab('da','capstone',this)">🏁 Capstone — Final Project</button>
     </div>
 
-    <!-- ── EXCEL TAB · Days 1–5 (5 days) ──
-         9 original topics compressed into 5 days by combining related pairs.
-         ─────────────────────────────────── -->
+    <!-- ── EXCEL TAB · Week 1–2 ── -->
     <div class="tab-panel active" id="da-tab-excel">
       <div class="tab-week-label">
-        <span class="week-num">Days 1–5</span>
-        <h4>Excel (with AI) &mdash; 5 Days</h4>
+        <span class="week-num">Week 1–2</span>
+        <h4>Excel (with AI)</h4>
       </div>
       <table class="syllabus-table">
-        <thead><tr><th>Chapter</th><th>Topic</th><th>Day</th></tr></thead>
+        <thead><tr><th>Chapter</th><th>Topic</th><th>Week</th></tr></thead>
         <tbody>
-          <!-- Day 1: Intro + Data Entry combined -->
-          <tr><td><span class="chapter-tag">Ch. 1</span></td><td>Excel Interface, Ribbons &amp; Shortcuts · Data Entry, Basic Formulas (SUM, AVERAGE, COUNT, MIN, MAX)</td><td>Day 1</td></tr>
-          <!-- Day 2: Data Cleaning + Logical Functions combined -->
-          <tr><td><span class="chapter-tag">Ch. 2</span></td><td>Data Cleaning (Remove Duplicates, TRIM, CLEAN) · Logical Functions (IF, AND, OR), Sort, Filters &amp; Tables</td><td>Day 2</td></tr>
-          <!-- Day 3: Lookup functions + Statistical / Date formulas combined -->
-          <tr><td><span class="chapter-tag">Ch. 3</span></td><td>VLOOKUP, HLOOKUP, MATCH &amp; INDEX · Statistical Formulas (STDEV, MEDIAN, RANK) &amp; Date Functions</td><td>Day 3</td></tr>
-          <!-- Day 4: Pivot Tables + AI in Excel combined -->
-          <tr><td><span class="chapter-tag">Ch. 4</span></td><td>Pivot Tables (Grouping, Slicers, Pivot Charts) · AI in Excel — Copilot, Formula Suggestions &amp; Auto-Insights</td><td>Day 4</td></tr>
-          <!-- Day 5: Full dashboard project -->
-          <tr><td><span class="chapter-tag project-day">Ch. 5</span></td><td class="td-project">📊 Project — Full AI-Assisted Excel Dashboard on a Real Business Dataset</td><td class="project-day">Day 5</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 1</span></td><td>Excel Interface, Ribbons &amp; Shortcuts · Data Entry, Basic Formulas (SUM, AVERAGE, COUNT, MIN, MAX)</td><td>Week 1</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 2</span></td><td>Data Cleaning (Remove Duplicates, TRIM, CLEAN) · Logical Functions (IF, AND, OR), Sort, Filters &amp; Tables</td><td>Week 1</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 3</span></td><td>VLOOKUP, HLOOKUP, MATCH &amp; INDEX · Statistical Formulas (STDEV, MEDIAN, RANK) &amp; Date Functions</td><td>Week 2</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 4</span></td><td>Pivot Tables (Grouping, Slicers, Pivot Charts) · AI in Excel — Copilot, Formula Suggestions &amp; Auto-Insights</td><td>Week 2</td></tr>
+          <tr><td><span class="chapter-tag project-day">Ch. 5</span></td><td class="td-project">📊 Project — Full AI-Assisted Excel Dashboard on a Real Business Dataset</td><td class="project-day">Week 2</td></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- ── SQL TAB · Days 6–15 (10 days) ──
-         Full SQL coverage: DDL → DML → Operators → Functions → Joins → Project
-         ─────────────────────────────────── -->
+    <!-- ── SQL TAB · Week 3–4 ── -->
     <div class="tab-panel" id="da-tab-sql">
       <div class="tab-week-label">
-        <span class="week-num">Days 6–15</span>
-        <h4>SQL &mdash; 10 Days</h4>
+        <span class="week-num">Week 3–4</span>
+        <h4>SQL</h4>
       </div>
       <table class="syllabus-table">
-        <thead><tr><th>Chapter</th><th>Topic</th><th>Day</th></tr></thead>
+        <thead><tr><th>Chapter</th><th>Topic</th><th>Week</th></tr></thead>
         <tbody>
-          <tr><td><span class="chapter-tag">Ch. 1</span></td><td>Intro to SQL — Types of Commands (DDL, DML, DQL), Create Database &amp; Table, INSERT Data</td><td>Day 6</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 2</span></td><td>DELETE Rows &amp; Columns, UPDATE Statements, Basic SELECT Queries</td><td>Day 7</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 3</span></td><td>ALTER Column &amp; Datatypes, Query Toolbar, Practice Assignment with Solution</td><td>Day 8</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 4</span></td><td>Import CSV Files into SQL, Types of SQL Operators — Overview</td><td>Day 9</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 5</span></td><td>Comparison, Logical, BETWEEN, LIKE, IN Operators &amp; Set Operators (UNION, INTERSECT)</td><td>Day 10</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 6</span></td><td>String Functions (CONCAT, SUBSTRING, UPPER, LOWER) &amp; Date/Time Functions</td><td>Day 11</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 7</span></td><td>Conditional Functions — CASE Statements &amp; COALESCE / NULLIF Functions</td><td>Day 12</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 8</span></td><td>Joins in SQL — INNER, LEFT, RIGHT, FULL OUTER &amp; CROSS JOIN with Real Examples</td><td>Day 13</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 9</span></td><td>Subqueries, CTEs (Common Table Expressions) &amp; Window Functions (ROW_NUMBER, RANK)</td><td>Day 14</td></tr>
-          <tr><td><span class="chapter-tag project-day">Ch. 10</span></td><td class="td-project">🗄️ Project — End-to-End SQL Analysis on a Real Business Dataset</td><td class="project-day">Day 15</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 1</span></td><td>Intro to SQL — Types of Commands (DDL, DML, DQL), Create Database &amp; Table, INSERT Data</td><td>Week 3</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 2</span></td><td>DELETE Rows &amp; Columns, UPDATE Statements, Basic SELECT Queries</td><td>Week 3</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 3</span></td><td>ALTER Column &amp; Datatypes, Query Toolbar, Practice Assignment with Solution</td><td>Week 3</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 4</span></td><td>Import CSV Files into SQL, Types of SQL Operators — Overview</td><td>Week 3</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 5</span></td><td>Comparison, Logical, BETWEEN, LIKE, IN Operators &amp; Set Operators (UNION, INTERSECT)</td><td>Week 4</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 6</span></td><td>String Functions (CONCAT, SUBSTRING, UPPER, LOWER) &amp; Date/Time Functions</td><td>Week 4</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 7</span></td><td>Conditional Functions — CASE Statements &amp; COALESCE / NULLIF Functions</td><td>Week 4</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 8</span></td><td>Joins in SQL — INNER, LEFT, RIGHT, FULL OUTER &amp; CROSS JOIN with Real Examples</td><td>Week 4</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 9</span></td><td>Subqueries, CTEs (Common Table Expressions) &amp; Window Functions (ROW_NUMBER, RANK)</td><td>Week 4</td></tr>
+          <tr><td><span class="chapter-tag project-day">Ch. 10</span></td><td class="td-project">🗄️ Project — End-to-End SQL Analysis on a Real Business Dataset</td><td class="project-day">Week 4</td></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- ── POWER BI TAB · Days 16–22 (7 days within the 10-day BI block) ──
-         Power BI gets 7 days; Tableau gets the remaining 3 days (Days 23–25).
-         Together = 10 days for the full BI section.
-         ─────────────────────────────────── -->
-    <div class="tab-panel" id="da-tab-powerbi">
-      <div class="tab-week-label">
-        <span class="week-num">Days 16–22</span>
-        <h4>Power BI &mdash; 7 Days <small style="font-weight:400;color:var(--muted);font-size:13px;">(part of the 10-day BI &amp; Tableau block)</small></h4>
-      </div>
-      <table class="syllabus-table">
-        <thead><tr><th>Chapter</th><th>Topic</th><th>Day</th></tr></thead>
-        <tbody>
-          <tr><td><span class="chapter-tag">Ch. 1</span></td><td>Power BI Introduction, Import Data &amp; Power Query Basics</td><td>Day 16</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 2</span></td><td>Data Modelling — Relationships, Page Formatting &amp; Column / Bar Chart Visuals</td><td>Day 17</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 3</span></td><td>Area, Line, Waterfall, Funnel, Scatter, Pie, Donut, TreeMap &amp; Filled Map Charts</td><td>Day 18</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 4</span></td><td>Gauge, KPI, Card, Multirow Card · Slicer &amp; New Slicer with Images · Table &amp; Matrix</td><td>Day 19</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 5</span></td><td>DAX Basics — SUM, SUMX, Calculated Columns vs Measures &amp; Date DAX Formulas</td><td>Day 20</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 6</span></td><td>Advanced DAX — CALCULATE, DATESBETWEEN, MTD, QTD &amp; YTD Formulas</td><td>Day 21</td></tr>
-          <tr><td><span class="chapter-tag project-day">Ch. 7</span></td><td class="td-project">📈 Project — End-to-End Interactive Power BI Dashboard Report</td><td class="project-day">Day 22</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ── TABLEAU TAB · Days 23–25 (3 days within the 10-day BI block) ──
-         ─────────────────────────────────── -->
-    <div class="tab-panel" id="da-tab-tableau">
-      <div class="tab-week-label">
-        <span class="week-num">Days 23–25</span>
-        <h4>Tableau &mdash; 3 Days <small style="font-weight:400;color:var(--muted);font-size:13px;">(completes the 10-day BI &amp; Tableau block)</small></h4>
-      </div>
-      <table class="syllabus-table">
-        <thead><tr><th>Chapter</th><th>Topic</th><th>Day</th></tr></thead>
-        <tbody>
-          <tr><td><span class="chapter-tag">Ch. 1</span></td><td>Tableau Introduction — Interface, Data Connection, Charts (Bar, Line, Scatter, Map, Heat Map)</td><td>Day 23</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 2</span></td><td>Calculated Fields, Filters (Context, Dimension, Measure), Parameters &amp; Dashboard Actions</td><td>Day 24</td></tr>
-          <tr><td><span class="chapter-tag project-day">Ch. 3</span></td><td class="td-project">📉 Project — Published Interactive Tableau Dashboard on Real Dataset</td><td class="project-day">Day 25</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- ── PYTHON, EDA & AI TAB · Days 26–40 (15 days) ──
-         13 days of learning + LAST 2 DAYS (39–40) are Final Capstone Projects.
-         ─────────────────────────────────── -->
+    <!-- ── PYTHON + EDA + TABLEAU TAB · Week 5–8 ── -->
     <div class="tab-panel" id="da-tab-python">
       <div class="tab-week-label">
-        <span class="week-num">Days 26–40</span>
-        <h4>Python, EDA &amp; AI for Insights &mdash; 15 Days (incl. Final Projects)</h4>
+        <span class="week-num">Week 5–8</span>
+        <h4>Python + EDA + Tableau</h4>
       </div>
       <table class="syllabus-table">
-        <thead><tr><th>Chapter</th><th>Topic</th><th>Day</th></tr></thead>
+        <thead><tr><th>Chapter</th><th>Topic</th><th>Week</th></tr></thead>
         <tbody>
-          <tr><td><span class="chapter-tag">Ch. 1</span></td><td>Python Basics — Variables, Data Types, Operators, Input/Output</td><td>Day 26</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 2</span></td><td>Control Statements (if-else, loops) &amp; Functions (User-defined, Lambda, map/filter)</td><td>Day 27</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 3</span></td><td>Data Structures — List, Tuple, Set, Dictionary &amp; List Comprehensions</td><td>Day 28</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 4</span></td><td>File Handling &amp; Exception Handling in Python</td><td>Day 29</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 5</span></td><td>NumPy — Array Operations, Broadcasting &amp; Mathematical / Statistical Functions</td><td>Day 30</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 6</span></td><td>Pandas-I — DataFrames, Series, Data Loading (CSV, Excel, JSON)</td><td>Day 31</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 7</span></td><td>Pandas-II — Data Cleaning, Grouping, Merging, Pivot Tables in Python</td><td>Day 32</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 8</span></td><td>Exploratory Data Analysis (EDA) — Techniques, Workflow &amp; Pattern Finding</td><td>Day 33</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 9</span></td><td>Data Visualization — Matplotlib &amp; Seaborn (Heatmaps, Pairplots, Box Plots, Histograms)</td><td>Day 34</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 10</span></td><td>AI for Data Analytics — Automating Analysis &amp; Finding Insights with AI Tools</td><td>Day 35</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 11</span></td><td>Storytelling with Data — Combining Python EDA + Power BI / Tableau for Reporting</td><td>Day 36</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 12</span></td><td>Capstone Prep — Dataset Selection, Problem Statement, Data Cleaning &amp; EDA on Real Dataset</td><td>Day 37</td></tr>
-          <tr><td><span class="chapter-tag">Ch. 13</span></td><td>Capstone Build — Dashboard &amp; Visualization (Excel / Power BI / Tableau) + AI Insight Report</td><td>Day 38</td></tr>
-          <!-- LAST 2 DAYS — Final Projects -->
+          <tr><td><span class="chapter-tag">Ch. 1</span></td><td>Python Basics — Variables, Data Types, Operators, Input/Output</td><td>Week 5</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 2</span></td><td>Control Statements (if-else, loops) &amp; Functions (User-defined, Lambda, map/filter)</td><td>Week 5</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 3</span></td><td>Data Structures — List, Tuple, Set, Dictionary &amp; List Comprehensions</td><td>Week 5</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 4</span></td><td>File Handling &amp; Exception Handling in Python</td><td>Week 6</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 5</span></td><td>NumPy — Array Operations, Broadcasting &amp; Mathematical / Statistical Functions</td><td>Week 6</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 6</span></td><td>Pandas-I — DataFrames, Series, Data Loading (CSV, Excel, JSON)</td><td>Week 6</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 7</span></td><td>Pandas-II — Data Cleaning, Grouping, Merging, Pivot Tables in Python</td><td>Week 6</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 8</span></td><td>Exploratory Data Analysis (EDA) — Techniques, Workflow &amp; Pattern Finding</td><td>Week 7</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 9</span></td><td>Data Visualization — Matplotlib &amp; Seaborn (Heatmaps, Pairplots, Box Plots, Histograms)</td><td>Week 7</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 10</span></td><td>AI for Data Analytics — Automating Analysis &amp; Finding Insights with AI Tools</td><td>Week 7</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 11</span></td><td>Tableau Introduction — Interface, Data Connection, Charts (Bar, Line, Scatter, Map, Heat Map)</td><td>Week 7</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 12</span></td><td>Tableau — Calculated Fields, Filters (Context, Dimension, Measure), Parameters &amp; Dashboard Actions</td><td>Week 8</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 13</span></td><td>Storytelling with Data — Combining Python EDA + Tableau for Reporting</td><td>Week 8</td></tr>
+          <tr><td><span class="chapter-tag project-day">Ch. 14</span></td><td class="td-project">🐍 Project — Python EDA + Published Interactive Tableau Dashboard</td><td class="project-day">Week 8</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── POWER BI + TABLEAU TAB · Week 9–12 ── -->
+    <div class="tab-panel" id="da-tab-powerbi">
+      <div class="tab-week-label">
+        <span class="week-num">Week 9–12</span>
+        <h4>Power BI + Tableau</h4>
+      </div>
+      <table class="syllabus-table">
+        <thead><tr><th>Chapter</th><th>Topic</th><th>Week</th></tr></thead>
+        <tbody>
+          <tr><td><span class="chapter-tag">Ch. 1</span></td><td>Power BI Introduction, Import Data &amp; Power Query Basics</td><td>Week 9</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 2</span></td><td>Data Modelling — Relationships, Page Formatting &amp; Column / Bar Chart Visuals</td><td>Week 9</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 3</span></td><td>Area, Line, Waterfall, Funnel, Scatter, Pie, Donut, TreeMap &amp; Filled Map Charts</td><td>Week 9</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 4</span></td><td>Gauge, KPI, Card, Multirow Card · Slicer &amp; New Slicer with Images · Table &amp; Matrix</td><td>Week 10</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 5</span></td><td>DAX Basics — SUM, SUMX, Calculated Columns vs Measures &amp; Date DAX Formulas</td><td>Week 10</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 6</span></td><td>Advanced DAX — CALCULATE, DATESBETWEEN, MTD, QTD &amp; YTD Formulas</td><td>Week 11</td></tr>
+          <tr><td><span class="chapter-tag project-day">Ch. 7</span></td><td class="td-project">📈 Project — End-to-End Interactive Power BI Dashboard Report</td><td class="project-day">Week 11</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 8</span></td><td>Tableau Refresher — Advanced Calculated Fields, LOD Expressions &amp; Advanced Dashboard Actions</td><td>Week 12</td></tr>
+          <tr><td><span class="chapter-tag project-day">Ch. 9</span></td><td class="td-project">📉 Project — Combined Power BI &amp; Tableau Comparative Dashboard</td><td class="project-day">Week 12</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ── CAPSTONE TAB · Final Project (2 Industry Projects) ── -->
+    <div class="tab-panel" id="da-tab-capstone">
+      <div class="tab-week-label">
+        <span class="week-num">Final Week</span>
+        <h4>Capstone Project &mdash; 2 Industry Projects</h4>
+      </div>
+      <table class="syllabus-table">
+        <thead><tr><th>Chapter</th><th>Topic</th><th>Week</th></tr></thead>
+        <tbody>
+          <tr><td><span class="chapter-tag">Ch. 1</span></td><td>Capstone Prep — Dataset Selection, Problem Statement, Data Cleaning &amp; EDA on Real Dataset</td><td>Final Week</td></tr>
+          <tr><td><span class="chapter-tag">Ch. 2</span></td><td>Capstone Build — Dashboard &amp; Visualization (Excel / Power BI / Tableau) + AI Insight Report</td><td>Final Week</td></tr>
           <tr style="background:rgba(240,165,0,0.05);">
-            <td><span class="chapter-tag project-day">Ch. 14</span></td>
-            <td class="td-project">🏁 Final Project Day 1 — Complete Capstone Submission (Data + Dashboard + Report)</td>
-            <td class="project-day">Day 39</td>
+            <td><span class="chapter-tag project-day">Ch. 3</span></td>
+            <td class="td-project">🏁 Industry Project 1 — Complete Capstone Submission (Data + Dashboard + Report)</td>
+            <td class="project-day">Final Week</td>
           </tr>
           <tr style="background:rgba(240,165,0,0.07);">
-            <td><span class="chapter-tag project-day">Ch. 15</span></td>
-            <td class="td-project">🎓 Final Project Day 2 — Live Capstone Presentation, Evaluation &amp; Certificate Awarding</td>
-            <td class="project-day">Day 40</td>
+            <td><span class="chapter-tag project-day">Ch. 4</span></td>
+            <td class="td-project">🎓 Industry Project 2 — Live Capstone Presentation, Evaluation &amp; Certificate Awarding</td>
+            <td class="project-day">Final Week</td>
           </tr>
         </tbody>
       </table>
-      <!-- Callout clarifying the project structure -->
       <p style="font-size:13px;color:var(--muted);margin-top:14px;padding:12px 16px;background:var(--bg3);border-radius:8px;border:1px solid rgba(240,165,0,0.25);">
         <i class="fa-solid fa-star" style="color:var(--gold);margin-right:6px;"></i>
-        <strong style="color:var(--text);">Days 39 &amp; 40 are Final Project Days</strong> — The last 2 days of the program are fully dedicated to your Capstone submission and live presentation. Certificates are awarded on Day 40.
+        <strong style="color:var(--text);">2 Industry Projects</strong> — The program closes with two real-world capstone deliverables, evaluated live, with certificates awarded on completion.
       </p>
     </div>
   </section><!-- /da syllabus section -->
