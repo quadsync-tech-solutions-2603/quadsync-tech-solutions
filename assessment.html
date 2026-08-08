@@ -784,9 +784,9 @@ const ASSESSMENT_META = {
     description: "Utility-first styling and responsive design workflow."
   },
 
-  /* ---------------- Human Resources Maan track ---------------- */
+  /* ---------------- HR Manager track ---------------- */
   hr: {
-    name: "Human Resources Maan Assessment",
+    name: "HR Manager Assessment",
     subject: "Human Resources",
     icon: "hr",
     category: "Human Resources",
@@ -1007,7 +1007,7 @@ const SEED_QUESTIONS = {
     { q: "Which process formally ends an employment relationship?", options: ["Offboarding", "Onboarding", "Induction", "Recruitment"], correct: 0 },
     { q: "Which term refers to attracting and selecting suitable candidates?", options: ["Recruitment", "Retention", "Appraisal", "Payroll"], correct: 0 },
     { q: "Which document outlines an employee's duties and terms of employment?", options: ["Employment Contract", "Resume", "Payslip", "Appraisal Form"], correct: 0 },
-    { q: "What does HRIS stand for?", options: ["Human Resource Information System", "Human Retention Incentive Scheme", "Human Resources Maan Internal Standards", "Human Rights Information Source"], correct: 0 },
+    { q: "What does HRIS stand for?", options: ["Human Resource Information System", "Human Retention Incentive Scheme", "HR Manager Internal Standards", "Human Rights Information Source"], correct: 0 },
     { q: "Which principle requires equal pay for equal work regardless of gender?", options: ["Equal Remuneration", "Minimum Wages", "Payment of Wages", "Factories Regulation"], correct: 0 }
   ]
 };
@@ -1127,7 +1127,7 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     const map = {
       excelfoundation: "XL", pythonfoundation: "PY", pythonadvanced: "PY+", sql: "DB",
       powerbi: "BI", tableau: "TB", html: "HT", css: "CS", js: "JS", react: "RC",
-      expressnode: "EX", mongodb: "MG", tailwind: "TW", hr: "Human Resources Maan"
+      expressnode: "EX", mongodb: "MG", tailwind: "TW", hr: "HR Manager"
     };
     return map[key] || key.slice(0, 2).toUpperCase();
   }
