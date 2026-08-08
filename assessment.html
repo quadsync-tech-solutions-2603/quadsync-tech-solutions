@@ -295,6 +295,12 @@ main{ flex:1; position:relative; z-index:1; }
 .exam-header .brand-tag{ color:var(--muted); }
 .exam-test-name{ font-family:var(--font-display); font-weight:600; font-size:0.98rem; color:var(--blue); }
 .exam-header .header-spacer{ flex:1; }
+/* Only the timer should be visible in the exam header — hide the
+   duplicate branding/test-name that used to overlap with the navbar. */
+.exam-header .sync-mark,
+.exam-header .brand-text,
+.exam-header .exam-test-name{ display:none; }
+.exam-header .container{ justify-content:flex-end; }
 
 .timer{
   font-family:var(--font-mono); font-size:1.05rem; font-weight:700;
@@ -637,10 +643,10 @@ main{ flex:1; position:relative; z-index:1; }
       automatically. No other file needs to change.
 
    NOTE ON PLACEHOLDER QUESTIONS
-   Each subject ships with 10 real, hand-written sample questions
-   followed by 40 clearly-labelled placeholder questions
-   ("Q11" onward). Replace the placeholders with your own bank —
-   just keep the same { q, options, correct } shape.
+   Each subject ships with real, hand-written sample questions
+   followed by clearly-labelled placeholder questions where a full
+   bank hasn't been supplied yet ("Q11" onward, etc.).
+   Excel Foundation now ships with its full, real 50-question bank.
    ============================================================ */
 
 const ASSESSMENT_META = {
@@ -791,9 +797,11 @@ const ASSESSMENT_META = {
   }
 };
 
-/* ---------- hand-written sample questions (10 per subject) ---------- */
+/* ---------- hand-written sample questions ---------- */
 
 const SEED_QUESTIONS = {
+  /* Full, real 50-question bank for Excel Foundation
+     (Section A: Easy 1-20, Section B: Moderate 21-40, Section C: Hard 41-50) */
   excelfoundation: [
     { q: "Which symbol is used to start a formula in Excel?", options: ["#", "=", "$", "@"], correct: 1 },
     { q: "Which function is used to add numbers in Excel?", options: ["COUNT", "SUM", "ADD", "TOTAL"], correct: 1 },
@@ -846,7 +854,6 @@ const SEED_QUESTIONS = {
     { q: "You have duplicate customer records and want to identify duplicates without immediately deleting them. Which feature is most suitable?", options: ["Remove Duplicates", "Conditional Formatting → Duplicate Values", "Sort A to Z", "Data Validation"], correct: 1 },
     { q: "You have a sales table and want to retrieve a value based on both Employee ID and Month. Which approach is most suitable for a two-condition lookup?", options: ["SUM only", "INDEX + MATCH using multiple criteria", "MAX only", "COUNTBLANK"], correct: 1 }
   ],
-   
   pythonfoundation: [
     { q: "Which keyword is used to define a function in Python?", options: ["def", "function", "func", "define"], correct: 0 },
     { q: "Which built-in data type is immutable?", options: ["Tuple", "List", "Dictionary", "Set"], correct: 0 },
@@ -859,7 +866,6 @@ const SEED_QUESTIONS = {
     { q: "Which keyword is used to create a class in Python?", options: ["class", "object", "define", "struct"], correct: 0 },
     { q: "Which standard library module provides regular-expression support?", options: ["re", "regex", "pyregex", "string"], correct: 0 }
   ],
-   
   pythonadvanced: [
     { q: "Which built-in function pairs elements from multiple iterables into tuples?", options: ["zip()", "map()", "enumerate()", "reduce()"], correct: 0 },
     { q: "Which decorator defines a method that doesn't access instance or class data?", options: ["@staticmethod", "@classmethod", "@property", "@abstractmethod"], correct: 0 },
@@ -872,7 +878,6 @@ const SEED_QUESTIONS = {
     { q: "What does the *args syntax allow a function to accept?", options: ["A variable number of positional arguments", "Only keyword arguments", "A single tuple argument only", "Nothing — it's invalid syntax"], correct: 0 },
     { q: "Which library is the core package for fast numerical array operations in Python?", options: ["NumPy", "Matplotlib", "Seaborn", "Requests"], correct: 0 }
   ],
-   
   sql: [
     { q: "Which SQL clause is used to filter individual records?", options: ["WHERE", "HAVING", "GROUP BY", "ORDER BY"], correct: 0 },
     { q: "Which JOIN returns matching rows from both tables plus unmatched rows from each side?", options: ["FULL OUTER JOIN", "INNER JOIN", "LEFT JOIN", "RIGHT JOIN"], correct: 0 },
@@ -897,7 +902,6 @@ const SEED_QUESTIONS = {
     { q: "Which visual lets a viewer filter a whole report by picking a value?", options: ["Slicer", "Card", "Matrix", "Gauge"], correct: 0 },
     { q: "What is the standard file extension for a Power BI report?", options: [".pbix", ".pbit", ".xlsx", ".pbi"], correct: 0 }
   ],
-   
   tableau: [
     { q: "Which Tableau file type packages the workbook together with its data?", options: [".twbx", ".twb", ".tde", ".hyper"], correct: 0 },
     { q: "Which pane lists dimensions and measures pulled from your data source?", options: ["Data pane", "Analytics pane", "Marks card", "Show Me panel"], correct: 0 },
@@ -910,110 +914,18 @@ const SEED_QUESTIONS = {
     { q: "Which local data engine format speeds up performance by pre-aggregating data?", options: ["Extract (.hyper)", "Live connection", "Data blend", "Union"], correct: 0 },
     { q: "Which technique stacks rows from two similarly structured tables into one?", options: ["Union", "Join", "Blend", "Relationship"], correct: 0 }
   ],
-   
   html: [
-    { q: "Which tag defines the largest, most important heading on a page?", options: ["<heading>", "<h6>", "<h1>", "<head>"], correct: 2 },
-    { q: "Which attribute provides alternate text for an image?", options: ["src", "alt", "title", "longdesc"], correct: 1 },
-    { q: "Which tag is used to create a hyperlink?", options: ["<link>", "<nav>", "<a>", "<href>"], correct: 2 },
-    { q: "Which HTML5 element is used to group a set of navigation links?", options: ["<section>", "<div>", "<menu>", "<nav>"], correct: 3 },
-    { q: "Which attribute makes a form field mandatory before submission?", options: ["validate", "needed", "required", "mandatory"], correct: 2 },
-    { q: "Which tag embeds a video directly in an HTML page?", options: ["<media>", "<video>", "<movie>", "<embed>"], correct: 1 },
-    { q: "Which input type is used for entering numeric values?", options: ["digit", "number", "integer", "text"], correct: 1 },
-    { q: "Which tag defines a single row inside an HTML table?", options: ["<td>", "<row>", "<tr>", "<th>"], correct: 2 },
-    { q: "Which doctype declaration is used at the top of an HTML5 document?", options: ["<html5>", "<!DOCTYPE W3C>", "<!DOCTYPE HTML5>", "<!DOCTYPE html>"], correct: 3 },
-    { q: "Which semantic tag represents an independent, self-contained piece of content?", options: ["<div>", "<article>", "<section>", "<aside>"], correct: 1 },
-    { q: "What does HTML stand for?", options: ["Home Tool Markup Language", "Hyperlink Text Management Language", "High Text Machine Language", "Hyper Text Markup Language"], correct: 3 },
-    { q: "Which tag contains the visible content of an HTML webpage?", options: ["<body>", "<main>", "<html>", "<head>"], correct: 0 },
-    { q: "Which tag is used to create a paragraph?", options: ["<paragraph>", "<text>", "<p>", "<para>"], correct: 2 },
-    { q: "Which tag is used to insert an image into a webpage?", options: ["<picture>", "<src>", "<image>", "<img>"], correct: 3 },
-    { q: "Which attribute specifies the location of an image file?", options: ["path", "src", "link", "href"], correct: 1 },
-    { q: "Which tag creates an unordered list?", options: ["<li>", "<list>", "<ul>", "<ol>"], correct: 2 },
-    { q: "Which tag creates an ordered list?", options: ["<order>", "<li>", "<ol>", "<ul>"], correct: 2 },
-    { q: "Which tag defines an individual item in a list?", options: ["<i>", "<li>", "<item>", "<list-item>"], correct: 1 },
-    { q: "Which tag is used to create a table in HTML?", options: ["<grid>", "<tab>", "<table>", "<tbl>"], correct: 2 },
-    { q: "Which tag is used to create a button?", options: ["<btn>", "<input-button>", "<button>", "<click>"], correct: 2 },
-    { q: "Which tag defines the title displayed in the browser tab?", options: ["<caption>", "<title>", "<head>", "<name>"], correct: 1 },
-    { q: "Which HTML element is used to create a line break?", options: ["<newline>", "<br>", "<break>", "<lb>"], correct: 1 },
-    { q: "Which tag represents text with strong importance?", options: ["<important>", "<strong>", "<bold>", "<bolder>"], correct: 1 },
-    { q: "Which tag represents emphasized text?", options: ["<italic>", "<i-text>", "<em>", "<emphasis>"], correct: 2 },
-    { q: "Which attribute specifies the destination URL of a hyperlink?", options: ["url", "link", "src", "href"], correct: 3 },
-    { q: "What does target=\"_blank\" generally do to a hyperlink?", options: ["Disables the link", "Opens it in the same paragraph", "Opens it in a new browsing context", "Deletes the link"], correct: 2 },
-    { q: "Which attribute provides a unique identifier for an HTML element?", options: ["key", "name", "class", "id"], correct: 3 },
-    { q: "Which attribute can be shared by multiple HTML elements for grouping or styling?", options: ["class", "group", "id", "style-id"], correct: 0 },
-    { q: "Which tag defines a standard data cell in an HTML table?", options: ["<cell>", "<th>", "<td>", "<tr>"], correct: 2 },
-    { q: "Which tag defines a header cell in an HTML table?", options: ["<header>", "<td>", "<thead>", "<th>"], correct: 3 },
-    { q: "Which input type is specifically designed for email addresses?", options: ["mail", "text-email", "email", "address"], correct: 2 },
-    { q: "Which input type hides the characters entered by the user?", options: ["private", "password", "hidden", "secure"], correct: 1 },
-    { q: "Which HTML element is used to associate descriptive text with a form control?", options: ["<caption>", "<description>", "<label>", "<text>"], correct: 2 },
-    { q: "Which attribute connects a label to an input element using the input's id?", options: ["connect", "input", "target", "for"], correct: 3 },
-    { q: "Which input type allows users to select multiple independent options?", options: ["select", "multiple", "radio", "checkbox"], correct: 3 },
-    { q: "Which input type is normally used when only one option should be selected from a group?", options: ["single", "radio", "option", "checkbox"], correct: 1 },
-    { q: "Which semantic HTML element is commonly used for the main content of a webpage?", options: ["<primary>", "<main>", "<content>", "<body-main>"], correct: 1 },
-    { q: "Which semantic element is commonly used for introductory content or website branding?", options: ["<heading>", "<header>", "<top>", "<intro>"], correct: 1 },
-    { q: "Which semantic element is commonly used for the bottom section of a webpage?", options: ["<end>", "<bottom-section>", "<footer>", "<bottom>"], correct: 2 },
-    { q: "Which semantic element is used to represent a thematic section of content?", options: ["<content>", "<section>", "<part>", "<division>"], correct: 1 },
-    { q: "Which option represents the correct basic structure of an HTML5 document?", options: [
-        "<html><body><head><title>Page</title></head></body></html>",
-        "<!HTML5><head><body>Content</body></head>",
-        "<!DOCTYPE html><html><head><title>Page</title></head><body>Content</body></html>",
-        "<html5><header><content>Page</content></header></html5>"
-    ], correct: 2 },
-    { q: "Which option correctly associates a label with an input field for accessibility?", options: [
-        "<label id=\"username\">Username</label><input for=\"username\">",
-        "<label target=\"username\">Username</label><input name=\"username\">",
-        "<label connect=\"username\">Username</label><input name=\"username\">",
-        "<label for=\"username\">Username</label><input id=\"username\">"
-    ], correct: 3 },
-    { q: "What is the primary purpose of semantic HTML?", options: [
-        "To replace JavaScript",
-        "To provide meaningful structure and meaning to content",
-        "To make every webpage load instantly",
-        "To automatically add CSS styles"
-    ], correct: 1 },
-    { q: "What is the primary purpose of ARIA attributes in HTML?", options: [
-        "To replace all HTML semantic elements",
-        "To add colors to HTML elements",
-        "To improve accessibility information for assistive technologies",
-        "To connect HTML directly to a database"
-    ], correct: 2 },
-    { q: "Which option creates an accessible button with an appropriate ARIA label?", options: [
-        "<button aria=\"Close\">X</button>",
-        "<button label=\"Close\">X</button>",
-        "<button aria-label=\"Close\">X</button>",
-        "<button accessibility=\"Close\">X</button>"
-    ], correct: 2 },
-    { q: "Which structure is most appropriate for a webpage containing a header, navigation, main content, and footer?", options: [
-        "<top><links></links><content></content><bottom></bottom>",
-        "<header><nav></nav><main></main><footer></footer>",
-        "<head><navigation></navigation><body-content></body-content><end></end>",
-        "<div class=\"header\"><div class=\"links\"></div><div class=\"content\"></div></div>"
-    ], correct: 1 },
-    { q: "Which approach is most appropriate when creating an accessible registration form?", options: [
-        "Use only placeholder text without labels",
-        "Use images instead of form controls",
-        "Use paragraphs instead of input labels",
-        "Use labels associated with inputs and appropriate input types"
-    ], correct: 3 },
-    { q: "Which HTML structure is most semantic for an article containing two separate sections?", options: [
-        "<content><part>Section 1</part><part>Section 2</part></content>",
-        "<article><p>Article</p><p>Section 1</p><p>Section 2</p></article>",
-        "<article><header>Article</header><section>Section 1</section><section>Section 2</section></article>",
-        "<div><div>Article</div><div>Section 1</div><div>Section 2</div></div>"
-    ], correct: 2 },
-    { q: "Which form structure provides the best basic accessibility for name and email fields?", options: [
-        "<input placeholder=\"Name\"><input placeholder=\"Email\">",
-        "<label for=\"name\">Name</label><input id=\"name\" type=\"text\"><label for=\"email\">Email</label><input id=\"email\" type=\"email\">",
-        "<p>Name</p><input type=\"text\"><p>Email</p><input type=\"text\">",
-        "<input name=\"name\"><input name=\"email\">"
-    ], correct: 1 },
-    { q: "Which attribute is particularly important for describing the purpose of an image to users who cannot see it?", options: [
-        "loading",
-        "width",
-        "src",
-        "alt"
-    ], correct: 3 }
-],
-   
+    { q: "Which tag defines the largest, most important heading on a page?", options: ["<h1>", "<heading>", "<head>", "<h6>"], correct: 0 },
+    { q: "Which attribute provides alternate text for an image?", options: ["alt", "title", "src", "longdesc"], correct: 0 },
+    { q: "Which tag is used to create a hyperlink?", options: ["<a>", "<link>", "<href>", "<nav>"], correct: 0 },
+    { q: "Which HTML5 element is used to group a set of navigation links?", options: ["<nav>", "<section>", "<div>", "<menu>"], correct: 0 },
+    { q: "Which attribute makes a form field mandatory before submission?", options: ["required", "mandatory", "validate", "needed"], correct: 0 },
+    { q: "Which tag embeds a video directly in an HTML page?", options: ["<video>", "<media>", "<embed>", "<movie>"], correct: 0 },
+    { q: "Which input type restricts a field's value to numbers only?", options: ["number", "text", "digit", "integer"], correct: 0 },
+    { q: "Which tag defines a single row inside an HTML table?", options: ["<tr>", "<td>", "<th>", "<row>"], correct: 0 },
+    { q: "Which doctype declaration is used at the top of an HTML5 document?", options: ["<!DOCTYPE html>", "<!DOCTYPE HTML5>", "<html5>", "<!DOCTYPE W3C>"], correct: 0 },
+    { q: "Which semantic tag represents an independent, self-contained piece of content?", options: ["<article>", "<aside>", "<section>", "<div>"], correct: 0 }
+  ],
   css: [
     { q: "Which property changes the text color of an element?", options: ["color", "text-color", "font-color", "foreground"], correct: 0 },
     { q: "Which layout model arranges items in a single row or column with flexible sizing?", options: ["Flexbox", "Grid", "Float", "Table"], correct: 0 },
@@ -1026,7 +938,6 @@ const SEED_QUESTIONS = {
     { q: "Which at-rule applies styles conditionally based on screen size or device features?", options: ["@media", "@supports", "@import", "@font-face"], correct: 0 },
     { q: "Which property creates rounded corners on an element?", options: ["border-radius", "corner-radius", "border-round", "radius"], correct: 0 }
   ],
-   
   js: [
     { q: "Which keyword declares a block-scoped variable that can be reassigned?", options: ["let", "const", "var", "def"], correct: 0 },
     { q: "Which method converts a JSON string into a JavaScript object?", options: ["JSON.parse()", "JSON.stringify()", "JSON.convert()", "JSON.toObject()"], correct: 0 },
@@ -1039,7 +950,6 @@ const SEED_QUESTIONS = {
     { q: "Which keyword is used to handle an error thrown inside a try block?", options: ["catch", "except", "error", "handle"], correct: 0 },
     { q: "Which array method returns a new array containing only elements that satisfy a condition?", options: ["filter()", "map()", "find()", "some()"], correct: 0 }
   ],
-   
   react: [
     { q: "Which hook lets you add local state to a functional component?", options: ["useState", "useEffect", "useReducer", "useMemo"], correct: 0 },
     { q: "Which hook is used to run side effects, like data fetching, in a component?", options: ["useEffect", "useState", "useContext", "useRef"], correct: 0 },
@@ -1052,7 +962,6 @@ const SEED_QUESTIONS = {
     { q: "Which hook returns a mutable reference object that persists across renders without causing re-renders?", options: ["useRef", "useState", "useMemo", "useCallback"], correct: 0 },
     { q: "Which command is commonly used to quickly scaffold a new React project?", options: ["npx create-react-app", "npm init react", "react new", "npm react-start"], correct: 0 }
   ],
-   
   expressnode: [
     { q: "Which core Node.js function creates a basic HTTP server?", options: ["http.createServer()", "express.createServer()", "server.create()", "node.createServer()"], correct: 0 },
     { q: "Which Express method defines a route that responds to GET requests?", options: ["app.get()", "app.route()", "app.fetch()", "app.request()"], correct: 0 },
@@ -1065,7 +974,6 @@ const SEED_QUESTIONS = {
     { q: "Which function must be called to pass control on to the next middleware in Express?", options: ["next()", "continue()", "pass()", "forward()"], correct: 0 },
     { q: "Which Node.js global object holds information about the currently running process?", options: ["process", "global", "module", "__dirname"], correct: 0 }
   ],
-   
   mongodb: [
     { q: "What is the basic unit of data storage in MongoDB called?", options: ["Document", "Row", "Record", "Tuple"], correct: 0 },
     { q: "Which method inserts a single new document into a collection?", options: ["insertOne()", "addOne()", "createOne()", "pushOne()"], correct: 0 },
@@ -1078,7 +986,6 @@ const SEED_QUESTIONS = {
     { q: "Which field does MongoDB automatically generate as a unique identifier for every document?", options: ["_id", "id", "uid", "docId"], correct: 0 },
     { q: "Which popular library is used to model MongoDB data with schemas in a Node.js app?", options: ["Mongoose", "Sequelize", "TypeORM", "Prisma"], correct: 0 }
   ],
-   
   tailwind: [
     { q: "What type of CSS framework is Tailwind classified as?", options: ["Utility-first", "Component-based", "Grid-only", "Reset framework"], correct: 0 },
     { q: "Which class sets an element's text color using Tailwind's palette?", options: ["text-blue-500", "color-blue-500", "blue-text-500", "font-blue-500"], correct: 0 },
@@ -1091,7 +998,6 @@ const SEED_QUESTIONS = {
     { q: "Which class sets an element's width to 100% of its container?", options: ["w-full", "width-100", "w-100%", "full-width"], correct: 0 },
     { q: "Which class creates a grid container with 3 equal-width columns?", options: ["grid-cols-3", "cols-3", "grid-3", "columns-3"], correct: 0 }
   ],
-   
   hr: [
     { q: "What does the abbreviation KRA stand for in Human Resources?", options: ["Key Result Area", "Key Recruitment Area", "Known Result Assessment", "Key Retention Analysis"], correct: 0 },
     { q: "Which process periodically evaluates an employee's performance?", options: ["Performance Appraisal", "Onboarding", "Recruitment", "Payroll"], correct: 0 },
@@ -1106,7 +1012,7 @@ const SEED_QUESTIONS = {
   ]
 };
 
-/* ---------- generate 40 placeholder questions per subject (11-50) ---------- */
+/* ---------- generate placeholder questions to top up any bank below 50 ---------- */
 
 function buildPlaceholderQuestions(subjectLabel, startIndex, count) {
   const items = [];
@@ -1124,7 +1030,7 @@ function buildPlaceholderQuestions(subjectLabel, startIndex, count) {
 const QUESTION_BANKS = {};
 Object.keys(ASSESSMENT_META).forEach((key) => {
   const seed = SEED_QUESTIONS[key] || [];
-  const placeholders = buildPlaceholderQuestions(ASSESSMENT_META[key].subject, seed.length + 1, 50 - seed.length);
+  const placeholders = buildPlaceholderQuestions(ASSESSMENT_META[key].subject, seed.length + 1, Math.max(0, 50 - seed.length));
   QUESTION_BANKS[key] = seed.concat(placeholders).slice(0, 50);
 });
 
@@ -1340,9 +1246,16 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
   const pageAssessment = el("page-assessment");
   const pageResult = el("page-result");
 
+  const mainSiteHeader = document.getElementById("main-header");
+
   function showPage(page) {
     [pageDashboard, pageInstructions, pageAssessment, pageResult].forEach((p) => p.classList.add("hidden"));
     page.classList.remove("hidden");
+    // While the assessment itself is on screen, hide the main site navbar
+    // so only the exam header (test name + timer) is visible — no overlap.
+    if (mainSiteHeader) {
+      mainSiteHeader.classList.toggle("hidden", page === pageAssessment);
+    }
     window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
   }
 
