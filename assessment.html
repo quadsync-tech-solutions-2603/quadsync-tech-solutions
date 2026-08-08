@@ -77,41 +77,19 @@ button:focus-visible, input:focus-visible, a:focus-visible, [tabindex]:focus-vis
 
 .container{ max-width:1240px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
 
-/* ============ sync logo mark ============ */
-.sync-mark{ width:40px; height:40px; flex:0 0 auto; display:grid; place-items:center; }
-.sync-mark svg{ width:100%; height:100%; }
-
 /* ============ header ============ */
-.site-header{
-  position:sticky; top:0; z-index:40;
-  background:transparent;
-  border-bottom:1px solid transparent;
-  transition:.3s;
-}
-.site-header.scrolled{
-  background:rgba(5,15,26,0.92);
-  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--border);
-}
-.site-header .container{ display:flex; align-items:center; gap:14px; min-height:74px; }
-.brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
-.brand-text .brand-name{
-  font-family:var(--font-display); font-weight:700; font-size:1.14rem;
-  color:var(--text); line-height:1.15; letter-spacing:-0.2px;
-}
-.brand-text .brand-tag{ font-size:0.74rem; color:var(--muted); letter-spacing:0.02em; }
-.header-spacer{ flex:1; }
-.header-status{
-  font-family:var(--font-mono); font-size:0.78rem; color:var(--muted);
-  display:flex; align-items:center; gap:8px;
-  background:var(--glow); border:1px solid var(--border);
-  padding:8px 14px; border-radius:100px;
-}
-.header-status .dot{
-  width:7px; height:7px; border-radius:50%; background:var(--success);
-  animation:pulse 2s infinite;
-}
-@keyframes pulse{ 0%,100%{ opacity:1; transform:scale(1);} 50%{ opacity:.5; transform:scale(1.3);} }
+header{position:fixed;width:100%;z-index:1000;top:0;transition:.3s;}
+header.scrolled{background:rgba(5,15,26,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:10px 7%;transition:.3s;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo img{height:48px;width:auto;border-radius:8px;}
+.logo-text{font-family:'Sora',sans-serif;font-size:25px;font-weight:700;color:var(--blue);letter-spacing:-0.3px;line-height:1.2;}
+.nav-links{list-style:none;display:flex;gap:4px;align-items:center;}
+.nav-links a{text-decoration:none;color:#fff;padding:6px 12px;border-radius:6px;font-size:15px;font-weight:500;transition:.2s;letter-spacing:0.2px;}
+.nav-links a:hover{color:var(--blue);background:var(--glow);}
+.nav-cta{background:var(--blue)!important;color:#fff!important;border-radius:8px!important;padding:7px 16px!important;}
+.nav-cta:hover{background:var(--blue-dark)!important;transform:translateY(-1px);}
+.menu-toggle{display:none;font-size:20px;cursor:pointer;color:var(--text);background:none;border:none;padding:4px;}
 
 /* ============ hero ============ */
 .hero{ padding:76px 0 40px; position:relative; overflow:hidden; }
@@ -438,33 +416,28 @@ main{ flex:1; position:relative; z-index:1; }
 <body>
 
 <!-- ============ HEADER ============ -->
-<header class="site-header" id="mainHeader">
-  <div class="container">
-    <a href="#" class="brand" id="brandHome">
-      <span class="sync-mark" aria-hidden="true">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="syncGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#1e88e5"/><stop offset="1" stop-color="#4dabff"/>
-            </linearGradient>
-          </defs>
-          <path d="M8 15a12 12 0 0 1 20.8-8.2" stroke="url(#syncGrad)" stroke-width="3.4" stroke-linecap="round"/>
-          <path d="M28.8 6.8 L30 13 L23.6 12" stroke="url(#syncGrad)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M32 25a12 12 0 0 1-20.8 8.2" stroke="url(#syncGrad)" stroke-width="3.4" stroke-linecap="round"/>
-          <path d="M11.2 33.2 L10 27 L16.4 28" stroke="url(#syncGrad)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </span>
+<header id="main-header">
+  <nav class="navbar">
+    <a href="#home" class="logo">
       <img src="Logo.png" alt="QuadSync Logo">
       <div>
         <div class="logo-text">QuadSync Tech Solutions</div>
       </div>
     </a>
-    <!-- <div class="header-spacer"></div>
-    <div class="header-status" id="headerStatus">
-      <span class="dot"></span> Portal Ready
-    </div> -->
-  </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <!-- <li><a href="#internships">Internships</a></li> -->
+      <li><a href="#services">Services</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="trainingprograms.html">Training Programs</a></li>
+      <!-- <li><a href="">Program Details</a></li> -->
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
+  </nav>
 </header>
+
 
 <main id="mainContent">
 
