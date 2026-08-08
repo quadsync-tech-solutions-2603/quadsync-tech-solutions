@@ -1,1 +1,1503 @@
-<p>Hello</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>QuadSync Tech Solutions | Online Assessment Portal</title>
+<meta name="description" content="QuadSync Tech Solutions — Online Assessment Portal. Synchronizing Innovations with Success." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   QuadSync Tech Solutions — Online Assessment Portal
+   style.css — matches the QuadSync main-site dark navy/blue theme
+   ============================================================ */
+
+:root{
+  --blue:#4dabff;
+  --blue-dark:#1e88e5;
+  --blue-deeper:#0d47a1;
+  --bg:#050f1a;
+  --bg2:#071624;
+  --bg3:#0a1e35;
+  --bg4:#0d2340;
+  --text:#e6edf6;
+  --muted:#8fa8c4;
+  --border:rgba(77,171,255,0.18);
+  --glow:rgba(77,171,255,0.08);
+
+  --success:#34d399;
+  --success-bg:rgba(52,211,153,0.12);
+  --danger:#f87171;
+  --danger-bg:rgba(248,113,113,0.12);
+  --warning:#fbbf24;
+  --warning-bg:rgba(251,188,5,0.12);
+
+  --font-display:'Sora', sans-serif;
+  --font-body:'Space Grotesk', sans-serif;
+  --font-mono:'JetBrains Mono', monospace;
+
+  --radius-lg:20px;
+  --radius-md:14px;
+  --radius-sm:9px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family:var(--font-body);
+  color:var(--text);
+  background:var(--bg);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+  display:flex; flex-direction:column;
+}
+body::before{
+  content:''; position:fixed; inset:0;
+  background-image:linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size:60px 60px; opacity:0.4; pointer-events:none; z-index:0;
+}
+img{ max-width:100%; display:block; }
+button{ font-family:inherit; cursor:pointer; }
+a{ color:inherit; }
+.hidden{ display:none !important; }
+::selection{ background:var(--blue); color:#04101d; }
+
+button:focus-visible, input:focus-visible, a:focus-visible, [tabindex]:focus-visible{
+  outline:3px solid var(--blue);
+  outline-offset:2px;
+}
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+}
+
+.container{ max-width:1240px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
+
+/* ============ sync logo mark ============ */
+.sync-mark{ width:40px; height:40px; flex:0 0 auto; display:grid; place-items:center; }
+.sync-mark svg{ width:100%; height:100%; }
+
+/* ============ header ============ */
+.site-header{
+  position:sticky; top:0; z-index:40;
+  background:transparent;
+  border-bottom:1px solid transparent;
+  transition:.3s;
+}
+.site-header.scrolled{
+  background:rgba(5,15,26,0.92);
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.site-header .container{ display:flex; align-items:center; gap:14px; min-height:74px; }
+.brand{ display:flex; align-items:center; gap:12px; text-decoration:none; }
+.brand-text .brand-name{
+  font-family:var(--font-display); font-weight:700; font-size:1.14rem;
+  color:var(--text); line-height:1.15; letter-spacing:-0.2px;
+}
+.brand-text .brand-tag{ font-size:0.74rem; color:var(--muted); letter-spacing:0.02em; }
+.header-spacer{ flex:1; }
+.header-status{
+  font-family:var(--font-mono); font-size:0.78rem; color:var(--muted);
+  display:flex; align-items:center; gap:8px;
+  background:var(--glow); border:1px solid var(--border);
+  padding:8px 14px; border-radius:100px;
+}
+.header-status .dot{
+  width:7px; height:7px; border-radius:50%; background:var(--success);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{ 0%,100%{ opacity:1; transform:scale(1);} 50%{ opacity:.5; transform:scale(1.3);} }
+
+/* ============ hero ============ */
+.hero{ padding:76px 0 40px; position:relative; overflow:hidden; }
+.hero::before{
+  content:''; position:absolute; width:600px; height:600px; border-radius:50%;
+  background:radial-gradient(circle, rgba(77,171,255,0.14), transparent 70%);
+  filter:blur(80px); top:-160px; right:-120px; pointer-events:none; z-index:0;
+}
+.hero::after{
+  content:''; position:absolute; width:400px; height:400px; border-radius:50%;
+  background:radial-gradient(circle, rgba(29,110,213,0.10), transparent 70%);
+  filter:blur(80px); bottom:-140px; left:-100px; pointer-events:none; z-index:0;
+}
+.hero-eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(77,171,255,0.1); border:1px solid rgba(77,171,255,0.25);
+  border-radius:100px; padding:6px 16px; font-size:0.78rem; color:var(--blue);
+  margin-bottom:22px; font-weight:500; letter-spacing:0.3px;
+}
+.hero-eyebrow::before{
+  content:""; width:7px; height:7px; border-radius:50%; background:var(--blue);
+  display:inline-block; animation:pulse 2s infinite;
+}
+.hero h1{
+  font-family:var(--font-display); font-weight:700;
+  font-size:clamp(2rem, 4vw, 3.1rem); line-height:1.08; letter-spacing:-0.02em;
+  color:var(--text); margin:0 0 16px; max-width:16ch;
+}
+.hero p.lead{ font-size:1.05rem; color:var(--muted); max-width:56ch; margin:0 0 32px; line-height:1.7; }
+
+.controls-row{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:10px; }
+.search-box{ flex:1 1 280px; position:relative; }
+.search-box input{
+  width:100%; padding:14px 16px 14px 44px;
+  border-radius:var(--radius-md);
+  border:1px solid var(--border);
+  background:var(--bg3);
+  font-size:0.95rem; color:var(--text);
+}
+.search-box input::placeholder{ color:var(--muted); }
+.search-box input:focus{ border-color:var(--blue); }
+.search-box svg{ position:absolute; left:14px; top:50%; transform:translateY(-50%); width:18px; height:18px; color:var(--muted); }
+
+.filter-chips{ display:flex; gap:8px; flex-wrap:wrap; }
+.chip{
+  padding:10px 16px; border-radius:100px; border:1px solid var(--border);
+  background:var(--bg3); font-size:0.85rem; font-weight:600; color:var(--muted);
+  transition:all .2s ease; white-space:nowrap;
+}
+.chip:hover{ border-color:var(--blue); color:var(--blue); }
+.chip.active{
+  background:var(--blue); border-color:var(--blue); color:#04101d;
+}
+
+/* ============ assessment grid ============ */
+.grid-section{ padding:20px 0 90px; position:relative; z-index:1; }
+.assessment-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(310px, 1fr)); gap:22px; margin-top:22px; }
+.empty-state{ grid-column:1/-1; text-align:center; padding:60px 20px; color:var(--muted); font-size:0.95rem; }
+
+.card{
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:26px;
+  display:flex; flex-direction:column; gap:14px;
+  transition:.3s; position:relative; overflow:hidden;
+  animation:cardIn .45s ease both;
+}
+.card::before{
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg, var(--blue), transparent); opacity:0; transition:.3s;
+}
+.card:hover{ transform:translateY(-6px); border-color:rgba(77,171,255,0.4); box-shadow:0 20px 50px rgba(0,0,0,0.35); }
+.card:hover::before{ opacity:1; }
+@keyframes cardIn{ from{ opacity:0; transform:translateY(14px);} to{ opacity:1; transform:translateY(0);} }
+
+.card-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.card-icon{
+  width:48px; height:48px; border-radius:12px; flex:0 0 auto;
+  display:grid; place-items:center;
+  background:rgba(77,171,255,0.1); border:1px solid rgba(77,171,255,0.25);
+  color:var(--blue); font-family:var(--font-display); font-weight:700; font-size:1.05rem;
+}
+.difficulty-badge{
+  font-size:0.7rem; font-weight:700; padding:5px 12px; border-radius:100px;
+  letter-spacing:0.03em; white-space:nowrap; height:fit-content; border:1px solid transparent;
+  text-transform:uppercase;
+}
+.difficulty-badge.beginner{ background:var(--success-bg); color:var(--success); border-color:rgba(52,211,153,0.3); }
+.difficulty-badge.intermediate{ background:var(--warning-bg); color:var(--warning); border-color:rgba(251,188,5,0.3); }
+.difficulty-badge.advanced{ background:var(--danger-bg); color:var(--danger); border-color:rgba(248,113,113,0.3); }
+
+.card h3{ font-family:var(--font-display); font-size:1.16rem; margin:0; color:var(--text); font-weight:700; }
+.card .subject{ font-size:0.82rem; color:var(--blue); font-weight:600; margin-top:-8px; }
+.card .desc{ font-size:0.88rem; color:var(--muted); line-height:1.6; margin:0; flex:1; }
+
+.meta-row{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:8px;
+  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  padding:14px 0;
+}
+.meta-item{ text-align:left; }
+.meta-item .val{ font-family:var(--font-mono); font-weight:700; font-size:0.95rem; color:var(--text); }
+.meta-item .lab{ font-size:0.66rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em; margin-top:2px; }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:13px 20px; border-radius:var(--radius-md); border:none;
+  font-weight:600; font-size:0.92rem; letter-spacing:0.01em;
+  transition:.25s;
+}
+.btn-primary{ background:var(--blue); color:#04101d; }
+.btn-primary:hover{ background:var(--blue-dark); transform:translateY(-2px); box-shadow:0 12px 30px rgba(77,171,255,0.25); color:#fff; }
+.btn-secondary{ background:transparent; color:var(--blue); border:1.5px solid rgba(77,171,255,0.35); }
+.btn-secondary:hover{ border-color:var(--blue); background:rgba(77,171,255,0.08); transform:translateY(-2px); }
+.btn-danger{ background:var(--danger); color:#2a0a0a; }
+.btn-block{ width:100%; }
+.btn:disabled{ opacity:0.5; cursor:not-allowed; transform:none !important; }
+
+/* ============ footer ============ */
+.site-footer{
+  border-top:1px solid var(--border);
+  background:var(--bg2);
+  color:var(--muted);
+  padding:30px 0;
+  margin-top:auto;
+  position:relative; z-index:1;
+}
+.site-footer .container{ text-align:center; }
+.site-footer strong{ color:var(--text); font-family:var(--font-display); }
+.site-footer p{ margin:4px 0; font-size:0.83rem; }
+
+main{ flex:1; position:relative; z-index:1; }
+
+/* ============ modal overlay ============ */
+.overlay{
+  position:fixed; inset:0; z-index:100;
+  background:rgba(3,9,18,0.7);
+  backdrop-filter:blur(6px);
+  display:flex; align-items:center; justify-content:center;
+  padding:20px; animation:fadeIn .18s ease both;
+}
+@keyframes fadeIn{ from{ opacity:0;} to{ opacity:1;} }
+.modal{
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  width:100%; max-width:440px;
+  padding:30px; box-shadow:0 30px 70px rgba(0,0,0,0.5);
+  animation:popIn .22s cubic-bezier(.2,.9,.3,1.2) both;
+}
+@keyframes popIn{ from{ opacity:0; transform:scale(0.94) translateY(10px);} to{ opacity:1; transform:none;} }
+.modal h2{ font-family:var(--font-display); margin:0 0 4px; color:var(--text); font-size:1.3rem; }
+.modal .sub{ color:var(--muted); font-size:0.88rem; margin:0 0 22px; }
+.field{ margin-bottom:16px; }
+.field label{ display:block; font-size:0.82rem; font-weight:600; color:var(--text); margin-bottom:6px; }
+.field label .opt{ color:var(--muted); font-weight:500; }
+.field input{
+  width:100%; padding:12px 14px; border-radius:var(--radius-sm);
+  border:1px solid var(--border); font-size:0.94rem; background:var(--bg2); color:var(--text);
+}
+.field input::placeholder{ color:var(--muted); }
+.field input:focus{ border-color:var(--blue); }
+.field .err{ color:var(--danger); font-size:0.78rem; margin-top:5px; display:none; }
+.field.invalid input{ border-color:var(--danger); }
+.field.invalid .err{ display:block; }
+.modal-actions{ display:flex; gap:10px; margin-top:20px; }
+.modal-close{
+  position:absolute; top:16px; right:16px; background:none; border:none;
+  width:32px; height:32px; border-radius:8px; color:var(--muted); font-size:1.1rem;
+}
+.modal-close:hover{ background:var(--glow); color:var(--text); }
+.modal-wrap{ position:relative; }
+
+/* ============ instructions page ============ */
+.page{ padding:56px 0 90px; animation:fadeIn .25s ease both; position:relative; z-index:1; }
+.back-link{
+  display:inline-flex; align-items:center; gap:6px; color:var(--blue);
+  font-weight:600; font-size:0.88rem; text-decoration:none; margin-bottom:20px;
+  background:none; border:none; padding:0;
+}
+.panel{
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:36px; max-width:760px; margin:0 auto;
+}
+.panel-header{ display:flex; align-items:center; gap:14px; margin-bottom:22px; }
+.panel h2{ font-family:var(--font-display); font-size:1.5rem; margin:0; color:var(--text); }
+.panel .student-line{ color:var(--muted); font-size:0.88rem; }
+
+.info-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:14px; margin:24px 0; }
+.info-tile{ background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px; text-align:center; }
+.info-tile .val{ font-family:var(--font-mono); font-size:1.3rem; font-weight:700; color:var(--blue); }
+.info-tile .lab{ font-size:0.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.03em; margin-top:4px; }
+
+.rules-list{ list-style:none; padding:0; margin:22px 0; display:flex; flex-direction:column; gap:12px; }
+.rules-list li{ display:flex; gap:10px; align-items:flex-start; font-size:0.92rem; color:var(--text); line-height:1.5; }
+.rules-list li svg{ flex:0 0 auto; margin-top:2px; color:var(--blue); width:18px; height:18px; }
+
+/* ============ assessment page ============ */
+.exam-shell{ min-height:100vh; display:flex; flex-direction:column; position:relative; z-index:1; }
+.exam-header{ position:sticky; top:0; z-index:30; background:rgba(5,15,26,0.96); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); padding:14px 0; }
+.exam-header .container{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+.exam-header .brand-name{ color:var(--text); }
+.exam-header .brand-tag{ color:var(--muted); }
+.exam-test-name{ font-family:var(--font-display); font-weight:600; font-size:0.98rem; color:var(--blue); }
+.exam-header .header-spacer{ flex:1; }
+
+.timer{
+  font-family:var(--font-mono); font-size:1.05rem; font-weight:700;
+  background:rgba(77,171,255,0.1); padding:9px 18px; border-radius:100px;
+  display:flex; align-items:center; gap:8px; border:1px solid rgba(77,171,255,0.28); color:var(--blue);
+}
+.timer.low-time{ background:var(--danger); border-color:var(--danger); color:#2a0a0a; animation:tpulse 1s infinite; }
+@keyframes tpulse{ 0%,100%{ opacity:1;} 50%{ opacity:0.7;} }
+
+.progress-bar-track{ height:6px; background:var(--bg3); }
+.progress-bar-fill{ height:100%; background:linear-gradient(90deg,var(--blue-dark),var(--blue)); width:0%; transition:width .3s ease; }
+
+.exam-body{ flex:1; display:grid; grid-template-columns:1fr 300px; gap:26px; max-width:1240px; margin:0 auto; padding:28px 24px 40px; width:100%; }
+.question-panel{ background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-lg); padding:32px; }
+.q-meta-row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; flex-wrap:wrap; gap:8px; }
+.q-number{ font-family:var(--font-mono); color:var(--blue); font-weight:700; font-size:0.9rem; }
+.q-marks{ font-size:0.8rem; color:var(--muted); }
+.q-text{ font-size:1.12rem; line-height:1.6; color:var(--text); margin:0 0 24px; font-weight:600; }
+
+.options-list{ display:flex; flex-direction:column; gap:12px; margin-bottom:28px; }
+.option{
+  display:flex; align-items:center; gap:12px;
+  padding:14px 16px; border-radius:var(--radius-md);
+  border:1.5px solid var(--border); background:var(--bg2);
+  cursor:pointer; transition:.2s; font-size:0.95rem; color:var(--text);
+}
+.option:hover{ border-color:var(--blue); background:var(--bg4); }
+.option .opt-key{
+  width:28px; height:28px; border-radius:50%; flex:0 0 auto;
+  display:grid; place-items:center; font-weight:700; font-size:0.8rem;
+  background:var(--bg3); border:1.5px solid var(--border); color:var(--muted);
+}
+.option.selected{ border-color:var(--blue); background:rgba(77,171,255,0.12); }
+.option.selected .opt-key{ background:var(--blue); color:#04101d; border-color:var(--blue); }
+
+.exam-nav-btns{ display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.exam-nav-btns .grow{ flex:1; }
+
+.palette-panel{ background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius-lg); padding:22px; height:fit-content; position:sticky; top:110px; }
+.palette-panel h4{ margin:0 0 4px; font-family:var(--font-display); font-size:0.95rem; color:var(--text); }
+.student-mini{ font-size:0.78rem; color:var(--muted); margin-bottom:16px; }
+.palette-legend{ display:flex; flex-direction:column; gap:8px; font-size:0.78rem; color:var(--muted); margin-bottom:16px; }
+.palette-legend .lg-item{ display:flex; align-items:center; gap:8px; }
+.legend-dot{ width:14px; height:14px; border-radius:5px; flex:0 0 auto; }
+.legend-dot.answered{ background:var(--success); }
+.legend-dot.unanswered{ background:var(--bg2); border:1.5px solid var(--border); }
+.legend-dot.current{ background:var(--blue); }
+
+.palette-grid{ display:grid; grid-template-columns:repeat(5, 1fr); gap:8px; margin-bottom:18px; max-height:320px; overflow-y:auto; padding-right:2px; }
+.palette-btn{
+  aspect-ratio:1; border-radius:8px; border:1.5px solid var(--border);
+  background:var(--bg2); font-family:var(--font-mono); font-weight:700; font-size:0.78rem;
+  color:var(--text); display:grid; place-items:center; transition:.15s;
+}
+.palette-btn.answered{ background:var(--success); color:#04101d; border-color:var(--success); }
+.palette-btn.current{ background:var(--blue); color:#04101d; border-color:var(--blue); box-shadow:0 0 0 3px rgba(77,171,255,0.25); }
+.palette-btn:hover{ transform:translateY(-1px); }
+
+.submit-summary{ font-size:0.8rem; color:var(--muted); margin-bottom:12px; }
+.submit-summary b{ color:var(--text); }
+
+@media (max-width: 940px){
+  .exam-body{ grid-template-columns:1fr; }
+  .palette-panel{ position:static; order:-1; }
+  .palette-grid{ max-height:none; grid-template-columns:repeat(8, 1fr); }
+}
+@media (max-width: 480px){
+  .palette-grid{ grid-template-columns:repeat(6, 1fr); }
+  .panel{ padding:22px; }
+  .question-panel{ padding:20px; }
+}
+
+/* ============ result page ============ */
+.result-panel{
+  max-width:640px; margin:0 auto; text-align:center;
+  background:var(--bg3); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:46px 34px;
+}
+.result-badge{ width:84px; height:84px; border-radius:50%; margin:0 auto 18px; display:grid; place-items:center; font-size:2.2rem; }
+.result-badge.pass{ background:var(--success-bg); color:var(--success); border:1px solid rgba(52,211,153,0.3); }
+.result-badge.fail{ background:var(--danger-bg); color:var(--danger); border:1px solid rgba(248,113,113,0.3); }
+.result-panel h2{ font-family:var(--font-display); margin:0 0 6px; color:var(--text); }
+.result-panel .status-text{ font-weight:700; margin-bottom:26px; }
+.status-text.pass{ color:var(--success); }
+.status-text.fail{ color:var(--danger); }
+
+.score-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:12px; margin:24px 0; }
+.score-tile{ background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px; }
+.score-tile .val{ font-family:var(--font-mono); font-size:1.4rem; font-weight:700; color:var(--text); }
+.score-tile .lab{ font-size:0.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.03em; }
+
+.screenshot-note{
+  background:var(--warning-bg); color:var(--warning); border:1px solid rgba(251,188,5,0.25);
+  border-radius:var(--radius-md); padding:14px 18px; font-size:0.88rem; text-align:left; margin:20px 0; line-height:1.5;
+}
+.result-actions{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:10px; }
+
+/* toast */
+.toast{
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%) translateY(20px);
+  background:var(--bg3); border:1px solid var(--border); color:var(--text);
+  padding:13px 22px; border-radius:100px;
+  font-size:0.86rem; z-index:200; box-shadow:0 10px 30px rgba(0,0,0,0.45);
+  opacity:0; pointer-events:none; transition:all .25s ease;
+}
+.toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+@media (max-width:640px){
+  .hero{ padding:52px 0 24px; }
+  .controls-row{ flex-direction:column; align-items:stretch; }
+  .filter-chips{ overflow-x:auto; flex-wrap:nowrap; padding-bottom:4px; }
+  .modal-actions{ flex-direction:column; }
+  .exam-nav-btns{ flex-direction:column; }
+  .exam-nav-btns .grow{ order:-1; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="mainHeader">
+  <div class="container">
+    <a href="#" class="brand" id="brandHome">
+      <span class="sync-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="syncGrad" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#1e88e5"/><stop offset="1" stop-color="#4dabff"/>
+            </linearGradient>
+          </defs>
+          <path d="M8 15a12 12 0 0 1 20.8-8.2" stroke="url(#syncGrad)" stroke-width="3.4" stroke-linecap="round"/>
+          <path d="M28.8 6.8 L30 13 L23.6 12" stroke="url(#syncGrad)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M32 25a12 12 0 0 1-20.8 8.2" stroke="url(#syncGrad)" stroke-width="3.4" stroke-linecap="round"/>
+          <path d="M11.2 33.2 L10 27 L16.4 28" stroke="url(#syncGrad)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <img id="companyLogoImg" src="Logo.png" alt="QuadSync Tech Solutions logo" style="width:0;height:0;position:absolute;" onerror="this.style.display='none'" />
+      <span class="brand-text">
+        <span class="brand-name">QuadSync Tech Solutions</span>
+        <span class="brand-tag">Synchronizing Innovations with Success</span>
+      </span>
+    </a>
+    <div class="header-spacer"></div>
+    <div class="header-status" id="headerStatus">
+      <span class="dot"></span> Portal Ready
+    </div>
+  </div>
+</header>
+
+<main id="mainContent">
+
+  <!-- ============ PAGE 1: DASHBOARD ============ -->
+  <section id="page-dashboard">
+    <div class="hero container">
+      <div class="hero-eyebrow">Assessment Center</div>
+      <h1>Online Assessment Portal</h1>
+      <p class="lead">Pick a test from the list below to check your skills. Enter your name, read the instructions, and start whenever you're ready.</p>
+
+      <div class="controls-row">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="searchInput" placeholder="Search assessments by name or subject…" autocomplete="off" />
+        </div>
+      </div>
+      <div class="controls-row">
+        <div class="filter-chips" id="filterChips">
+          <button class="chip active" data-filter="All">All</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-section container">
+      <div class="assessment-grid" id="assessmentGrid" aria-live="polite">
+        <!-- cards injected by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PAGE 2: INSTRUCTIONS ============ -->
+  <section id="page-instructions" class="page hidden">
+    <div class="container">
+      <button class="back-link" id="backToDashboardFromInstructions">&larr; Back to Dashboard</button>
+      <div class="panel">
+        <div class="panel-header">
+          <span class="card-icon" id="instrIcon">Q</span>
+          <div>
+            <h2 id="instrTestName">Test Name</h2>
+            <div class="student-line" id="instrStudentLine">Candidate: —</div>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-tile"><div class="val" id="instrTotalQ">-</div><div class="lab">Questions</div></div>
+          <div class="info-tile"><div class="val" id="instrTotalMarks">-</div><div class="lab">Total Marks</div></div>
+          <div class="info-tile"><div class="val" id="instrDuration">-</div><div class="lab">Duration</div></div>
+          <div class="info-tile"><div class="val" id="instrPassMarks">-</div><div class="lab">Passing Marks</div></div>
+        </div>
+
+        <ul class="rules-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Each question carries equal marks.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> There is no negative marking for wrong answers.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> The test will auto-submit automatically when the time ends.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> You can move between questions freely using the question palette.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Do not refresh or close the tab once the assessment has started.</li>
+        </ul>
+
+        <button class="btn btn-primary btn-block" id="startAssessmentBtn">Start Assessment</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PAGE 3: ASSESSMENT ============ -->
+  <section id="page-assessment" class="exam-shell hidden">
+    <div class="exam-header">
+      <div class="container">
+        <span class="sync-mark" aria-hidden="true" style="width:30px;height:30px;">
+          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 15a12 12 0 0 1 20.8-8.2" stroke="#7DD3FC" stroke-width="3.6" stroke-linecap="round"/>
+            <path d="M28.8 6.8 L30 13 L23.6 12" stroke="#7DD3FC" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M32 25a12 12 0 0 1-20.8 8.2" stroke="#7DD3FC" stroke-width="3.6" stroke-linecap="round"/>
+            <path d="M11.2 33.2 L10 27 L16.4 28" stroke="#7DD3FC" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-name">QuadSync Tech Solutions</span>
+        </span>
+        <span class="exam-test-name" id="examTestName">— Test Name</span>
+        <div class="header-spacer"></div>
+        <div class="timer" id="examTimer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+          <span id="timerText">00:00</span>
+        </div>
+      </div>
+      <div class="progress-bar-track"><div class="progress-bar-fill" id="progressBarFill"></div></div>
+    </div>
+
+    <div class="exam-body">
+      <div class="question-panel">
+        <div class="q-meta-row">
+          <span class="q-number" id="qNumberLabel">Question 1 of 50</span>
+          <span class="q-marks" id="qMarksLabel">1 Mark</span>
+        </div>
+        <p class="q-text" id="qText">Question text goes here</p>
+        <div class="options-list" id="optionsList"></div>
+
+        <div class="exam-nav-btns">
+          <button class="btn btn-secondary" id="prevBtn">&larr; Previous</button>
+          <span class="grow"></span>
+          <button class="btn btn-secondary" id="nextBtn">Next &rarr;</button>
+          <button class="btn btn-primary" id="submitBtn">Submit Test</button>
+        </div>
+      </div>
+
+      <aside class="palette-panel">
+        <h4>Question Palette</h4>
+        <div class="student-mini" id="paletteStudentName">Candidate: —</div>
+        <div class="palette-legend">
+          <div class="lg-item"><span class="legend-dot current"></span> Current question</div>
+          <div class="lg-item"><span class="legend-dot answered"></span> Answered</div>
+          <div class="lg-item"><span class="legend-dot unanswered"></span> Not answered</div>
+        </div>
+        <div class="palette-grid" id="paletteGrid"></div>
+        <div class="submit-summary"><b id="answeredCount">0</b> of <b id="totalCount">50</b> answered</div>
+        <button class="btn btn-primary btn-block" id="paletteSubmitBtn">Submit Test</button>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ PAGE 4: RESULT ============ -->
+  <section id="page-result" class="page hidden">
+    <div class="container">
+      <div class="result-panel">
+        <div class="result-badge" id="resultBadge">🏆</div>
+        <h2 id="resultStudentName">Well done, Student!</h2>
+        <div class="student-line" id="resultTestName">Test Name</div>
+        <div class="status-text" id="resultStatusText">PASS</div>
+
+        <div class="score-grid">
+          <div class="score-tile"><div class="val" id="resTotalQ">-</div><div class="lab">Total Questions</div></div>
+          <div class="score-tile"><div class="val" id="resCorrect">-</div><div class="lab">Correct</div></div>
+          <div class="score-tile"><div class="val" id="resWrong">-</div><div class="lab">Wrong</div></div>
+          <div class="score-tile"><div class="val" id="resScore">-</div><div class="lab">Score</div></div>
+          <div class="score-tile"><div class="val" id="resPercent">-</div><div class="lab">Percentage</div></div>
+        </div>
+
+        <div class="screenshot-note">
+          📸 Please take a screenshot of your result and submit it through the Google Form.
+        </div>
+
+        <div class="result-actions">
+          <a class="btn btn-primary" id="submitScreenshotBtn" href="https://forms.google.com/your-form-link-here" target="_blank" rel="noopener">Submit Screenshot</a>
+          <button class="btn btn-secondary" id="returnToDashboardBtn">Return to Dashboard</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER (visible on every page) ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <p><strong>© 2026 QuadSync Tech Solutions</strong></p>
+    <p>Synchronizing Innovations with Success</p>
+    <p>All Rights Reserved.</p>
+  </div>
+</footer>
+
+<!-- ============ MODAL: Student Details ============ -->
+<div class="overlay hidden" id="studentModalOverlay">
+  <div class="modal modal-wrap">
+    <button class="modal-close" id="closeStudentModal" aria-label="Close">✕</button>
+    <h2>Before you begin</h2>
+    <p class="sub">Enter your details to start <span id="modalTestName">this test</span>.</p>
+    <form id="studentForm" novalidate>
+      <div class="field" id="nameField">
+        <label for="studentName">Full Name <span class="opt">(required)</span></label>
+        <input type="text" id="studentName" autocomplete="name" placeholder="e.g. Priya Sharma" />
+        <div class="err">Please enter your name to continue.</div>
+      </div>
+      <div class="field">
+        <label for="studentEmail">Email <span class="opt">(optional)</span></label>
+        <input type="email" id="studentEmail" autocomplete="email" placeholder="e.g. priya@email.com" />
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" id="cancelStudentModal">Cancel</button>
+        <button type="submit" class="btn btn-primary grow">Continue</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   QuadSync Tech Solutions — Online Assessment Portal
+   data.js — assessment catalogue + question banks
+   ------------------------------------------------------------
+   HOW TO ADD A NEW ASSESSMENT
+   1. Add a new key to ASSESSMENT_META below (copy an existing block).
+   2. Add a matching key to QUESTION_BANKS with an array of question
+      objects: { q, options: [4 strings], correct: index 0-3 }.
+   3. Refresh the page — the dashboard card & test are generated
+      automatically. No other file needs to change.
+
+   NOTE ON PLACEHOLDER QUESTIONS
+   Each subject ships with 10 real, hand-written sample questions
+   followed by 40 clearly-labelled placeholder questions
+   ("Q11" onward). Replace the placeholders with your own bank —
+   just keep the same { q, options, correct } shape.
+   ============================================================ */
+
+const ASSESSMENT_META = {
+  /* ---------------- Data Analyst track ---------------- */
+  excelfoundation: {
+    name: "Excel Foundation",
+    subject: "Microsoft Excel",
+    icon: "excel",
+    category: "Data Analyst",
+    difficulty: "Beginner",
+    duration: 40,
+    passingPercent: 40,
+    description: "Formulas, functions, PivotTables and everyday spreadsheet skills."
+  },
+  pythonfoundation: {
+    name: "Python Foundation",
+    subject: "Python Programming Basics",
+    icon: "python",
+    category: "Data Analyst",
+    difficulty: "Beginner",
+    duration: 45,
+    passingPercent: 40,
+    description: "Core syntax, data types, loops and functions for absolute beginners."
+  },
+  pythonadvanced: {
+    name: "Python Advanced",
+    subject: "Python for Data Analysis",
+    icon: "python",
+    category: "Data Analyst",
+    difficulty: "Advanced",
+    duration: 60,
+    passingPercent: 40,
+    description: "Decorators, generators, OOP and advanced problem solving."
+  },
+  sql: {
+    name: "SQL Assessment",
+    subject: "Structured Query Language",
+    icon: "sql",
+    category: "Data Analyst",
+    difficulty: "Intermediate",
+    duration: 45,
+    passingPercent: 40,
+    description: "Querying, joins, constraints and database fundamentals."
+  },
+  powerbi: {
+    name: "Power BI Assessment",
+    subject: "Microsoft Power BI",
+    icon: "powerbi",
+    category: "Data Analyst",
+    difficulty: "Intermediate",
+    duration: 45,
+    passingPercent: 40,
+    description: "Data modelling, DAX, visuals and report building."
+  },
+  tableau: {
+    name: "Tableau Assessment",
+    subject: "Tableau Visualization",
+    icon: "tableau",
+    category: "Data Analyst",
+    difficulty: "Intermediate",
+    duration: 45,
+    passingPercent: 40,
+    description: "Dashboards, calculated fields and visual storytelling."
+  },
+
+  /* ---------------- MERN Stack Development track ---------------- */
+  html: {
+    name: "HTML Assessment",
+    subject: "HTML5",
+    icon: "html",
+    category: "MERN Stack Development",
+    difficulty: "Beginner",
+    duration: 30,
+    passingPercent: 40,
+    description: "Semantic markup, forms and page structure fundamentals."
+  },
+  css: {
+    name: "CSS Assessment",
+    subject: "CSS3",
+    icon: "css",
+    category: "MERN Stack Development",
+    difficulty: "Beginner",
+    duration: 30,
+    passingPercent: 40,
+    description: "Layout, styling, Flexbox/Grid and responsive design."
+  },
+  js: {
+    name: "JavaScript Assessment",
+    subject: "JavaScript (ES6+)",
+    icon: "js",
+    category: "MERN Stack Development",
+    difficulty: "Intermediate",
+    duration: 45,
+    passingPercent: 40,
+    description: "Core language, DOM, async programming and ES6+ features."
+  },
+  react: {
+    name: "React Assessment",
+    subject: "React.js",
+    icon: "react",
+    category: "MERN Stack Development",
+    difficulty: "Intermediate",
+    duration: 45,
+    passingPercent: 40,
+    description: "Components, hooks, state and props in modern React."
+  },
+  expressnode: {
+    name: "Express & Node Assessment",
+    subject: "Node.js & Express",
+    icon: "node",
+    category: "MERN Stack Development",
+    difficulty: "Intermediate",
+    duration: 45,
+    passingPercent: 40,
+    description: "Server-side JavaScript, REST APIs and middleware."
+  },
+  mongodb: {
+    name: "MongoDB Assessment",
+    subject: "MongoDB",
+    icon: "mongo",
+    category: "MERN Stack Development",
+    difficulty: "Intermediate",
+    duration: 40,
+    passingPercent: 40,
+    description: "Documents, collections, queries and schema design."
+  },
+  tailwind: {
+    name: "Tailwind CSS Assessment",
+    subject: "Tailwind CSS",
+    icon: "tailwind",
+    category: "MERN Stack Development",
+    difficulty: "Beginner",
+    duration: 30,
+    passingPercent: 40,
+    description: "Utility-first styling and responsive design workflow."
+  },
+
+  /* ---------------- HR track ---------------- */
+  hr: {
+    name: "HR Assessment",
+    subject: "Human Resources",
+    icon: "hr",
+    category: "HR",
+    difficulty: "Beginner",
+    duration: 30,
+    passingPercent: 40,
+    description: "Recruitment, onboarding, appraisals and HR fundamentals."
+  }
+};
+
+/* ---------- hand-written sample questions (10 per subject) ---------- */
+
+const SEED_QUESTIONS = {
+  excelfoundation: [
+    { q: "Which function looks up a value in the first column of a range and returns a value from another column in the same row?", options: ["VLOOKUP", "SUMIF", "CONCATENATE", "TODAY"], correct: 0 },
+    { q: "Which shortcut key inserts a new worksheet in Excel?", options: ["Shift + F11", "Ctrl + N", "Alt + F1", "Ctrl + F11"], correct: 0 },
+    { q: "Which feature highlights cells automatically based on specific conditions?", options: ["Conditional Formatting", "Data Validation", "Freeze Panes", "Goal Seek"], correct: 0 },
+    { q: "Which function returns the count of numeric values in a range?", options: ["COUNT", "COUNTA", "COUNTIF", "COUNTBLANK"], correct: 0 },
+    { q: "Which tool summarises large datasets using drag-and-drop fields?", options: ["PivotTable", "PivotChart", "Power Query", "Data Table"], correct: 0 },
+    { q: "Which function returns TRUE when a cell is empty?", options: ["ISBLANK", "ISERROR", "ISNUMBER", "ISTEXT"], correct: 0 },
+    { q: "Which symbol locks a cell reference so it doesn't change while copying a formula?", options: ["$", "#", "%", "&"], correct: 0 },
+    { q: "Which chart type best shows a trend over time?", options: ["Line chart", "Pie chart", "Bar chart", "Scatter chart"], correct: 0 },
+    { q: "Which feature restricts the type of data that can be entered into a cell?", options: ["Data Validation", "Conditional Formatting", "Freeze Panes", "Sort & Filter"], correct: 0 },
+    { q: "Which function is used to join multiple text strings into one?", options: ["CONCATENATE", "VLOOKUP", "SUMPRODUCT", "INDEX"], correct: 0 }
+  ],
+  pythonfoundation: [
+    { q: "Which keyword is used to define a function in Python?", options: ["def", "function", "func", "define"], correct: 0 },
+    { q: "Which built-in data type is immutable?", options: ["Tuple", "List", "Dictionary", "Set"], correct: 0 },
+    { q: "Which loop is used to iterate over a sequence?", options: ["for", "while", "do-while", "repeat"], correct: 0 },
+    { q: "Which list method adds an item to the end of the list?", options: ["append()", "add()", "insert()", "extend()"], correct: 0 },
+    { q: "Which construct is used to handle runtime exceptions?", options: ["try-except", "if-else", "for-else", "switch-case"], correct: 0 },
+    { q: "Which symbol starts a single-line comment in Python?", options: ["#", "//", "/* */", "--"], correct: 0 },
+    { q: "Which built-in function returns the number of items in an object?", options: ["len()", "size()", "count()", "length()"], correct: 0 },
+    { q: "What does PEP stand for in the Python ecosystem?", options: ["Python Enhancement Proposal", "Python Execution Program", "Python Error Protocol", "Programmed Execution Path"], correct: 0 },
+    { q: "Which keyword is used to create a class in Python?", options: ["class", "object", "define", "struct"], correct: 0 },
+    { q: "Which standard library module provides regular-expression support?", options: ["re", "regex", "pyregex", "string"], correct: 0 }
+  ],
+  pythonadvanced: [
+    { q: "Which built-in function pairs elements from multiple iterables into tuples?", options: ["zip()", "map()", "enumerate()", "reduce()"], correct: 0 },
+    { q: "Which decorator defines a method that doesn't access instance or class data?", options: ["@staticmethod", "@classmethod", "@property", "@abstractmethod"], correct: 0 },
+    { q: "Which keyword turns a function into a generator that yields values lazily?", options: ["yield", "return", "pass", "continue"], correct: 0 },
+    { q: "Which standard library module supports running code across multiple threads?", options: ["threading", "socket", "itertools", "functools"], correct: 0 },
+    { q: "What term describes a function that accepts or returns another function?", options: ["Higher-order function", "Lambda function", "Nested function", "Recursive function"], correct: 0 },
+    { q: "Which method creates a shallow copy of a list?", options: ["copy()", "clone()", "duplicate()", "replicate()"], correct: 0 },
+    { q: "Which magic method controls an object's readable string representation for print()?", options: ["__str__", "__init__", "__call__", "__len__"], correct: 0 },
+    { q: "Which keyword is used with a context manager to safely open and close resources?", options: ["with", "using", "close", "finally"], correct: 0 },
+    { q: "What does the *args syntax allow a function to accept?", options: ["A variable number of positional arguments", "Only keyword arguments", "A single tuple argument only", "Nothing — it's invalid syntax"], correct: 0 },
+    { q: "Which library is the core package for fast numerical array operations in Python?", options: ["NumPy", "Matplotlib", "Seaborn", "Requests"], correct: 0 }
+  ],
+  sql: [
+    { q: "Which SQL clause is used to filter individual records?", options: ["WHERE", "HAVING", "GROUP BY", "ORDER BY"], correct: 0 },
+    { q: "Which JOIN returns matching rows from both tables plus unmatched rows from each side?", options: ["FULL OUTER JOIN", "INNER JOIN", "LEFT JOIN", "RIGHT JOIN"], correct: 0 },
+    { q: "Which keyword removes duplicate rows from a result set?", options: ["DISTINCT", "UNIQUE", "FILTER", "GROUP"], correct: 0 },
+    { q: "Which constraint ensures a column can never store a NULL value?", options: ["NOT NULL", "UNIQUE", "CHECK", "DEFAULT"], correct: 0 },
+    { q: "Which command permanently removes a table's structure and data?", options: ["DROP", "DELETE", "TRUNCATE", "REMOVE"], correct: 0 },
+    { q: "Which clause filters groups after an aggregation has been applied?", options: ["HAVING", "WHERE", "GROUP BY", "ORDER BY"], correct: 0 },
+    { q: "Which key uniquely identifies every record in a table?", options: ["PRIMARY KEY", "FOREIGN KEY", "UNIQUE KEY", "INDEX"], correct: 0 },
+    { q: "Which statement is used to modify existing records in a table?", options: ["UPDATE", "ALTER", "MODIFY", "SET"], correct: 0 },
+    { q: "In the ACID properties of a transaction, what does the 'A' stand for?", options: ["Atomicity", "Aggregation", "Association", "Authentication"], correct: 0 },
+    { q: "Which function returns the total number of rows in a result set?", options: ["COUNT", "SUM", "TOTAL", "ROWCOUNT"], correct: 0 }
+  ],
+  powerbi: [
+    { q: "Which language is used to write custom measures and calculations in Power BI?", options: ["DAX", "SQL", "Python", "M Query"], correct: 0 },
+    { q: "Which tool is used to import and transform data before loading it into the model?", options: ["Power Query", "DAX", "Power Pivot", "Power View"], correct: 0 },
+    { q: "Which visual best represents a part-to-whole relationship?", options: ["Pie chart", "Line chart", "Card", "Table"], correct: 0 },
+    { q: "Which type of calculation evaluates dynamically based on report filter context?", options: ["Measure", "Calculated Column", "Parameter", "Bookmark"], correct: 0 },
+    { q: "Which feature links two tables together using a common field?", options: ["Relationship", "Hierarchy", "Bookmark", "Filter"], correct: 0 },
+    { q: "Which pane lets you drag fields onto a report to build visuals?", options: ["Visualization pane", "Data pane", "Query editor", "Report view"], correct: 0 },
+    { q: "Which DAX function adds up all the values in a column?", options: ["SUM", "CALCULATE", "FILTER", "RELATED"], correct: 0 },
+    { q: "Which feature captures a specific report view/state for later use?", options: ["Bookmark", "Drillthrough", "Tooltip", "Slicer"], correct: 0 },
+    { q: "Which visual lets a viewer filter a whole report by picking a value?", options: ["Slicer", "Card", "Matrix", "Gauge"], correct: 0 },
+    { q: "What is the standard file extension for a Power BI report?", options: [".pbix", ".pbit", ".xlsx", ".pbi"], correct: 0 }
+  ],
+  tableau: [
+    { q: "Which Tableau file type packages the workbook together with its data?", options: [".twbx", ".twb", ".tde", ".hyper"], correct: 0 },
+    { q: "Which pane lists dimensions and measures pulled from your data source?", options: ["Data pane", "Analytics pane", "Marks card", "Show Me panel"], correct: 0 },
+    { q: "Which card controls how marks are displayed — color, size and shape — on a viz?", options: ["Marks card", "Filters shelf", "Pages shelf", "Legend card"], correct: 0 },
+    { q: "Which type of field is built using a custom formula on existing data?", options: ["Calculated Field", "Parameter", "Set", "Group"], correct: 0 },
+    { q: "Which feature lets a viewer interactively change a value, like a threshold, that drives the view?", options: ["Parameter", "Calculated Field", "Filter", "Bookmark"], correct: 0 },
+    { q: "Which feature combines multiple worksheets into a single interactive view?", options: ["Dashboard", "Story", "Workbook", "Extract"], correct: 0 },
+    { q: "Which action type lets clicking a mark in one sheet filter another sheet?", options: ["Filter Action", "Highlight Action", "URL Action", "Parameter Action"], correct: 0 },
+    { q: "Which term describes a sequence of worksheets used to narrate a data-driven story?", options: ["Story", "Dashboard", "Workbook", "Extract"], correct: 0 },
+    { q: "Which local data engine format speeds up performance by pre-aggregating data?", options: ["Extract (.hyper)", "Live connection", "Data blend", "Union"], correct: 0 },
+    { q: "Which technique stacks rows from two similarly structured tables into one?", options: ["Union", "Join", "Blend", "Relationship"], correct: 0 }
+  ],
+  html: [
+    { q: "Which tag defines the largest, most important heading on a page?", options: ["<h1>", "<heading>", "<head>", "<h6>"], correct: 0 },
+    { q: "Which attribute provides alternate text for an image?", options: ["alt", "title", "src", "longdesc"], correct: 0 },
+    { q: "Which tag is used to create a hyperlink?", options: ["<a>", "<link>", "<href>", "<nav>"], correct: 0 },
+    { q: "Which HTML5 element is used to group a set of navigation links?", options: ["<nav>", "<section>", "<div>", "<menu>"], correct: 0 },
+    { q: "Which attribute makes a form field mandatory before submission?", options: ["required", "mandatory", "validate", "needed"], correct: 0 },
+    { q: "Which tag embeds a video directly in an HTML page?", options: ["<video>", "<media>", "<embed>", "<movie>"], correct: 0 },
+    { q: "Which input type restricts a field's value to numbers only?", options: ["number", "text", "digit", "integer"], correct: 0 },
+    { q: "Which tag defines a single row inside an HTML table?", options: ["<tr>", "<td>", "<th>", "<row>"], correct: 0 },
+    { q: "Which doctype declaration is used at the top of an HTML5 document?", options: ["<!DOCTYPE html>", "<!DOCTYPE HTML5>", "<html5>", "<!DOCTYPE W3C>"], correct: 0 },
+    { q: "Which semantic tag represents an independent, self-contained piece of content?", options: ["<article>", "<aside>", "<section>", "<div>"], correct: 0 }
+  ],
+  css: [
+    { q: "Which property changes the text color of an element?", options: ["color", "text-color", "font-color", "foreground"], correct: 0 },
+    { q: "Which layout model arranges items in a single row or column with flexible sizing?", options: ["Flexbox", "Grid", "Float", "Table"], correct: 0 },
+    { q: "Which property controls the space between an element's border and its content?", options: ["padding", "margin", "border-spacing", "gap"], correct: 0 },
+    { q: "Which selector targets an element with a specific id?", options: ["#id-name", ".id-name", "*id-name", "&id-name"], correct: 0 },
+    { q: "Which property makes text bold?", options: ["font-weight", "font-style", "text-decoration", "font-bold"], correct: 0 },
+    { q: "Which unit is relative to the root element's font size?", options: ["rem", "em", "px", "vh"], correct: 0 },
+    { q: "Which property controls the stacking order of positioned elements?", options: ["z-index", "order", "position", "layer"], correct: 0 },
+    { q: "Which CSS feature lets you define reusable custom values, accessed with var()?", options: ["CSS Custom Properties", "@mixin", "$variables", "--SASS"], correct: 0 },
+    { q: "Which at-rule applies styles conditionally based on screen size or device features?", options: ["@media", "@supports", "@import", "@font-face"], correct: 0 },
+    { q: "Which property creates rounded corners on an element?", options: ["border-radius", "corner-radius", "border-round", "radius"], correct: 0 }
+  ],
+  js: [
+    { q: "Which keyword declares a block-scoped variable that can be reassigned?", options: ["let", "const", "var", "def"], correct: 0 },
+    { q: "Which method converts a JSON string into a JavaScript object?", options: ["JSON.parse()", "JSON.stringify()", "JSON.convert()", "JSON.toObject()"], correct: 0 },
+    { q: "Which array method returns a new array with the results of calling a function on every element?", options: ["map()", "forEach()", "filter()", "reduce()"], correct: 0 },
+    { q: "Which operator checks both value and type for equality?", options: ["===", "==", "=", "!=="], correct: 0 },
+    { q: "Inside a regular object method, what does the 'this' keyword refer to?", options: ["The object the method belongs to", "The global window object always", "The parent function", "It is always undefined"], correct: 0 },
+    { q: "Which function type does not have its own 'this' binding?", options: ["Arrow function", "Regular function", "Constructor function", "IIFE"], correct: 0 },
+    { q: "Which built-in object handles asynchronous operations using .then()/.catch()?", options: ["Promise", "Callback", "Async", "Observable"], correct: 0 },
+    { q: "Which array method adds one or more elements to the end of an array?", options: ["push()", "pop()", "shift()", "unshift()"], correct: 0 },
+    { q: "Which keyword is used to handle an error thrown inside a try block?", options: ["catch", "except", "error", "handle"], correct: 0 },
+    { q: "Which array method returns a new array containing only elements that satisfy a condition?", options: ["filter()", "map()", "find()", "some()"], correct: 0 }
+  ],
+  react: [
+    { q: "Which hook lets you add local state to a functional component?", options: ["useState", "useEffect", "useReducer", "useMemo"], correct: 0 },
+    { q: "Which hook is used to run side effects, like data fetching, in a component?", options: ["useEffect", "useState", "useContext", "useRef"], correct: 0 },
+    { q: "Which syntax extension lets you write HTML-like markup inside JavaScript in React?", options: ["JSX", "HTML-in-JS", "TSX only", "ReactML"], correct: 0 },
+    { q: "Which special prop is required when rendering a dynamic list of elements?", options: ["key", "id", "index", "ref"], correct: 0 },
+    { q: "Which hook lets a component read context values without a Consumer wrapper?", options: ["useContext", "useState", "useReducer", "useCallback"], correct: 0 },
+    { q: "What is the general term for functions that let components 'hook into' state and lifecycle features?", options: ["Hooks", "Mixins", "Decorators", "Middleware"], correct: 0 },
+    { q: "In a class component, which lifecycle method runs once right after the component mounts?", options: ["componentDidMount", "componentWillMount", "render", "componentDidUpdate"], correct: 0 },
+    { q: "Which React feature is used to pass data from a parent component down to a child?", options: ["Props", "State", "Context only", "Refs only"], correct: 0 },
+    { q: "Which hook returns a mutable reference object that persists across renders without causing re-renders?", options: ["useRef", "useState", "useMemo", "useCallback"], correct: 0 },
+    { q: "Which command is commonly used to quickly scaffold a new React project?", options: ["npx create-react-app", "npm init react", "react new", "npm react-start"], correct: 0 }
+  ],
+  expressnode: [
+    { q: "Which core Node.js function creates a basic HTTP server?", options: ["http.createServer()", "express.createServer()", "server.create()", "node.createServer()"], correct: 0 },
+    { q: "Which Express method defines a route that responds to GET requests?", options: ["app.get()", "app.route()", "app.fetch()", "app.request()"], correct: 0 },
+    { q: "Which keyword imports a module using Node's CommonJS module system?", options: ["require", "import", "include", "using"], correct: 0 },
+    { q: "Which Express feature processes a request before it reaches the final route handler?", options: ["Middleware", "Router", "Controller", "Listener"], correct: 0 },
+    { q: "Which built-in Express middleware parses incoming JSON request bodies?", options: ["express.json()", "express.parse()", "bodyParser.raw()", "express.body()"], correct: 0 },
+    { q: "Which object represents the incoming HTTP request inside an Express route handler?", options: ["req", "res", "next", "ctx"], correct: 0 },
+    { q: "Which npm package is commonly used to load environment variables from a .env file?", options: ["dotenv", "envkit", "config-node", "nodenv"], correct: 0 },
+    { q: "Which HTTP status code indicates a resource was successfully created?", options: ["201", "200", "204", "400"], correct: 0 },
+    { q: "Which function must be called to pass control on to the next middleware in Express?", options: ["next()", "continue()", "pass()", "forward()"], correct: 0 },
+    { q: "Which Node.js global object holds information about the currently running process?", options: ["process", "global", "module", "__dirname"], correct: 0 }
+  ],
+  mongodb: [
+    { q: "What is the basic unit of data storage in MongoDB called?", options: ["Document", "Row", "Record", "Tuple"], correct: 0 },
+    { q: "Which method inserts a single new document into a collection?", options: ["insertOne()", "addOne()", "createOne()", "pushOne()"], correct: 0 },
+    { q: "Which format does MongoDB use internally to store documents?", options: ["BSON", "JSON", "XML", "CSV"], correct: 0 },
+    { q: "Which method retrieves documents that match a given query?", options: ["find()", "get()", "select()", "fetch()"], correct: 0 },
+    { q: "What is a group of related MongoDB documents called?", options: ["Collection", "Table", "Schema", "Cluster"], correct: 0 },
+    { q: "Which query operator matches values greater than a given number?", options: ["$gt", "$more", "$above", ">"], correct: 0 },
+    { q: "Which aggregation stage joins documents from another collection, similar to a SQL join?", options: ["$lookup", "$merge", "$join", "$relate"], correct: 0 },
+    { q: "Which method updates a single document that matches a filter?", options: ["updateOne()", "modifyOne()", "setOne()", "patchOne()"], correct: 0 },
+    { q: "Which field does MongoDB automatically generate as a unique identifier for every document?", options: ["_id", "id", "uid", "docId"], correct: 0 },
+    { q: "Which popular library is used to model MongoDB data with schemas in a Node.js app?", options: ["Mongoose", "Sequelize", "TypeORM", "Prisma"], correct: 0 }
+  ],
+  tailwind: [
+    { q: "What type of CSS framework is Tailwind classified as?", options: ["Utility-first", "Component-based", "Grid-only", "Reset framework"], correct: 0 },
+    { q: "Which class sets an element's text color using Tailwind's palette?", options: ["text-blue-500", "color-blue-500", "blue-text-500", "font-blue-500"], correct: 0 },
+    { q: "Which prefix applies a utility class only at medium screen sizes and above?", options: ["md:", "medium:", "m:", "@md"], correct: 0 },
+    { q: "Which class applies flexbox display to an element?", options: ["flex", "d-flex", "flexbox", "display-flex"], correct: 0 },
+    { q: "Which file is typically used to customize Tailwind's default theme, like colors and spacing?", options: ["tailwind.config.js", "tailwind.theme.js", "tw.config.json", "config.tailwind.js"], correct: 0 },
+    { q: "Which class adds a consistent 1rem of padding on all sides of an element?", options: ["p-4", "padding-4", "pad-4", "p1"], correct: 0 },
+    { q: "Which prefix applies a utility class only while the element is hovered?", options: ["hover:", "on-hover:", ":hover", "mouseover:"], correct: 0 },
+    { q: "Which Tailwind mechanism removes unused CSS classes from production builds?", options: ["Content configuration (JIT)", "Minify", "Autoprefixer", "Treeshake"], correct: 0 },
+    { q: "Which class sets an element's width to 100% of its container?", options: ["w-full", "width-100", "w-100%", "full-width"], correct: 0 },
+    { q: "Which class creates a grid container with 3 equal-width columns?", options: ["grid-cols-3", "cols-3", "grid-3", "columns-3"], correct: 0 }
+  ],
+  hr: [
+    { q: "What does the abbreviation KRA stand for in HR?", options: ["Key Result Area", "Key Recruitment Area", "Known Result Assessment", "Key Retention Analysis"], correct: 0 },
+    { q: "Which process periodically evaluates an employee's performance?", options: ["Performance Appraisal", "Onboarding", "Recruitment", "Payroll"], correct: 0 },
+    { q: "Which HR process introduces a new employee to the organisation?", options: ["Onboarding", "Exit Interview", "Sourcing", "Succession Planning"], correct: 0 },
+    { q: "In India, which act primarily governs the Employee Provident Fund?", options: ["EPF Act", "Factories Act", "Minimum Wages Act", "Payment of Bonus Act"], correct: 0 },
+    { q: "What does CTC stand for in HR terminology?", options: ["Cost to Company", "Contract Term Clause", "Company Tax Credit", "Cost Tracking Chart"], correct: 0 },
+    { q: "Which process formally ends an employment relationship?", options: ["Offboarding", "Onboarding", "Induction", "Recruitment"], correct: 0 },
+    { q: "Which term refers to attracting and selecting suitable candidates?", options: ["Recruitment", "Retention", "Appraisal", "Payroll"], correct: 0 },
+    { q: "Which document outlines an employee's duties and terms of employment?", options: ["Employment Contract", "Resume", "Payslip", "Appraisal Form"], correct: 0 },
+    { q: "What does HRIS stand for?", options: ["Human Resource Information System", "Human Retention Incentive Scheme", "HR Internal Standards", "Human Rights Information Source"], correct: 0 },
+    { q: "Which principle requires equal pay for equal work regardless of gender?", options: ["Equal Remuneration", "Minimum Wages", "Payment of Wages", "Factories Regulation"], correct: 0 }
+  ]
+};
+
+/* ---------- generate 40 placeholder questions per subject (11-50) ---------- */
+
+function buildPlaceholderQuestions(subjectLabel, startIndex, count) {
+  const items = [];
+  for (let i = 0; i < count; i++) {
+    const n = startIndex + i;
+    items.push({
+      q: `[Placeholder] ${subjectLabel} — sample question #${n}. Replace this text in data.js with a real question.`,
+      options: ["Option A (correct — replace me)", "Option B (replace me)", "Option C (replace me)", "Option D (replace me)"],
+      correct: 0
+    });
+  }
+  return items;
+}
+
+const QUESTION_BANKS = {};
+Object.keys(ASSESSMENT_META).forEach((key) => {
+  const seed = SEED_QUESTIONS[key] || [];
+  const placeholders = buildPlaceholderQuestions(ASSESSMENT_META[key].subject, seed.length + 1, 50 - seed.length);
+  QUESTION_BANKS[key] = seed.concat(placeholders).slice(0, 50);
+});
+
+/* ---------- assemble the final ASSESSMENTS object used by app.js ---------- */
+
+const ASSESSMENTS = {};
+Object.keys(ASSESSMENT_META).forEach((key) => {
+  const meta = ASSESSMENT_META[key];
+  const questions = QUESTION_BANKS[key];
+  ASSESSMENTS[key] = Object.assign({}, meta, {
+    key: key,
+    totalQuestions: questions.length,
+    totalMarks: questions.length, // 1 mark per question
+    passingMarks: Math.ceil((questions.length * meta.passingPercent) / 100),
+    questions: questions
+  });
+});
+
+
+/* ============================================================
+   QuadSync Tech Solutions — Online Assessment Portal
+   app.js — all client-side logic (no backend, no database)
+   ============================================================ */
+
+(function () {
+  "use strict";
+
+  /* ---------------- state ---------------- */
+  const state = {
+    currentKey: null,
+    student: { name: "", email: "" },
+    currentIndex: 0,
+    answers: {},          // { questionIndex: optionIndex }
+    timeRemaining: 0,      // seconds
+    timerId: null,
+    testStarted: false,   // true once assessment page is live (for beforeunload warning)
+    activeFilter: "All",
+    searchTerm: ""
+  };
+
+  const STORAGE_PREFIX = "quadsync_progress_";
+
+  /* ---------------- element refs ---------------- */
+  const el = (id) => document.getElementById(id);
+  const grid = el("assessmentGrid");
+  const filterChips = el("filterChips");
+  const searchInput = el("searchInput");
+  const toast = el("toast");
+  const header = el("mainHeader");
+
+  /* ================= HEADER SCROLL ================= */
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 20) header.classList.add("scrolled");
+    else header.classList.remove("scrolled");
+  });
+
+  /* ================= TOAST ================= */
+  let toastTimer = null;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+  }
+
+  /* ================= SECURITY FEATURES ================= */
+  // Disable right-click
+  document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+  // Disable common devtools / view-source shortcuts
+  document.addEventListener("keydown", (e) => {
+    const k = e.key;
+    if (
+      k === "F12" ||
+      (e.ctrlKey && e.shiftKey && (k === "I" || k === "i" || k === "J" || k === "j" || k === "C" || k === "c")) ||
+      (e.ctrlKey && (k === "U" || k === "u"))
+    ) {
+      e.preventDefault();
+    }
+  });
+
+  // Warn before leaving mid-assessment
+  window.addEventListener("beforeunload", (e) => {
+    if (state.testStarted) {
+      e.preventDefault();
+      e.returnValue = "";
+      return "";
+    }
+  });
+
+  /* ================= DASHBOARD ================= */
+
+  function iconLabel(key) {
+    const map = {
+      excelfoundation: "XL", pythonfoundation: "PY", pythonadvanced: "PY+", sql: "DB",
+      powerbi: "BI", tableau: "TB", html: "HT", css: "CS", js: "JS", react: "RC",
+      expressnode: "EX", mongodb: "MG", tailwind: "TW", hr: "HR"
+    };
+    return map[key] || key.slice(0, 2).toUpperCase();
+  }
+
+  function difficultyClass(diff) {
+    const d = (diff || "").toLowerCase();
+    if (d === "beginner") return "beginner";
+    if (d === "advanced") return "advanced";
+    return "intermediate";
+  }
+
+  function buildFilterChips() {
+    const categories = ["All", ...new Set(Object.values(ASSESSMENTS).map((a) => a.category))];
+    filterChips.innerHTML = categories
+      .map((c) => `<button class="chip${c === "All" ? " active" : ""}" data-filter="${c}">${c}</button>`)
+      .join("");
+    filterChips.querySelectorAll(".chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        filterChips.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
+        chip.classList.add("active");
+        state.activeFilter = chip.dataset.filter;
+        renderDashboard();
+      });
+    });
+  }
+
+  function renderDashboard() {
+    const term = state.searchTerm.trim().toLowerCase();
+    const items = Object.values(ASSESSMENTS).filter((a) => {
+      const matchesFilter = state.activeFilter === "All" || a.category === state.activeFilter;
+      const matchesSearch =
+        !term || a.name.toLowerCase().includes(term) || a.subject.toLowerCase().includes(term);
+      return matchesFilter && matchesSearch;
+    });
+
+    if (items.length === 0) {
+      grid.innerHTML = `<div class="empty-state">No assessments match your search. Try a different keyword or filter.</div>`;
+      return;
+    }
+
+    grid.innerHTML = items
+      .map(
+        (a) => `
+      <article class="card">
+        <div class="card-top">
+          <div class="card-icon">${iconLabel(a.key)}</div>
+          <span class="difficulty-badge ${difficultyClass(a.difficulty)}">${a.difficulty}</span>
+        </div>
+        <h3>${a.name}</h3>
+        <div class="subject">${a.subject}</div>
+        <p class="desc">${a.description}</p>
+        <div class="meta-row">
+          <div class="meta-item"><div class="val">${a.totalQuestions}</div><div class="lab">Questions</div></div>
+          <div class="meta-item"><div class="val">${a.totalMarks}</div><div class="lab">Marks</div></div>
+          <div class="meta-item"><div class="val">${a.duration}m</div><div class="lab">Duration</div></div>
+        </div>
+        <button class="btn btn-primary btn-block" data-start="${a.key}">Start Test</button>
+      </article>`
+      )
+      .join("");
+
+    grid.querySelectorAll("[data-start]").forEach((btn) => {
+      btn.addEventListener("click", () => openStudentModal(btn.dataset.start));
+    });
+  }
+
+  searchInput.addEventListener("input", (e) => {
+    state.searchTerm = e.target.value;
+    renderDashboard();
+  });
+
+  /* ================= STUDENT MODAL ================= */
+  const modalOverlay = el("studentModalOverlay");
+  const studentForm = el("studentForm");
+  const nameField = el("nameField");
+  const nameInput = el("studentName");
+  const emailInput = el("studentEmail");
+  const modalTestName = el("modalTestName");
+
+  function openStudentModal(key) {
+    state.currentKey = key;
+    modalTestName.textContent = ASSESSMENTS[key].name;
+    nameField.classList.remove("invalid");
+    nameInput.value = "";
+    emailInput.value = "";
+    modalOverlay.classList.remove("hidden");
+    setTimeout(() => nameInput.focus(), 50);
+  }
+  function closeStudentModal() {
+    modalOverlay.classList.add("hidden");
+  }
+  el("closeStudentModal").addEventListener("click", closeStudentModal);
+  el("cancelStudentModal").addEventListener("click", closeStudentModal);
+  modalOverlay.addEventListener("click", (e) => {
+    if (e.target === modalOverlay) closeStudentModal();
+  });
+
+  studentForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = nameInput.value.trim();
+    if (!name) {
+      nameField.classList.add("invalid");
+      nameInput.focus();
+      return;
+    }
+    nameField.classList.remove("invalid");
+    state.student.name = name;
+    state.student.email = emailInput.value.trim();
+    closeStudentModal();
+    showInstructions(state.currentKey);
+  });
+
+  /* ================= INSTRUCTIONS PAGE ================= */
+  const pageDashboard = el("page-dashboard");
+  const pageInstructions = el("page-instructions");
+  const pageAssessment = el("page-assessment");
+  const pageResult = el("page-result");
+
+  function showPage(page) {
+    [pageDashboard, pageInstructions, pageAssessment, pageResult].forEach((p) => p.classList.add("hidden"));
+    page.classList.remove("hidden");
+    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+  }
+
+  function showInstructions(key) {
+    const a = ASSESSMENTS[key];
+    el("instrIcon").textContent = iconLabel(key);
+    el("instrTestName").textContent = a.name;
+    el("instrStudentLine").textContent = `Candidate: ${state.student.name}${state.student.email ? " · " + state.student.email : ""}`;
+    el("instrTotalQ").textContent = a.totalQuestions;
+    el("instrTotalMarks").textContent = a.totalMarks;
+    el("instrDuration").textContent = a.duration + " min";
+    el("instrPassMarks").textContent = a.passingMarks;
+    showPage(pageInstructions);
+  }
+
+  el("backToDashboardFromInstructions").addEventListener("click", () => showPage(pageDashboard));
+
+  el("startAssessmentBtn").addEventListener("click", () => startAssessment(state.currentKey));
+
+  /* ================= ASSESSMENT ENGINE ================= */
+  const qText = el("qText");
+  const optionsList = el("optionsList");
+  const qNumberLabel = el("qNumberLabel");
+  const paletteGrid = el("paletteGrid");
+  const progressBarFill = el("progressBarFill");
+  const timerText = el("timerText");
+  const examTimer = el("examTimer");
+  const answeredCountEl = el("answeredCount");
+  const totalCountEl = el("totalCount");
+
+  function storageKey(key) {
+    return STORAGE_PREFIX + key + "_" + (state.student.name || "guest").replace(/\s+/g, "_");
+  }
+
+  function saveProgress() {
+    if (!state.currentKey) return;
+    try {
+      const payload = {
+        answers: state.answers,
+        currentIndex: state.currentIndex,
+        timeRemaining: state.timeRemaining,
+        student: state.student
+      };
+      localStorage.setItem(storageKey(state.currentKey), JSON.stringify(payload));
+    } catch (err) {
+      /* localStorage may be unavailable — fail silently */
+    }
+  }
+
+  function loadProgress(key) {
+    try {
+      const raw = localStorage.getItem(storageKey(key));
+      return raw ? JSON.parse(raw) : null;
+    } catch (err) {
+      return null;
+    }
+  }
+
+  function clearProgress(key) {
+    try {
+      localStorage.removeItem(storageKey(key));
+    } catch (err) {
+      /* ignore */
+    }
+  }
+
+  function startAssessment(key) {
+    const a = ASSESSMENTS[key];
+    const saved = loadProgress(key);
+
+    if (saved && saved.student && saved.student.name === state.student.name) {
+      state.answers = saved.answers || {};
+      state.currentIndex = saved.currentIndex || 0;
+      state.timeRemaining = typeof saved.timeRemaining === "number" ? saved.timeRemaining : a.duration * 60;
+    } else {
+      state.answers = {};
+      state.currentIndex = 0;
+      state.timeRemaining = a.duration * 60;
+    }
+
+    el("examTestName").textContent = "— " + a.name;
+    el("paletteStudentName").textContent = "Candidate: " + state.student.name;
+    totalCountEl.textContent = a.totalQuestions;
+
+    buildPalette(a);
+    renderQuestion();
+    updateProgress();
+    startTimer();
+
+    state.testStarted = true;
+    showPage(pageAssessment);
+  }
+
+  function buildPalette(a) {
+    paletteGrid.innerHTML = "";
+    for (let i = 0; i < a.totalQuestions; i++) {
+      const btn = document.createElement("button");
+      btn.className = "palette-btn";
+      btn.textContent = i + 1;
+      btn.type = "button";
+      btn.addEventListener("click", () => {
+        state.currentIndex = i;
+        renderQuestion();
+      });
+      paletteGrid.appendChild(btn);
+    }
+  }
+
+  function refreshPaletteState() {
+    const buttons = paletteGrid.querySelectorAll(".palette-btn");
+    buttons.forEach((btn, i) => {
+      btn.classList.toggle("current", i === state.currentIndex);
+      btn.classList.toggle("answered", state.answers[i] !== undefined);
+    });
+    answeredCountEl.textContent = Object.keys(state.answers).length;
+  }
+
+  function renderQuestion() {
+    const a = ASSESSMENTS[state.currentKey];
+    const q = a.questions[state.currentIndex];
+    qNumberLabel.textContent = `Question ${state.currentIndex + 1} of ${a.totalQuestions}`;
+    qText.textContent = q.q;
+
+    optionsList.innerHTML = q.options
+      .map(
+        (opt, i) => `
+        <div class="option${state.answers[state.currentIndex] === i ? " selected" : ""}" data-opt="${i}" role="button" tabindex="0">
+          <span class="opt-key">${String.fromCharCode(65 + i)}</span>
+          <span>${opt}</span>
+        </div>`
+      )
+      .join("");
+
+    optionsList.querySelectorAll(".option").forEach((optEl) => {
+      const select = () => {
+        state.answers[state.currentIndex] = parseInt(optEl.dataset.opt, 10);
+        renderQuestion();
+        updateProgress();
+        saveProgress();
+      };
+      optEl.addEventListener("click", select);
+      optEl.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(); }
+      });
+    });
+
+    el("prevBtn").disabled = state.currentIndex === 0;
+    el("nextBtn").disabled = state.currentIndex === a.totalQuestions - 1;
+
+    refreshPaletteState();
+  }
+
+  el("prevBtn").addEventListener("click", () => {
+    if (state.currentIndex > 0) { state.currentIndex--; renderQuestion(); saveProgress(); }
+  });
+  el("nextBtn").addEventListener("click", () => {
+    const a = ASSESSMENTS[state.currentKey];
+    if (state.currentIndex < a.totalQuestions - 1) { state.currentIndex++; renderQuestion(); saveProgress(); }
+  });
+
+  function updateProgress() {
+    const a = ASSESSMENTS[state.currentKey];
+    const answered = Object.keys(state.answers).length;
+    const pct = Math.round((answered / a.totalQuestions) * 100);
+    progressBarFill.style.width = pct + "%";
+  }
+
+  /* ---------- timer ---------- */
+  function formatTime(sec) {
+    const m = Math.floor(sec / 60).toString().padStart(2, "0");
+    const s = Math.floor(sec % 60).toString().padStart(2, "0");
+    return `${m}:${s}`;
+  }
+
+  function startTimer() {
+    clearInterval(state.timerId);
+    updateTimerDisplay();
+    state.timerId = setInterval(() => {
+      state.timeRemaining--;
+      if (state.timeRemaining <= 0) {
+        state.timeRemaining = 0;
+        updateTimerDisplay();
+        clearInterval(state.timerId);
+        showToast("Time's up! Auto-submitting your test…");
+        submitAssessment(true);
+        return;
+      }
+      updateTimerDisplay();
+      if (state.timeRemaining % 10 === 0) saveProgress();
+    }, 1000);
+  }
+
+  function updateTimerDisplay() {
+    timerText.textContent = formatTime(state.timeRemaining);
+    examTimer.classList.toggle("low-time", state.timeRemaining <= 60);
+  }
+
+  /* ---------- submit ---------- */
+  function confirmAndSubmit() {
+    const a = ASSESSMENTS[state.currentKey];
+    const answered = Object.keys(state.answers).length;
+    const unanswered = a.totalQuestions - answered;
+    const msg =
+      unanswered > 0
+        ? `You have ${unanswered} unanswered question(s). Submit anyway?`
+        : "Submit your test now?";
+    if (window.confirm(msg)) submitAssessment(false);
+  }
+  el("submitBtn").addEventListener("click", confirmAndSubmit);
+  el("paletteSubmitBtn").addEventListener("click", confirmAndSubmit);
+
+  function submitAssessment(auto) {
+    clearInterval(state.timerId);
+    state.testStarted = false;
+
+    const a = ASSESSMENTS[state.currentKey];
+    let correct = 0;
+    a.questions.forEach((q, i) => {
+      if (state.answers[i] !== undefined && state.answers[i] === q.correct) correct++;
+    });
+    const wrong = Object.keys(state.answers).length - correct;
+    const score = correct; // 1 mark per question
+    const percent = Math.round((score / a.totalMarks) * 100);
+    const passed = score >= a.passingMarks;
+
+    clearProgress(state.currentKey);
+    showResult(a, { correct, wrong, score, percent, passed, auto });
+  }
+
+  /* ================= RESULT PAGE ================= */
+  function showResult(a, r) {
+    el("resultStudentName").textContent = `Well done, ${state.student.name}!`;
+    el("resultTestName").textContent = a.name;
+    el("resTotalQ").textContent = a.totalQuestions;
+    el("resCorrect").textContent = r.correct;
+    el("resWrong").textContent = r.wrong;
+    el("resScore").textContent = `${r.score} / ${a.totalMarks}`;
+    el("resPercent").textContent = r.percent + "%";
+
+    const badge = el("resultBadge");
+    const statusText = el("resultStatusText");
+    if (r.passed) {
+      badge.className = "result-badge pass";
+      badge.textContent = "🏆";
+      statusText.className = "status-text pass";
+      statusText.textContent = "PASS";
+    } else {
+      badge.className = "result-badge fail";
+      badge.textContent = "✕";
+      statusText.className = "status-text fail";
+      statusText.textContent = "FAIL";
+    }
+
+    showPage(pageResult);
+    if (r.auto) showToast("Your test was auto-submitted as time ran out.");
+  }
+
+  el("returnToDashboardBtn").addEventListener("click", () => {
+    state.currentKey = null;
+    state.answers = {};
+    state.currentIndex = 0;
+    showPage(pageDashboard);
+  });
+
+  /* ================= INIT ================= */
+  buildFilterChips();
+  renderDashboard();
+})();
+
+</script>
+</body>
+</html>
