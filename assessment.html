@@ -778,16 +778,16 @@ const ASSESSMENT_META = {
     description: "Utility-first styling and responsive design workflow."
   },
 
-  /* ---------------- HR track ---------------- */
+  /* ---------------- Human Resources Maan track ---------------- */
   hr: {
-    name: "HR Assessment",
+    name: "Human Resources Maan Assessment",
     subject: "Human Resources",
     icon: "hr",
-    category: "HR",
+    category: "Human Resources",
     difficulty: "Beginner",
     duration: 30,
     passingPercent: 40,
-    description: "Recruitment, onboarding, appraisals and HR fundamentals."
+    description: "Recruitment, onboarding, appraisals and Human Resources fundamentals."
   }
 };
 
@@ -951,15 +951,15 @@ const SEED_QUESTIONS = {
     { q: "Which class creates a grid container with 3 equal-width columns?", options: ["grid-cols-3", "cols-3", "grid-3", "columns-3"], correct: 0 }
   ],
   hr: [
-    { q: "What does the abbreviation KRA stand for in HR?", options: ["Key Result Area", "Key Recruitment Area", "Known Result Assessment", "Key Retention Analysis"], correct: 0 },
+    { q: "What does the abbreviation KRA stand for in Human Resources?", options: ["Key Result Area", "Key Recruitment Area", "Known Result Assessment", "Key Retention Analysis"], correct: 0 },
     { q: "Which process periodically evaluates an employee's performance?", options: ["Performance Appraisal", "Onboarding", "Recruitment", "Payroll"], correct: 0 },
-    { q: "Which HR process introduces a new employee to the organisation?", options: ["Onboarding", "Exit Interview", "Sourcing", "Succession Planning"], correct: 0 },
+    { q: "Which Human Resources process introduces a new employee to the organisation?", options: ["Onboarding", "Exit Interview", "Sourcing", "Succession Planning"], correct: 0 },
     { q: "In India, which act primarily governs the Employee Provident Fund?", options: ["EPF Act", "Factories Act", "Minimum Wages Act", "Payment of Bonus Act"], correct: 0 },
-    { q: "What does CTC stand for in HR terminology?", options: ["Cost to Company", "Contract Term Clause", "Company Tax Credit", "Cost Tracking Chart"], correct: 0 },
+    { q: "What does CTC stand for in Human Resources terminology?", options: ["Cost to Company", "Contract Term Clause", "Company Tax Credit", "Cost Tracking Chart"], correct: 0 },
     { q: "Which process formally ends an employment relationship?", options: ["Offboarding", "Onboarding", "Induction", "Recruitment"], correct: 0 },
     { q: "Which term refers to attracting and selecting suitable candidates?", options: ["Recruitment", "Retention", "Appraisal", "Payroll"], correct: 0 },
     { q: "Which document outlines an employee's duties and terms of employment?", options: ["Employment Contract", "Resume", "Payslip", "Appraisal Form"], correct: 0 },
-    { q: "What does HRIS stand for?", options: ["Human Resource Information System", "Human Retention Incentive Scheme", "HR Internal Standards", "Human Rights Information Source"], correct: 0 },
+    { q: "What does HRIS stand for?", options: ["Human Resource Information System", "Human Retention Incentive Scheme", "Human Resources Maan Internal Standards", "Human Rights Information Source"], correct: 0 },
     { q: "Which principle requires equal pay for equal work regardless of gender?", options: ["Equal Remuneration", "Minimum Wages", "Payment of Wages", "Factories Regulation"], correct: 0 }
   ]
 };
@@ -1079,7 +1079,7 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     const map = {
       excelfoundation: "XL", pythonfoundation: "PY", pythonadvanced: "PY+", sql: "DB",
       powerbi: "BI", tableau: "TB", html: "HT", css: "CS", js: "JS", react: "RC",
-      expressnode: "EX", mongodb: "MG", tailwind: "TW", hr: "HR"
+      expressnode: "EX", mongodb: "MG", tailwind: "TW", hr: "Human Resources Maan"
     };
     return map[key] || key.slice(0, 2).toUpperCase();
   }
