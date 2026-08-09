@@ -535,19 +535,14 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
   <!-- ============ PAGE 1: DASHBOARD ============ -->
   <section id="page-dashboard" class="hidden">
     <div class="hero container">
-      <div class="hero-eyebrow">Assessment Center</div>
+      <div class="hero-eyebrow" id="dashboardEyebrow">Assessment Center</div>
       <h1>Online Assessment Portal</h1>
-      <p class="lead">Pick a test from the list below to check your skills. Read the instructions, and start whenever you're ready.</p>
+      <p class="lead" id="dashboardLead">Pick a test from the list below to check your skills. Read the instructions, and start whenever you're ready.</p>
 
       <div class="controls-row">
         <div class="search-box">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input type="text" id="searchInput" placeholder="Search assessments by name or subject…" autocomplete="off" />
-        </div>
-      </div>
-      <div class="controls-row">
-        <div class="filter-chips" id="filterChips">
-          <button class="chip active" data-filter="All">All</button>
         </div>
       </div>
     </div>
@@ -671,6 +666,34 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
     </div>
   </section>
 
+  <!-- ============ PAGE 5: ADMIN DASHBOARD (only reachable by the admin account) ============ -->
+  <section id="page-admin" class="page hidden">
+    <div class="container">
+      <div class="panel" style="max-width:920px;">
+        <div class="panel-header">
+          <div>
+            <h2>Admin Dashboard</h2>
+            <div class="student-line">Every submitted result, across every domain and batch. Visible only on this account.</div>
+          </div>
+        </div>
+
+        <div class="info-grid" id="adminSummaryGrid">
+          <div class="info-tile"><div class="val" id="adminTotalAttempts">0</div><div class="lab">Total Attempts</div></div>
+          <div class="info-tile"><div class="val" id="adminTotalPass">0</div><div class="lab">Passed</div></div>
+          <div class="info-tile"><div class="val" id="adminTotalFail">0</div><div class="lab">Failed</div></div>
+          <div class="info-tile"><div class="val" id="adminAvgPercent">0%</div><div class="lab">Avg. Score</div></div>
+        </div>
+
+        <div id="adminPageResultsList" style="max-height:460px; overflow:auto; font-family:var(--font-mono); font-size:0.78rem; background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:14px; margin:22px 0;"></div>
+
+        <div class="modal-actions" style="margin-top:0;">
+          <button class="btn btn-secondary" id="clearAllResultsBtn" type="button">Clear All Results</button>
+          <button class="btn btn-primary grow" id="downloadAllResultsPageBtn" type="button">Download All (JSON)</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <!-- ============ FOOTER (visible on every page) ============ -->
@@ -679,23 +702,8 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
     <p><strong>© 2026 QuadSync Tech Solutions</strong></p>
     <p>Synchronizing Innovations with Success</p>
     <p>All Rights Reserved.</p>
-    <button class="admin-link" id="adminLink" type="button">Admin: View Stored Results</button>
   </div>
 </footer>
-
-<!-- ============ ADMIN OVERLAY (local results viewer) ============ -->
-<div class="overlay hidden" id="adminOverlay">
-  <div class="modal modal-wrap" style="max-width:640px; text-align:left;">
-    <button class="modal-close" id="closeAdminOverlay" aria-label="Close">✕</button>
-    <h2>Results Admin</h2>
-    <p class="sub">All results are stored locally in <b>this browser only</b> (no backend/database). Download the JSON below to keep a permanent copy.</p>
-    <div id="adminResultsList" style="max-height:280px; overflow:auto; font-family:var(--font-mono); font-size:0.76rem; background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:12px; margin-bottom:16px;"></div>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" id="clearResultsBtn" type="button">Clear All</button>
-      <button class="btn btn-primary grow" id="downloadAllResultsBtn" type="button">Download All (JSON)</button>
-    </div>
-  </div>
-</div>
 
 <div class="toast" id="toast"></div>
 
@@ -728,13 +736,16 @@ const CREDENTIALS = [
   { qtsId: "QTS2608WD0002", name: "Chityala Likhitha Satyanarayana", password: "likhitha@123",   domain: "MERN Stack Development", batchCode: "IOTPWDB0001" },
   { qtsId: "QTS2608WD0003", name: "Sneha Maurya",                     password: "sneha@123",      domain: "MERN Stack Development", batchCode: "IOTPWDB0001" },
   { qtsId: "QTS2608WD0004", name: "Swarnapreeti Khuntia",             password: "swarnapreeti@123", domain: "MERN Stack Development", batchCode: "IOTPWDB0001" },
-  { qtsId: "QTS2608WD0005", name: "Sahana",                           password: "sahana@123",     domain: "MERN Stack Development", batchCode: "IOTPWDB0001" }
+  { qtsId: "QTS2608WD0005", name: "Sahana",                           password: "sahana@123",     domain: "MERN Stack Development", batchCode: "IOTPWDB0001" },
+
+  /* ---- Admin account · sees every stored result, never sees the test dashboard ---- */
+  { qtsId: "admin@qts.in", name: "Gaurav S. Borse", password: "admin@qts.in", domain: "admin", batchCode: "admin" }
   /* Add more students here, e.g.:
   { qtsId: "QTS2608XX0006", name: "Student Name", password: "choose-a-password", domain: "Domain Name", batchCode: "BatchCode" },
   */
 ];
 
-const ADMIN_PASSCODE = "quadsync-admin"; // change this to whatever you like
+const ADMIN_DOMAIN = "admin"; // any account with this domain is treated as admin, not a student
 
 /* ============================================================
    SECTION B: ASSESSMENT CATALOGUE + QUESTION BANKS
@@ -1076,7 +1087,6 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     timeRemaining: 0,
     timerId: null,
     testStarted: false,
-    activeFilter: "All",
     searchTerm: "",
     lastResult: null
   };
@@ -1087,7 +1097,6 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
 
   const el = (id) => document.getElementById(id);
   const grid = el("assessmentGrid");
-  const filterChips = el("filterChips");
   const searchInput = el("searchInput");
   const toast = el("toast");
   const header = document.getElementById("main-header");
@@ -1201,13 +1210,30 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
   const pageInstructions = el("page-instructions");
   const pageAssessment = el("page-assessment");
   const pageResult = el("page-result");
+  const pageAdmin = el("page-admin");
   const mainSiteHeader = document.getElementById("main-header");
 
+  function isAdmin(user) {
+    return !!user && user.domain === ADMIN_DOMAIN;
+  }
+
   function showPage(page) {
-    [pageLogin, pageDashboard, pageInstructions, pageAssessment, pageResult].forEach((p) => p.classList.add("hidden"));
+    [pageLogin, pageDashboard, pageInstructions, pageAssessment, pageResult, pageAdmin].forEach((p) => p.classList.add("hidden"));
     page.classList.remove("hidden");
     if (mainSiteHeader) mainSiteHeader.classList.toggle("hidden", page === pageAssessment);
     window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+  }
+
+  // Routes a logged-in user to the right landing page: the admin account always
+  // lands on the results dashboard, every student lands on their own domain's tests.
+  function routeAfterLogin(user) {
+    if (isAdmin(user)) {
+      renderAdminPage();
+      showPage(pageAdmin);
+    } else {
+      renderDashboard();
+      showPage(pageDashboard);
+    }
   }
 
   const loginForm = el("loginForm");
@@ -1227,7 +1253,7 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     persistSession(user);
     renderAuthStatus();
     showToast(`Welcome, ${user.name}!`);
-    showPage(pageDashboard);
+    routeAfterLogin(user);
   });
 
   /* ---------------- icons ---------------- */
@@ -1253,31 +1279,27 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     return "intermediate";
   }
 
-  function buildFilterChips() {
-    const categories = ["All", ...new Set(Object.values(ASSESSMENTS).map((a) => a.category))];
-    filterChips.innerHTML = categories
-      .map((c) => `<button class="chip${c === "All" ? " active" : ""}" data-filter="${c}">${c}</button>`)
-      .join("");
-    filterChips.querySelectorAll(".chip").forEach((chip) => {
-      chip.addEventListener("click", () => {
-        filterChips.querySelectorAll(".chip").forEach((c) => c.classList.remove("active"));
-        chip.classList.add("active");
-        state.activeFilter = chip.dataset.filter;
-        renderDashboard();
-      });
-    });
-  }
-
+  // A student's own domain is the ONLY category they can ever see or open —
+  // Data Analyst logins only get Data Analyst tests, MERN logins only get MERN
+  // tests, HR logins only get HR tests. The admin account never reaches this page.
   function renderDashboard() {
+    const u = state.currentUser;
+    const domainEyebrow = el("dashboardEyebrow");
+    const domainLead = el("dashboardLead");
+    if (u) {
+      domainEyebrow.innerHTML = `${domainIcon(u.domain)} ${u.domain} Assessments`;
+      domainLead.textContent = `Showing tests for your batch (${u.batchCode}) only. Pick a test below, read the instructions, and start whenever you're ready.`;
+    }
+
     const term = state.searchTerm.trim().toLowerCase();
     const items = Object.values(ASSESSMENTS).filter((a) => {
-      const matchesFilter = state.activeFilter === "All" || a.category === state.activeFilter;
+      const matchesDomain = u && a.category === u.domain;
       const matchesSearch = !term || a.name.toLowerCase().includes(term) || a.subject.toLowerCase().includes(term);
-      return matchesFilter && matchesSearch;
+      return matchesDomain && matchesSearch;
     });
 
     if (items.length === 0) {
-      grid.innerHTML = `<div class="empty-state">No assessments match your search. Try a different keyword or filter.</div>`;
+      grid.innerHTML = `<div class="empty-state">No assessments match your search. Try a different keyword.</div>`;
       return;
     }
 
@@ -1315,9 +1337,16 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
   /* ---------------- instructions ---------------- */
   function showInstructions(key) {
     if (!state.currentUser) { showPage(pageLogin); return; }
-    state.currentKey = key;
     const a = ASSESSMENTS[key];
     const u = state.currentUser;
+    // Belt-and-braces domain lock: even if this were called with a mismatched
+    // key, a candidate can never open a test outside their own domain.
+    if (!a || isAdmin(u) || a.category !== u.domain) {
+      showToast("That assessment isn't available for your domain.");
+      showPage(pageDashboard);
+      return;
+    }
+    state.currentKey = key;
     el("instrIcon").innerHTML = iconMarkup(a);
     el("instrTestName").textContent = a.name;
     el("instrStudentLine").textContent = `Candidate: ${u.name} · ${u.qtsId}`;
@@ -1566,17 +1595,26 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     showPage(pageDashboard);
   });
 
-  /* ---------------- admin overlay ---------------- */
-  const adminOverlay = el("adminOverlay");
-  const adminResultsList = el("adminResultsList");
+  /* ---------------- admin dashboard (admin account only — no student entry point) ---------------- */
+  const adminPageResultsList = el("adminPageResultsList");
 
-  function renderAdminList() {
+  function renderAdminPage() {
     const results = getAllResults();
-    if (results.length === 0) {
-      adminResultsList.innerHTML = `<div class="admin-empty">No results stored in this browser yet.</div>`;
+
+    const total = results.length;
+    const passCount = results.filter((r) => r.passed).length;
+    const failCount = total - passCount;
+    const avgPercent = total ? Math.round(results.reduce((sum, r) => sum + (r.percent || 0), 0) / total) : 0;
+    el("adminTotalAttempts").textContent = total;
+    el("adminTotalPass").textContent = passCount;
+    el("adminTotalFail").textContent = failCount;
+    el("adminAvgPercent").textContent = avgPercent + "%";
+
+    if (total === 0) {
+      adminPageResultsList.innerHTML = `<div class="admin-empty">No results stored in this browser yet.</div>`;
       return;
     }
-    adminResultsList.innerHTML = results
+    adminPageResultsList.innerHTML = results
       .slice()
       .reverse()
       .map((r) => `
@@ -1595,35 +1633,22 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
       .join("");
   }
 
-  el("adminLink").addEventListener("click", () => {
-    const pass = window.prompt("Enter admin passcode:");
-    if (pass === null) return;
-    if (pass !== ADMIN_PASSCODE) { showToast("Incorrect passcode."); return; }
-    renderAdminList();
-    adminOverlay.classList.remove("hidden");
-  });
-  el("closeAdminOverlay").addEventListener("click", () => adminOverlay.classList.add("hidden"));
-  adminOverlay.addEventListener("click", (e) => { if (e.target === adminOverlay) adminOverlay.classList.add("hidden"); });
-
-  el("downloadAllResultsBtn").addEventListener("click", () => {
+  el("downloadAllResultsPageBtn").addEventListener("click", () => {
     downloadJSON("quadsync_all_results.json", getAllResults());
   });
-  el("clearResultsBtn").addEventListener("click", () => {
+  el("clearAllResultsBtn").addEventListener("click", () => {
     if (!window.confirm("Clear all stored results from this browser? This cannot be undone.")) return;
     try { localStorage.removeItem(RESULTS_STORAGE_KEY); } catch (e) {}
-    renderAdminList();
+    renderAdminPage();
     showToast("Stored results cleared.");
   });
 
   /* ---------------- init ---------------- */
-  buildFilterChips();
-  renderDashboard();
-
   const restored = restoreSession();
   if (restored) {
     state.currentUser = restored;
     renderAuthStatus();
-    showPage(pageDashboard);
+    routeAfterLogin(restored);
   } else {
     showPage(pageLogin);
   }
