@@ -9,11 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-/* ============================================================
-   QuadSync Tech Solutions — Online Assessment Portal
-   style.css — matches the QuadSync main-site dark navy/blue theme
-   ============================================================ */
-
 :root{
   --blue:#4dabff;
   --blue-dark:#1e88e5;
@@ -80,16 +75,25 @@ button:focus-visible, input:focus-visible, a:focus-visible, [tabindex]:focus-vis
 /* ============ header ============ */
 header{position:fixed;width:100%;z-index:1000;top:0;transition:.3s;background:rgba(5,15,26,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 header.scrolled{background:rgba(5,15,26,0.98);backdrop-filter:blur(20px);box-shadow:0 6px 24px rgba(0,0,0,0.35);}
-.navbar{display:flex;justify-content:space-between;align-items:center;padding:10px 7%;transition:.3s;}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:10px 7%;transition:.3s;gap:16px;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;min-height:48px;}
 .logo img{height:48px;width:auto;border-radius:8px;}
+.logo img.broken{ display:none; }
 .logo-text{font-family:'Sora',sans-serif;font-size:25px;font-weight:700;color:var(--blue);letter-spacing:-0.3px;line-height:1.2;}
-.nav-links{list-style:none;display:flex;gap:4px;align-items:center;}
+.nav-links{list-style:none;display:flex;gap:4px;align-items:center;margin:0;padding:0;}
 .nav-links a{text-decoration:none;color:#fff;padding:6px 12px;border-radius:6px;font-size:15px;font-weight:500;transition:.2s;letter-spacing:0.2px;}
 .nav-links a:hover{color:var(--blue);background:var(--glow);}
-.nav-cta{background:var(--blue)!important;color:#fff!important;border-radius:8px!important;padding:7px 16px!important;}
-.nav-cta:hover{background:var(--blue-dark)!important;transform:translateY(-1px);}
 .menu-toggle{display:none;font-size:20px;cursor:pointer;color:var(--text);background:none;border:none;padding:4px;}
+
+.auth-status{ display:flex; align-items:center; gap:10px; font-size:0.82rem; color:var(--muted); white-space:nowrap; }
+.auth-status .who{ display:flex; flex-direction:column; line-height:1.25; text-align:right; }
+.auth-status .who b{ color:var(--text); font-size:0.85rem; }
+.auth-status .who span{ font-family:var(--font-mono); font-size:0.7rem; }
+.auth-status button{
+  background:transparent; border:1.5px solid rgba(77,171,255,0.35); color:var(--blue);
+  padding:8px 14px; border-radius:100px; font-size:0.8rem; font-weight:600; transition:.2s;
+}
+.auth-status button:hover{ border-color:var(--blue); background:rgba(77,171,255,0.08); }
 
 /* ============ hero ============ */
 .hero{ padding:76px 0 40px; position:relative; overflow:hidden; }
@@ -113,6 +117,7 @@ header.scrolled{background:rgba(5,15,26,0.98);backdrop-filter:blur(20px);box-sha
   content:""; width:7px; height:7px; border-radius:50%; background:var(--blue);
   display:inline-block; animation:pulse 2s infinite;
 }
+@keyframes pulse{ 0%,100%{ opacity:1; transform:scale(1);} 50%{ opacity:.5; transform:scale(1.3);} }
 .hero h1{
   font-family:var(--font-display); font-weight:700;
   font-size:clamp(2rem, 4vw, 3.1rem); line-height:1.08; letter-spacing:-0.02em;
@@ -140,9 +145,7 @@ header.scrolled{background:rgba(5,15,26,0.98);backdrop-filter:blur(20px);box-sha
   transition:all .2s ease; white-space:nowrap;
 }
 .chip:hover{ border-color:var(--blue); color:var(--blue); }
-.chip.active{
-  background:var(--blue); border-color:var(--blue); color:#04101d;
-}
+.chip.active{ background:var(--blue); border-color:var(--blue); color:#04101d; }
 
 /* ============ assessment grid ============ */
 .grid-section{ padding:20px 0 90px; position:relative; z-index:1; }
@@ -169,10 +172,14 @@ header.scrolled{background:rgba(5,15,26,0.98);backdrop-filter:blur(20px);box-sha
 .card-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
 .card-icon{
   width:48px; height:48px; border-radius:12px; flex:0 0 auto;
-  display:grid; place-items:center;
+  display:grid; place-items:center; position:relative;
   background:rgba(77,171,255,0.1); border:1px solid rgba(77,171,255,0.25);
   color:var(--blue); font-family:var(--font-display); font-weight:700; font-size:1.05rem;
 }
+.card-icon img{ width:26px; height:26px; object-fit:contain; }
+.card-icon .icon-fallback{ display:none; place-items:center; width:100%; height:100%; }
+.card-icon .icon-fallback.show{ display:grid; }
+
 .difficulty-badge{
   font-size:0.7rem; font-weight:700; padding:5px 12px; border-radius:100px;
   letter-spacing:0.03em; white-space:nowrap; height:fit-content; border:1px solid transparent;
@@ -221,10 +228,15 @@ header.scrolled{background:rgba(5,15,26,0.98);backdrop-filter:blur(20px);box-sha
 .site-footer .container{ text-align:center; }
 .site-footer strong{ color:var(--text); font-family:var(--font-display); }
 .site-footer p{ margin:4px 0; font-size:0.83rem; }
+.site-footer .admin-link{
+  background:none; border:none; color:var(--muted); font-size:0.76rem;
+  text-decoration:underline; margin-top:10px; padding:0;
+}
+.site-footer .admin-link:hover{ color:var(--blue); }
 
-main{ flex:1; position:relative; z-index:1; }
+main{ flex:1; position:relative; z-index:1; padding-top:74px; }
 
-/* ============ modal overlay ============ */
+/* ============ overlay / modal (login + admin) ============ */
 .overlay{
   position:fixed; inset:0; z-index:100;
   background:rgba(3,9,18,0.7);
@@ -263,6 +275,20 @@ main{ flex:1; position:relative; z-index:1; }
 .modal-close:hover{ background:var(--glow); color:var(--text); }
 .modal-wrap{ position:relative; }
 
+/* ============ login page ============ */
+#page-login{ padding:76px 0 90px; }
+#page-login .login-shell{
+  max-width:440px; margin:40px auto 0; background:var(--bg3); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:38px; position:relative; z-index:1;
+}
+#page-login h1{ font-family:var(--font-display); font-size:1.7rem; margin:0 0 8px; color:var(--text); }
+#page-login .lead-sm{ color:var(--muted); font-size:0.9rem; margin:0 0 26px; line-height:1.6; }
+.demo-hint{
+  margin-top:20px; background:var(--bg2); border:1px dashed var(--border); border-radius:var(--radius-md);
+  padding:12px 14px; font-size:0.76rem; color:var(--muted); line-height:1.6;
+}
+.demo-hint b{ color:var(--text); }
+
 /* ============ instructions page ============ */
 .page{ padding:56px 0 90px; animation:fadeIn .25s ease both; position:relative; z-index:1; }
 .back-link{
@@ -290,17 +316,8 @@ main{ flex:1; position:relative; z-index:1; }
 /* ============ assessment page ============ */
 .exam-shell{ min-height:100vh; display:flex; flex-direction:column; position:relative; z-index:1; }
 .exam-header{ position:sticky; top:0; z-index:30; background:rgba(5,15,26,0.96); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); padding:14px 0; }
-.exam-header .container{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
-.exam-header .brand-name{ color:var(--text); }
-.exam-header .brand-tag{ color:var(--muted); }
+.exam-header .container{ display:flex; align-items:center; gap:16px; flex-wrap:wrap; justify-content:space-between; }
 .exam-test-name{ font-family:var(--font-display); font-weight:600; font-size:0.98rem; color:var(--blue); }
-.exam-header .header-spacer{ flex:1; }
-/* Only the timer should be visible in the exam header — hide the
-   duplicate branding/test-name that used to overlap with the navbar. */
-.exam-header .sync-mark,
-.exam-header .brand-text,
-.exam-header .exam-test-name{ display:none; }
-.exam-header .container{ justify-content:flex-end; }
 
 .timer{
   font-family:var(--font-mono); font-size:1.05rem; font-weight:700;
@@ -408,6 +425,14 @@ main{ flex:1; position:relative; z-index:1; }
 }
 .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
+/* admin results list */
+.admin-row{
+  display:flex; justify-content:space-between; gap:10px; padding:8px 0;
+  border-bottom:1px solid var(--border); color:var(--text);
+}
+.admin-row:last-child{ border-bottom:none; }
+.admin-empty{ color:var(--muted); text-align:center; padding:20px 0; }
+
 @media (max-width:640px){
   .hero{ padding:52px 0 24px; }
   .controls-row{ flex-direction:column; align-items:stretch; }
@@ -415,8 +440,9 @@ main{ flex:1; position:relative; z-index:1; }
   .modal-actions{ flex-direction:column; }
   .exam-nav-btns{ flex-direction:column; }
   .exam-nav-btns .grow{ order:-1; }
+  .navbar{ flex-wrap:wrap; }
+  .auth-status .who{ display:none; }
 }
-
 </style>
 </head>
 <body>
@@ -425,34 +451,55 @@ main{ flex:1; position:relative; z-index:1; }
 <header id="main-header">
   <nav class="navbar">
     <a href="#home" class="logo">
-      <img src="Logo.png" alt="QuadSync Logo">
+      <img src="Logo.png" alt="QuadSync Logo" onerror="this.classList.add('broken'); this.onerror=null;">
       <div>
         <div class="logo-text">QuadSync Tech Solutions</div>
       </div>
     </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home">Home</a></li>
-      <!-- <li><a href="#internships">Internships</a></li> -->
-      <!-- <li><a href="#services">Services</a></li> -->
-      <!-- <li><a href="#events">Events</a></li> -->
-      <!-- <li><a href="#about">About</a></li> -->
       <li><a href="trainingprograms.html">Training Programs</a></li>
       <li><a href="assessment.html">Assessment Portal</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <div class="auth-status" id="authStatus"></div>
     <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
   </nav>
 </header>
 
-
 <main id="mainContent">
 
+  <!-- ============ PAGE 0: LOGIN ============ -->
+  <section id="page-login">
+    <div class="container">
+      <div class="login-shell">
+        <h1>Student Login</h1>
+        <p class="lead-sm">Enter your QuadSync ID and password to access the Online Assessment Portal.</p>
+        <form id="loginForm" novalidate>
+          <div class="field" id="loginIdField">
+            <label for="loginId">QTS ID</label>
+            <input type="text" id="loginId" placeholder="e.g. QTS2026001" autocomplete="username" />
+          </div>
+          <div class="field" id="loginPasswordField">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password" />
+            <div class="err">Incorrect QTS ID or Password. Please try again.</div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
+        <div class="demo-hint">
+          <b>Note:</b> Logins are matched against a list stored in this page's own code (no backend/database). Your name and batch are pulled from that list automatically once you log in — you won't be asked to type your name again.
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ PAGE 1: DASHBOARD ============ -->
-  <section id="page-dashboard">
+  <section id="page-dashboard" class="hidden">
     <div class="hero container">
       <div class="hero-eyebrow">Assessment Center</div>
       <h1>Online Assessment Portal</h1>
-      <p class="lead">Pick a test from the list below to check your skills. Enter your name, read the instructions, and start whenever you're ready.</p>
+      <p class="lead">Pick a test from the list below to check your skills. Read the instructions, and start whenever you're ready.</p>
 
       <div class="controls-row">
         <div class="search-box">
@@ -469,7 +516,7 @@ main{ flex:1; position:relative; z-index:1; }
 
     <div class="grid-section container">
       <div class="assessment-grid" id="assessmentGrid" aria-live="polite">
-        <!-- cards injected by app.js -->
+        <!-- cards injected by script -->
       </div>
     </div>
   </section>
@@ -480,7 +527,7 @@ main{ flex:1; position:relative; z-index:1; }
       <button class="back-link" id="backToDashboardFromInstructions">&larr; Back to Dashboard</button>
       <div class="panel">
         <div class="panel-header">
-          <span class="card-icon" id="instrIcon">Q</span>
+          <span class="card-icon" id="instrIcon"></span>
           <div>
             <h2 id="instrTestName">Test Name</h2>
             <div class="student-line" id="instrStudentLine">Candidate: —</div>
@@ -511,19 +558,7 @@ main{ flex:1; position:relative; z-index:1; }
   <section id="page-assessment" class="exam-shell hidden">
     <div class="exam-header">
       <div class="container">
-        <span class="sync-mark" aria-hidden="true" style="width:30px;height:30px;">
-          <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 15a12 12 0 0 1 20.8-8.2" stroke="#7DD3FC" stroke-width="3.6" stroke-linecap="round"/>
-            <path d="M28.8 6.8 L30 13 L23.6 12" stroke="#7DD3FC" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M32 25a12 12 0 0 1-20.8 8.2" stroke="#7DD3FC" stroke-width="3.6" stroke-linecap="round"/>
-            <path d="M11.2 33.2 L10 27 L16.4 28" stroke="#7DD3FC" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        <span class="brand-text">
-          <span class="brand-name">QuadSync Tech Solutions</span>
-        </span>
-        <span class="exam-test-name" id="examTestName">— Test Name</span>
-        <div class="header-spacer"></div>
+        <span class="exam-test-name" id="examTestName">Test Name</span>
         <div class="timer" id="examTimer">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
           <span id="timerText">00:00</span>
@@ -570,6 +605,7 @@ main{ flex:1; position:relative; z-index:1; }
       <div class="result-panel">
         <div class="result-badge" id="resultBadge">🏆</div>
         <h2 id="resultStudentName">Well done, Student!</h2>
+        <div class="student-line" id="resultCandidateLine">Candidate: —</div>
         <div class="student-line" id="resultTestName">Test Name</div>
         <div class="status-text" id="resultStatusText">PASS</div>
 
@@ -587,6 +623,7 @@ main{ flex:1; position:relative; z-index:1; }
 
         <div class="result-actions">
           <a class="btn btn-primary" id="submitScreenshotBtn" href="https://docs.google.com/forms/d/e/1FAIpQLSfOkJjnb1P59UQKi9J6kHN2yIR9X5f3dLVtbvpA3L8kMdfExQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Submit Screenshot</a>
+          <button class="btn btn-secondary" id="downloadResultBtn">Download My Result (JSON)</button>
           <button class="btn btn-secondary" id="returnToDashboardBtn">Return to Dashboard</button>
         </div>
       </div>
@@ -601,30 +638,21 @@ main{ flex:1; position:relative; z-index:1; }
     <p><strong>© 2026 QuadSync Tech Solutions</strong></p>
     <p>Synchronizing Innovations with Success</p>
     <p>All Rights Reserved.</p>
+    <button class="admin-link" id="adminLink" type="button">Admin: View Stored Results</button>
   </div>
 </footer>
 
-<!-- ============ MODAL: Student Details ============ -->
-<div class="overlay hidden" id="studentModalOverlay">
-  <div class="modal modal-wrap">
-    <button class="modal-close" id="closeStudentModal" aria-label="Close">✕</button>
-    <h2>Before you begin</h2>
-    <p class="sub">Enter your details to start <span id="modalTestName">this test</span>.</p>
-    <form id="studentForm" novalidate>
-      <div class="field" id="nameField">
-        <label for="studentName">Full Name <span class="opt">(required)</span></label>
-        <input type="text" id="studentName" autocomplete="name" placeholder="e.g. Priya Sharma" />
-        <div class="err">Please enter your name to continue.</div>
-      </div>
-      <div class="field">
-        <label for="studentEmail">Email <span class="opt">(optional)</span></label>
-        <input type="email" id="studentEmail" autocomplete="email" placeholder="e.g. priya@email.com" />
-      </div>
-      <div class="modal-actions">
-        <button type="button" class="btn btn-secondary" id="cancelStudentModal">Cancel</button>
-        <button type="submit" class="btn btn-primary grow">Continue</button>
-      </div>
-    </form>
+<!-- ============ ADMIN OVERLAY (local results viewer) ============ -->
+<div class="overlay hidden" id="adminOverlay">
+  <div class="modal modal-wrap" style="max-width:640px; text-align:left;">
+    <button class="modal-close" id="closeAdminOverlay" aria-label="Close">✕</button>
+    <h2>Results Admin</h2>
+    <p class="sub">All results are stored locally in <b>this browser only</b> (no backend/database). Download the JSON below to keep a permanent copy.</p>
+    <div id="adminResultsList" style="max-height:280px; overflow:auto; font-family:var(--font-mono); font-size:0.76rem; background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:12px; margin-bottom:16px;"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" id="clearResultsBtn" type="button">Clear All</button>
+      <button class="btn btn-primary grow" id="downloadAllResultsBtn" type="button">Download All (JSON)</button>
+    </div>
   </div>
 </div>
 
@@ -633,175 +661,122 @@ main{ flex:1; position:relative; z-index:1; }
 <script>
 /* ============================================================
    QuadSync Tech Solutions — Online Assessment Portal
-   data.js — assessment catalogue + question banks
    ------------------------------------------------------------
-   HOW TO ADD A NEW ASSESSMENT
-   1. Add a new key to ASSESSMENT_META below (copy an existing block).
-   2. Add a matching key to QUESTION_BANKS with an array of question
-      objects: { q, options: [4 strings], correct: index 0-3 }.
-   3. Refresh the page — the dashboard card & test are generated
-      automatically. No other file needs to change.
+   SECTION A: LOGIN CREDENTIALS (JSON, client-side only)
+   ------------------------------------------------------------
+   There is no backend, so this list lives directly in the page's
+   own code. Add one object per student: qtsId, name, password,
+   batch. Anyone who views this page's source can technically read
+   this list — that's the tradeoff of a fully backend-free portal.
+   ============================================================ */
 
-   NOTE ON PLACEHOLDER QUESTIONS
-   Each subject ships with real, hand-written sample questions
-   followed by clearly-labelled placeholder questions where a full
-   bank hasn't been supplied yet ("Q11" onward, etc.).
-   Excel Foundation now ships with its full, real 50-question bank.
+const CREDENTIALS = [
+  /* ---- Data Analyst · Batch IOTPDAB0001 ---- */
+  { qtsId: "QTS2608DA0001", name: "Vaishnavi Shantappa",              password: "vaishnavi@123",  batch: "Data Analyst · IOTPDAB0001" },
+  { qtsId: "QTS2608DA0002", name: "Nikita Nimbark",                   password: "nikita@123",     batch: "Data Analyst · IOTPDAB0001" },
+  { qtsId: "QTS2608DA0003", name: "Vivek Singh",                      password: "vivek@123",      batch: "Data Analyst · IOTPDAB0001" },
+  { qtsId: "QTS2608DA0004", name: "Kiran Prakash Pradhan",            password: "kiran@123",      batch: "Data Analyst · IOTPDAB0001" },
+  { qtsId: "QTS2608DA0005", name: "Prerana Kamlakar Patil",           password: "prerana@123",    batch: "Data Analyst · IOTPDAB0001" },
+  { qtsId: "QTS2608DA0006", name: "Dinesh",                           password: "dinesh@123",     batch: "Data Analyst · IOTPDAB0001" },
+  { qtsId: "QTS2608DA0007", name: "Lakshya Gargav",                   password: "lakshya@123",    batch: "Data Analyst · IOTPDAB0001" },
+  { qtsId: "QTS2608DA0008", name: "Laxmi",                            password: "laxmi@123",      batch: "Data Analyst · IOTPDAB0001" },
+
+  /* ---- Web Development · Batch IOTPWDB0001 ---- */
+  { qtsId: "QTS2608WD0001", name: "Vaishnavi Vijayakumar Sanade",     password: "vaishnaviv@123", batch: "Web Development · IOTPWDB0001" },
+  { qtsId: "QTS2608WD0002", name: "Chityala Likhitha Satyanarayana", password: "likhitha@123",   batch: "Web Development · IOTPWDB0001" },
+  { qtsId: "QTS2608WD0003", name: "Sneha Maurya",                     password: "sneha@123",      batch: "Web Development · IOTPWDB0001" },
+  { qtsId: "QTS2608WD0004", name: "Swarnapreeti Khuntia",             password: "swarnapreeti@123", batch: "Web Development · IOTPWDB0001" },
+  { qtsId: "QTS2608WD0005", name: "Sahana",                           password: "sahana@123",     batch: "Web Development · IOTPWDB0001" }
+  /* Add more students here, e.g.:
+  { qtsId: "QTS2608XX0006", name: "Student Name", password: "choose-a-password", batch: "Domain · BatchCode" },
+  */
+];
+
+const ADMIN_PASSCODE = "quadsync-admin"; // change this to whatever you like
+
+/* ============================================================
+   SECTION B: ASSESSMENT CATALOGUE + QUESTION BANKS
    ============================================================ */
 
 const ASSESSMENT_META = {
   /* ---------------- Data Analyst track ---------------- */
   excelfoundation: {
-    name: "Excel Foundation",
-    subject: "Microsoft Excel",
-    icon: "excel",
-    category: "Data Analyst",
-    difficulty: "Beginner",
-    duration: 40,
-    passingPercent: 40,
+    name: "Excel Foundation", subject: "Microsoft Excel", icon: "microsoftexcel",
+    category: "Data Analyst", difficulty: "Beginner", duration: 40, passingPercent: 30,
     description: "Formulas, functions, PivotTables and everyday spreadsheet skills."
   },
   pythonfoundation: {
-    name: "Python Foundation",
-    subject: "Python Programming Basics",
-    icon: "python",
-    category: "Data Analyst",
-    difficulty: "Beginner",
-    duration: 45,
-    passingPercent: 40,
+    name: "Python Foundation", subject: "Python Programming Basics", icon: "python",
+    category: "Data Analyst", difficulty: "Beginner", duration: 45, passingPercent: 30,
     description: "Core syntax, data types, loops and functions for absolute beginners."
   },
   pythonadvanced: {
-    name: "Python Advanced",
-    subject: "Python for Data Analysis",
-    icon: "python",
-    category: "Data Analyst",
-    difficulty: "Advanced",
-    duration: 60,
-    passingPercent: 40,
+    name: "Python Advanced", subject: "Python for Data Analysis", icon: "python",
+    category: "Data Analyst", difficulty: "Advanced", duration: 60, passingPercent: 30,
     description: "Decorators, generators, OOP and advanced problem solving."
   },
   sql: {
-    name: "SQL Assessment",
-    subject: "Structured Query Language",
-    icon: "sql",
-    category: "Data Analyst",
-    difficulty: "Intermediate",
-    duration: 45,
-    passingPercent: 40,
+    name: "SQL Assessment", subject: "Structured Query Language", icon: "mysql",
+    category: "Data Analyst", difficulty: "Intermediate", duration: 45, passingPercent: 30,
     description: "Querying, joins, constraints and database fundamentals."
   },
   powerbi: {
-    name: "Power BI Assessment",
-    subject: "Microsoft Power BI",
-    icon: "powerbi",
-    category: "Data Analyst",
-    difficulty: "Intermediate",
-    duration: 45,
-    passingPercent: 40,
+    name: "Power BI Assessment", subject: "Microsoft Power BI", icon: "powerbi",
+    category: "Data Analyst", difficulty: "Intermediate", duration: 45, passingPercent: 30,
     description: "Data modelling, DAX, visuals and report building."
   },
   tableau: {
-    name: "Tableau Assessment",
-    subject: "Tableau Visualization",
-    icon: "tableau",
-    category: "Data Analyst",
-    difficulty: "Intermediate",
-    duration: 45,
-    passingPercent: 40,
+    name: "Tableau Assessment", subject: "Tableau Visualization", icon: "tableau",
+    category: "Data Analyst", difficulty: "Intermediate", duration: 45, passingPercent: 30,
     description: "Dashboards, calculated fields and visual storytelling."
   },
 
   /* ---------------- MERN Stack Development track ---------------- */
   html: {
-    name: "HTML Assessment",
-    subject: "HTML5",
-    icon: "html",
-    category: "MERN Stack Development",
-    difficulty: "Beginner",
-    duration: 30,
-    passingPercent: 40,
+    name: "HTML Assessment", subject: "HTML5", icon: "html5",
+    category: "MERN Stack Development", difficulty: "Beginner", duration: 30, passingPercent: 30,
     description: "Semantic markup, forms and page structure fundamentals."
   },
   css: {
-    name: "CSS Assessment",
-    subject: "CSS3",
-    icon: "css",
-    category: "MERN Stack Development",
-    difficulty: "Beginner",
-    duration: 30,
-    passingPercent: 40,
+    name: "CSS Assessment", subject: "CSS3", icon: "css3",
+    category: "MERN Stack Development", difficulty: "Beginner", duration: 30, passingPercent: 30,
     description: "Layout, styling, Flexbox/Grid and responsive design."
   },
   js: {
-    name: "JavaScript Assessment",
-    subject: "JavaScript (ES6+)",
-    icon: "js",
-    category: "MERN Stack Development",
-    difficulty: "Intermediate",
-    duration: 45,
-    passingPercent: 40,
+    name: "JavaScript Assessment", subject: "JavaScript (ES6+)", icon: "javascript",
+    category: "MERN Stack Development", difficulty: "Intermediate", duration: 45, passingPercent: 30,
     description: "Core language, DOM, async programming and ES6+ features."
   },
   react: {
-    name: "React Assessment",
-    subject: "React.js",
-    icon: "react",
-    category: "MERN Stack Development",
-    difficulty: "Intermediate",
-    duration: 45,
-    passingPercent: 40,
+    name: "React Assessment", subject: "React.js", icon: "react",
+    category: "MERN Stack Development", difficulty: "Intermediate", duration: 45, passingPercent: 30,
     description: "Components, hooks, state and props in modern React."
   },
   expressnode: {
-    name: "Express & Node Assessment",
-    subject: "Node.js & Express",
-    icon: "node",
-    category: "MERN Stack Development",
-    difficulty: "Intermediate",
-    duration: 45,
-    passingPercent: 40,
+    name: "Express & Node Assessment", subject: "Node.js & Express", icon: "express",
+    category: "MERN Stack Development", difficulty: "Intermediate", duration: 45, passingPercent: 30,
     description: "Server-side JavaScript, REST APIs and middleware."
   },
   mongodb: {
-    name: "MongoDB Assessment",
-    subject: "MongoDB",
-    icon: "mongo",
-    category: "MERN Stack Development",
-    difficulty: "Intermediate",
-    duration: 40,
-    passingPercent: 40,
+    name: "MongoDB Assessment", subject: "MongoDB", icon: "mongodb",
+    category: "MERN Stack Development", difficulty: "Intermediate", duration: 40, passingPercent: 30,
     description: "Documents, collections, queries and schema design."
   },
   tailwind: {
-    name: "Tailwind CSS Assessment",
-    subject: "Tailwind CSS",
-    icon: "tailwind",
-    category: "MERN Stack Development",
-    difficulty: "Beginner",
-    duration: 30,
-    passingPercent: 40,
+    name: "Tailwind CSS Assessment", subject: "Tailwind CSS", icon: "tailwindcss",
+    category: "MERN Stack Development", difficulty: "Beginner", duration: 30, passingPercent: 30,
     description: "Utility-first styling and responsive design workflow."
   },
 
-  /* ---------------- HR Manager track ---------------- */
+  /* ---------------- HR track ---------------- */
   hr: {
-    name: "HR Manager Assessment",
-    subject: "Human Resources",
-    icon: "hr",
-    category: "Human Resources",
-    difficulty: "Beginner",
-    duration: 30,
-    passingPercent: 40,
-    description: "Recruitment, onboarding, appraisals and Human Resources fundamentals."
+    name: "HR Assessment", subject: "HR", icon: null,
+    category: "HR", difficulty: "Beginner", duration: 30, passingPercent: 30,
+    description: "Recruitment, onboarding, appraisals and HR fundamentals."
   }
 };
 
-/* ---------- hand-written sample questions ---------- */
-
 const SEED_QUESTIONS = {
-  /* Full, real 50-question bank for Excel Foundation
-     (Section A: Easy 1-20, Section B: Moderate 21-40, Section C: Hard 41-50) */
   excelfoundation: [
     { q: "Which symbol is used to start a formula in Excel?", options: ["#", "=", "$", "@"], correct: 1 },
     { q: "Which function is used to add numbers in Excel?", options: ["COUNT", "SUM", "ADD", "TOTAL"], correct: 1 },
@@ -999,27 +974,25 @@ const SEED_QUESTIONS = {
     { q: "Which class creates a grid container with 3 equal-width columns?", options: ["grid-cols-3", "cols-3", "grid-3", "columns-3"], correct: 0 }
   ],
   hr: [
-    { q: "What does the abbreviation KRA stand for in Human Resources?", options: ["Key Result Area", "Key Recruitment Area", "Known Result Assessment", "Key Retention Analysis"], correct: 0 },
+    { q: "What does the abbreviation KRA stand for in HR?", options: ["Key Result Area", "Key Recruitment Area", "Known Result Assessment", "Key Retention Analysis"], correct: 0 },
     { q: "Which process periodically evaluates an employee's performance?", options: ["Performance Appraisal", "Onboarding", "Recruitment", "Payroll"], correct: 0 },
-    { q: "Which Human Resources process introduces a new employee to the organisation?", options: ["Onboarding", "Exit Interview", "Sourcing", "Succession Planning"], correct: 0 },
+    { q: "Which HR process introduces a new employee to the organisation?", options: ["Onboarding", "Exit Interview", "Sourcing", "Succession Planning"], correct: 0 },
     { q: "In India, which act primarily governs the Employee Provident Fund?", options: ["EPF Act", "Factories Act", "Minimum Wages Act", "Payment of Bonus Act"], correct: 0 },
-    { q: "What does CTC stand for in Human Resources terminology?", options: ["Cost to Company", "Contract Term Clause", "Company Tax Credit", "Cost Tracking Chart"], correct: 0 },
+    { q: "What does CTC stand for in HR terminology?", options: ["Cost to Company", "Contract Term Clause", "Company Tax Credit", "Cost Tracking Chart"], correct: 0 },
     { q: "Which process formally ends an employment relationship?", options: ["Offboarding", "Onboarding", "Induction", "Recruitment"], correct: 0 },
     { q: "Which term refers to attracting and selecting suitable candidates?", options: ["Recruitment", "Retention", "Appraisal", "Payroll"], correct: 0 },
     { q: "Which document outlines an employee's duties and terms of employment?", options: ["Employment Contract", "Resume", "Payslip", "Appraisal Form"], correct: 0 },
-    { q: "What does HRIS stand for?", options: ["Human Resource Information System", "Human Retention Incentive Scheme", "HR Manager Internal Standards", "Human Rights Information Source"], correct: 0 },
+    { q: "What does HRIS stand for?", options: ["Human Resource Information System", "Human Retention Incentive Scheme", "HR Internal Standards", "Human Rights Information Source"], correct: 0 },
     { q: "Which principle requires equal pay for equal work regardless of gender?", options: ["Equal Remuneration", "Minimum Wages", "Payment of Wages", "Factories Regulation"], correct: 0 }
   ]
 };
-
-/* ---------- generate placeholder questions to top up any bank below 50 ---------- */
 
 function buildPlaceholderQuestions(subjectLabel, startIndex, count) {
   const items = [];
   for (let i = 0; i < count; i++) {
     const n = startIndex + i;
     items.push({
-      q: `[Placeholder] ${subjectLabel} — sample question #${n}. Replace this text in data.js with a real question.`,
+      q: `[Placeholder] ${subjectLabel} — sample question #${n}. Replace this text with a real question.`,
       options: ["Option A (correct — replace me)", "Option B (replace me)", "Option C (replace me)", "Option D (replace me)"],
       correct: 0
     });
@@ -1034,8 +1007,6 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
   QUESTION_BANKS[key] = seed.concat(placeholders).slice(0, 50);
 });
 
-/* ---------- assemble the final ASSESSMENTS object used by app.js ---------- */
-
 const ASSESSMENTS = {};
 Object.keys(ASSESSMENT_META).forEach((key) => {
   const meta = ASSESSMENT_META[key];
@@ -1043,51 +1014,47 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
   ASSESSMENTS[key] = Object.assign({}, meta, {
     key: key,
     totalQuestions: questions.length,
-    totalMarks: questions.length, // 1 mark per question
+    totalMarks: questions.length,
     passingMarks: Math.ceil((questions.length * meta.passingPercent) / 100),
     questions: questions
   });
 });
 
-
 /* ============================================================
-   QuadSync Tech Solutions — Online Assessment Portal
-   app.js — all client-side logic (no backend, no database)
+   SECTION C: APP LOGIC
    ============================================================ */
-
 (function () {
   "use strict";
 
-  /* ---------------- state ---------------- */
   const state = {
+    currentUser: null,
     currentKey: null,
-    student: { name: "", email: "" },
     currentIndex: 0,
-    answers: {},          // { questionIndex: optionIndex }
-    timeRemaining: 0,      // seconds
+    answers: {},
+    timeRemaining: 0,
     timerId: null,
-    testStarted: false,   // true once assessment page is live (for beforeunload warning)
+    testStarted: false,
     activeFilter: "All",
-    searchTerm: ""
+    searchTerm: "",
+    lastResult: null
   };
 
+  const AUTH_SESSION_KEY = "quadsync_auth_session";
   const STORAGE_PREFIX = "quadsync_progress_";
+  const RESULTS_STORAGE_KEY = "quadsync_results";
 
-  /* ---------------- element refs ---------------- */
   const el = (id) => document.getElementById(id);
   const grid = el("assessmentGrid");
   const filterChips = el("filterChips");
   const searchInput = el("searchInput");
   const toast = el("toast");
-  const header = el("mainHeader");
+  const header = document.getElementById("main-header");
 
-  /* ================= HEADER SCROLL ================= */
   window.addEventListener("scroll", () => {
     if (window.scrollY > 20) header.classList.add("scrolled");
     else header.classList.remove("scrolled");
   });
 
-  /* ================= TOAST ================= */
   let toastTimer = null;
   function showToast(msg) {
     toast.textContent = msg;
@@ -1096,40 +1063,129 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
   }
 
-  /* ================= SECURITY FEATURES ================= */
-  // Disable right-click
+  /* ---------------- security ---------------- */
   document.addEventListener("contextmenu", (e) => e.preventDefault());
-
-  // Disable common devtools / view-source shortcuts
   document.addEventListener("keydown", (e) => {
     const k = e.key;
     if (
       k === "F12" ||
       (e.ctrlKey && e.shiftKey && (k === "I" || k === "i" || k === "J" || k === "j" || k === "C" || k === "c")) ||
       (e.ctrlKey && (k === "U" || k === "u"))
-    ) {
-      e.preventDefault();
-    }
+    ) { e.preventDefault(); }
   });
-
-  // Warn before leaving mid-assessment
   window.addEventListener("beforeunload", (e) => {
-    if (state.testStarted) {
-      e.preventDefault();
-      e.returnValue = "";
-      return "";
-    }
+    if (state.testStarted) { e.preventDefault(); e.returnValue = ""; return ""; }
   });
 
-  /* ================= DASHBOARD ================= */
+  /* ---------------- json download helper ---------------- */
+  function downloadJSON(filename, dataObj) {
+    const blob = new Blob([JSON.stringify(dataObj, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
 
-  function iconLabel(key) {
+  /* ---------------- results storage ---------------- */
+  function getAllResults() {
+    try { return JSON.parse(localStorage.getItem(RESULTS_STORAGE_KEY) || "[]"); }
+    catch (e) { return []; }
+  }
+  function saveResultRecord(record) {
+    try {
+      const all = getAllResults();
+      all.push(record);
+      localStorage.setItem(RESULTS_STORAGE_KEY, JSON.stringify(all));
+    } catch (e) { /* ignore */ }
+  }
+
+  /* ---------------- auth ---------------- */
+  function attemptLogin(id, password) {
+    const idNorm = id.trim().toLowerCase();
+    return CREDENTIALS.find((c) => c.qtsId.toLowerCase() === idNorm && c.password === password) || null;
+  }
+  function persistSession(user) {
+    try { sessionStorage.setItem(AUTH_SESSION_KEY, JSON.stringify(user)); } catch (e) {}
+  }
+  function restoreSession() {
+    try {
+      const raw = sessionStorage.getItem(AUTH_SESSION_KEY);
+      if (!raw) return null;
+      const parsed = JSON.parse(raw);
+      const stillValid = CREDENTIALS.find((c) => c.qtsId === parsed.qtsId && c.password === parsed.password);
+      return stillValid || null;
+    } catch (e) { return null; }
+  }
+  function clearSession() {
+    try { sessionStorage.removeItem(AUTH_SESSION_KEY); } catch (e) {}
+  }
+
+  const authStatus = el("authStatus");
+  function renderAuthStatus() {
+    if (!state.currentUser) { authStatus.innerHTML = ""; return; }
+    const u = state.currentUser;
+    authStatus.innerHTML = `
+      <div class="who"><b>${u.name}</b><span>${u.qtsId} · ${u.batch}</span></div>
+      <button type="button" id="logoutBtn">Logout</button>
+    `;
+    el("logoutBtn").addEventListener("click", () => {
+      clearSession();
+      state.currentUser = null;
+      renderAuthStatus();
+      showPage(pageLogin);
+      showToast("You have been logged out.");
+    });
+  }
+
+  const pageLogin = el("page-login");
+  const pageDashboard = el("page-dashboard");
+  const pageInstructions = el("page-instructions");
+  const pageAssessment = el("page-assessment");
+  const pageResult = el("page-result");
+  const mainSiteHeader = document.getElementById("main-header");
+
+  function showPage(page) {
+    [pageLogin, pageDashboard, pageInstructions, pageAssessment, pageResult].forEach((p) => p.classList.add("hidden"));
+    page.classList.remove("hidden");
+    if (mainSiteHeader) mainSiteHeader.classList.toggle("hidden", page === pageAssessment);
+    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
+  }
+
+  const loginForm = el("loginForm");
+  const loginIdInput = el("loginId");
+  const loginPasswordInput = el("loginPassword");
+  const loginPasswordField = el("loginPasswordField");
+
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const user = attemptLogin(loginIdInput.value, loginPasswordInput.value);
+    if (!user) {
+      loginPasswordField.classList.add("invalid");
+      return;
+    }
+    loginPasswordField.classList.remove("invalid");
+    state.currentUser = user;
+    persistSession(user);
+    renderAuthStatus();
+    showToast(`Welcome, ${user.name}!`);
+    showPage(pageDashboard);
+  });
+
+  /* ---------------- icons ---------------- */
+  function iconAbbrev(key) {
     const map = {
       excelfoundation: "XL", pythonfoundation: "PY", pythonadvanced: "PY+", sql: "DB",
       powerbi: "BI", tableau: "TB", html: "HT", css: "CS", js: "JS", react: "RC",
       expressnode: "EX", mongodb: "MG", tailwind: "TW", hr: "HR"
     };
     return map[key] || key.slice(0, 2).toUpperCase();
+  }
+  function iconMarkup(a) {
+    const fallback = `<span class="icon-fallback show">${iconAbbrev(a.key)}</span>`;
+    if (!a.icon) return fallback;
+    const src = `https://cdn.simpleicons.org/${a.icon}/4dabff`;
+    return `<img src="${src}" alt="${a.subject}" onerror="this.style.display='none'; this.nextElementSibling.classList.add('show');" /><span class="icon-fallback">${iconAbbrev(a.key)}</span>`;
   }
 
   function difficultyClass(diff) {
@@ -1158,8 +1214,7 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     const term = state.searchTerm.trim().toLowerCase();
     const items = Object.values(ASSESSMENTS).filter((a) => {
       const matchesFilter = state.activeFilter === "All" || a.category === state.activeFilter;
-      const matchesSearch =
-        !term || a.name.toLowerCase().includes(term) || a.subject.toLowerCase().includes(term);
+      const matchesSearch = !term || a.name.toLowerCase().includes(term) || a.subject.toLowerCase().includes(term);
       return matchesFilter && matchesSearch;
     });
 
@@ -1173,7 +1228,7 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
         (a) => `
       <article class="card">
         <div class="card-top">
-          <div class="card-icon">${iconLabel(a.key)}</div>
+          <div class="card-icon">${iconMarkup(a)}</div>
           <span class="difficulty-badge ${difficultyClass(a.difficulty)}">${a.difficulty}</span>
         </div>
         <h3>${a.name}</h3>
@@ -1190,7 +1245,7 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
       .join("");
 
     grid.querySelectorAll("[data-start]").forEach((btn) => {
-      btn.addEventListener("click", () => openStudentModal(btn.dataset.start));
+      btn.addEventListener("click", () => showInstructions(btn.dataset.start));
     });
   }
 
@@ -1199,71 +1254,15 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     renderDashboard();
   });
 
-  /* ================= STUDENT MODAL ================= */
-  const modalOverlay = el("studentModalOverlay");
-  const studentForm = el("studentForm");
-  const nameField = el("nameField");
-  const nameInput = el("studentName");
-  const emailInput = el("studentEmail");
-  const modalTestName = el("modalTestName");
-
-  function openStudentModal(key) {
-    state.currentKey = key;
-    modalTestName.textContent = ASSESSMENTS[key].name;
-    nameField.classList.remove("invalid");
-    nameInput.value = "";
-    emailInput.value = "";
-    modalOverlay.classList.remove("hidden");
-    setTimeout(() => nameInput.focus(), 50);
-  }
-  function closeStudentModal() {
-    modalOverlay.classList.add("hidden");
-  }
-  el("closeStudentModal").addEventListener("click", closeStudentModal);
-  el("cancelStudentModal").addEventListener("click", closeStudentModal);
-  modalOverlay.addEventListener("click", (e) => {
-    if (e.target === modalOverlay) closeStudentModal();
-  });
-
-  studentForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const name = nameInput.value.trim();
-    if (!name) {
-      nameField.classList.add("invalid");
-      nameInput.focus();
-      return;
-    }
-    nameField.classList.remove("invalid");
-    state.student.name = name;
-    state.student.email = emailInput.value.trim();
-    closeStudentModal();
-    showInstructions(state.currentKey);
-  });
-
-  /* ================= INSTRUCTIONS PAGE ================= */
-  const pageDashboard = el("page-dashboard");
-  const pageInstructions = el("page-instructions");
-  const pageAssessment = el("page-assessment");
-  const pageResult = el("page-result");
-
-  const mainSiteHeader = document.getElementById("main-header");
-
-  function showPage(page) {
-    [pageDashboard, pageInstructions, pageAssessment, pageResult].forEach((p) => p.classList.add("hidden"));
-    page.classList.remove("hidden");
-    // While the assessment itself is on screen, hide the main site navbar
-    // so only the exam header (test name + timer) is visible — no overlap.
-    if (mainSiteHeader) {
-      mainSiteHeader.classList.toggle("hidden", page === pageAssessment);
-    }
-    window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
-  }
-
+  /* ---------------- instructions ---------------- */
   function showInstructions(key) {
+    if (!state.currentUser) { showPage(pageLogin); return; }
+    state.currentKey = key;
     const a = ASSESSMENTS[key];
-    el("instrIcon").textContent = iconLabel(key);
+    const u = state.currentUser;
+    el("instrIcon").innerHTML = iconMarkup(a);
     el("instrTestName").textContent = a.name;
-    el("instrStudentLine").textContent = `Candidate: ${state.student.name}${state.student.email ? " · " + state.student.email : ""}`;
+    el("instrStudentLine").textContent = `Candidate: ${u.name} · ${u.qtsId} · Batch: ${u.batch}`;
     el("instrTotalQ").textContent = a.totalQuestions;
     el("instrTotalMarks").textContent = a.totalMarks;
     el("instrDuration").textContent = a.duration + " min";
@@ -1272,10 +1271,9 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
   }
 
   el("backToDashboardFromInstructions").addEventListener("click", () => showPage(pageDashboard));
-
   el("startAssessmentBtn").addEventListener("click", () => startAssessment(state.currentKey));
 
-  /* ================= ASSESSMENT ENGINE ================= */
+  /* ---------------- assessment engine ---------------- */
   const qText = el("qText");
   const optionsList = el("optionsList");
   const qNumberLabel = el("qNumberLabel");
@@ -1287,46 +1285,31 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
   const totalCountEl = el("totalCount");
 
   function storageKey(key) {
-    return STORAGE_PREFIX + key + "_" + (state.student.name || "guest").replace(/\s+/g, "_");
+    return STORAGE_PREFIX + key + "_" + (state.currentUser ? state.currentUser.qtsId : "guest");
   }
-
   function saveProgress() {
     if (!state.currentKey) return;
     try {
-      const payload = {
-        answers: state.answers,
-        currentIndex: state.currentIndex,
-        timeRemaining: state.timeRemaining,
-        student: state.student
-      };
-      localStorage.setItem(storageKey(state.currentKey), JSON.stringify(payload));
-    } catch (err) {
-      /* localStorage may be unavailable — fail silently */
-    }
+      localStorage.setItem(storageKey(state.currentKey), JSON.stringify({
+        answers: state.answers, currentIndex: state.currentIndex, timeRemaining: state.timeRemaining
+      }));
+    } catch (e) {}
   }
-
   function loadProgress(key) {
     try {
       const raw = localStorage.getItem(storageKey(key));
       return raw ? JSON.parse(raw) : null;
-    } catch (err) {
-      return null;
-    }
+    } catch (e) { return null; }
   }
-
   function clearProgress(key) {
-    try {
-      localStorage.removeItem(storageKey(key));
-    } catch (err) {
-      /* ignore */
-    }
+    try { localStorage.removeItem(storageKey(key)); } catch (e) {}
   }
 
   function startAssessment(key) {
     const a = ASSESSMENTS[key];
     const saved = loadProgress(key);
 
-    if (saved && saved.student && saved.student.name === state.student.name) {
+    if (saved) {
       state.answers = saved.answers || {};
       state.currentIndex = saved.currentIndex || 0;
       state.timeRemaining = typeof saved.timeRemaining === "number" ? saved.timeRemaining : a.duration * 60;
@@ -1336,8 +1319,8 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
       state.timeRemaining = a.duration * 60;
     }
 
-    el("examTestName").textContent = "— " + a.name;
-    el("paletteStudentName").textContent = "Candidate: " + state.student.name;
+    el("examTestName").textContent = a.name;
+    el("paletteStudentName").textContent = `Candidate: ${state.currentUser.name} · Batch: ${state.currentUser.batch}`;
     totalCountEl.textContent = a.totalQuestions;
 
     buildPalette(a);
@@ -1356,10 +1339,7 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
       btn.className = "palette-btn";
       btn.textContent = i + 1;
       btn.type = "button";
-      btn.addEventListener("click", () => {
-        state.currentIndex = i;
-        renderQuestion();
-      });
+      btn.addEventListener("click", () => { state.currentIndex = i; renderQuestion(); });
       paletteGrid.appendChild(btn);
     }
   }
@@ -1419,17 +1399,14 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
   function updateProgress() {
     const a = ASSESSMENTS[state.currentKey];
     const answered = Object.keys(state.answers).length;
-    const pct = Math.round((answered / a.totalQuestions) * 100);
-    progressBarFill.style.width = pct + "%";
+    progressBarFill.style.width = Math.round((answered / a.totalQuestions) * 100) + "%";
   }
 
-  /* ---------- timer ---------- */
   function formatTime(sec) {
     const m = Math.floor(sec / 60).toString().padStart(2, "0");
     const s = Math.floor(sec % 60).toString().padStart(2, "0");
     return `${m}:${s}`;
   }
-
   function startTimer() {
     clearInterval(state.timerId);
     updateTimerDisplay();
@@ -1447,21 +1424,15 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
       if (state.timeRemaining % 10 === 0) saveProgress();
     }, 1000);
   }
-
   function updateTimerDisplay() {
     timerText.textContent = formatTime(state.timeRemaining);
     examTimer.classList.toggle("low-time", state.timeRemaining <= 60);
   }
 
-  /* ---------- submit ---------- */
   function confirmAndSubmit() {
     const a = ASSESSMENTS[state.currentKey];
-    const answered = Object.keys(state.answers).length;
-    const unanswered = a.totalQuestions - answered;
-    const msg =
-      unanswered > 0
-        ? `You have ${unanswered} unanswered question(s). Submit anyway?`
-        : "Submit your test now?";
+    const unanswered = a.totalQuestions - Object.keys(state.answers).length;
+    const msg = unanswered > 0 ? `You have ${unanswered} unanswered question(s). Submit anyway?` : "Submit your test now?";
     if (window.confirm(msg)) submitAssessment(false);
   }
   el("submitBtn").addEventListener("click", confirmAndSubmit);
@@ -1477,17 +1448,30 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
       if (state.answers[i] !== undefined && state.answers[i] === q.correct) correct++;
     });
     const wrong = Object.keys(state.answers).length - correct;
-    const score = correct; // 1 mark per question
+    const score = correct;
     const percent = Math.round((score / a.totalMarks) * 100);
     const passed = score >= a.passingMarks;
 
     clearProgress(state.currentKey);
+
+    const u = state.currentUser;
+    const record = {
+      qtsId: u.qtsId, name: u.name, batch: u.batch, program: a.category,
+      testKey: a.key, testName: a.name,
+      totalQuestions: a.totalQuestions, correct, wrong, score, totalMarks: a.totalMarks,
+      percent, passingMarks: a.passingMarks, passed,
+      date: new Date().toISOString()
+    };
+    saveResultRecord(record);
+    state.lastResult = record;
+
     showResult(a, { correct, wrong, score, percent, passed, auto });
   }
 
-  /* ================= RESULT PAGE ================= */
   function showResult(a, r) {
-    el("resultStudentName").textContent = `Well done, ${state.student.name}!`;
+    const u = state.currentUser;
+    el("resultStudentName").textContent = `Well done, ${u.name}!`;
+    el("resultCandidateLine").textContent = `${u.qtsId} · Batch: ${u.batch}`;
     el("resultTestName").textContent = a.name;
     el("resTotalQ").textContent = a.totalQuestions;
     el("resCorrect").textContent = r.correct;
@@ -1498,20 +1482,21 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     const badge = el("resultBadge");
     const statusText = el("resultStatusText");
     if (r.passed) {
-      badge.className = "result-badge pass";
-      badge.textContent = "🏆";
-      statusText.className = "status-text pass";
-      statusText.textContent = "PASS";
+      badge.className = "result-badge pass"; badge.textContent = "🏆";
+      statusText.className = "status-text pass"; statusText.textContent = "PASS";
     } else {
-      badge.className = "result-badge fail";
-      badge.textContent = "✕";
-      statusText.className = "status-text fail";
-      statusText.textContent = "FAIL";
+      badge.className = "result-badge fail"; badge.textContent = "✕";
+      statusText.className = "status-text fail"; statusText.textContent = "FAIL";
     }
 
     showPage(pageResult);
     if (r.auto) showToast("Your test was auto-submitted as time ran out.");
   }
+
+  el("downloadResultBtn").addEventListener("click", () => {
+    if (!state.lastResult) return;
+    downloadJSON(`${state.lastResult.qtsId}_${state.lastResult.testKey}_result.json`, state.lastResult);
+  });
 
   el("returnToDashboardBtn").addEventListener("click", () => {
     state.currentKey = null;
@@ -1520,11 +1505,61 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     showPage(pageDashboard);
   });
 
-  /* ================= INIT ================= */
+  /* ---------------- admin overlay ---------------- */
+  const adminOverlay = el("adminOverlay");
+  const adminResultsList = el("adminResultsList");
+
+  function renderAdminList() {
+    const results = getAllResults();
+    if (results.length === 0) {
+      adminResultsList.innerHTML = `<div class="admin-empty">No results stored in this browser yet.</div>`;
+      return;
+    }
+    adminResultsList.innerHTML = results
+      .slice()
+      .reverse()
+      .map((r) => `
+        <div class="admin-row">
+          <span>${r.name} (${r.qtsId}) — ${r.testName}</span>
+          <span>${r.score}/${r.totalMarks} · ${r.passed ? "PASS" : "FAIL"}</span>
+        </div>
+      `)
+      .join("");
+  }
+
+  el("adminLink").addEventListener("click", () => {
+    const pass = window.prompt("Enter admin passcode:");
+    if (pass === null) return;
+    if (pass !== ADMIN_PASSCODE) { showToast("Incorrect passcode."); return; }
+    renderAdminList();
+    adminOverlay.classList.remove("hidden");
+  });
+  el("closeAdminOverlay").addEventListener("click", () => adminOverlay.classList.add("hidden"));
+  adminOverlay.addEventListener("click", (e) => { if (e.target === adminOverlay) adminOverlay.classList.add("hidden"); });
+
+  el("downloadAllResultsBtn").addEventListener("click", () => {
+    downloadJSON("quadsync_all_results.json", getAllResults());
+  });
+  el("clearResultsBtn").addEventListener("click", () => {
+    if (!window.confirm("Clear all stored results from this browser? This cannot be undone.")) return;
+    try { localStorage.removeItem(RESULTS_STORAGE_KEY); } catch (e) {}
+    renderAdminList();
+    showToast("Stored results cleared.");
+  });
+
+  /* ---------------- init ---------------- */
   buildFilterChips();
   renderDashboard();
-})();
 
+  const restored = restoreSession();
+  if (restored) {
+    state.currentUser = restored;
+    renderAuthStatus();
+    showPage(pageDashboard);
+  } else {
+    showPage(pageLogin);
+  }
+})();
 </script>
 </body>
 </html>
