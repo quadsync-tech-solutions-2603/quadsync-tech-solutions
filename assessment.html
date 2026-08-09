@@ -96,19 +96,8 @@ button:focus-visible, input:focus-visible, a:focus-visible, [tabindex]:focus-vis
   background:var(--bg2); color:var(--muted); border-color:var(--border);
 }
 
-/* ============ header ============ */
-header{position:fixed;width:100%;z-index:1000;top:0;transition:.3s;background:rgba(5,15,26,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
-header.scrolled{background:rgba(5,15,26,0.98);backdrop-filter:blur(20px);box-shadow:0 6px 24px rgba(0,0,0,0.35);}
-.navbar{display:flex;justify-content:space-between;align-items:center;padding:10px 7%;transition:.3s;gap:16px;}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;min-height:48px;}
-.logo img{height:48px;width:auto;border-radius:8px;}
-.logo img.broken{ display:none; }
-.logo-text{font-family:'Sora',sans-serif;font-size:25px;font-weight:700;color:var(--blue);letter-spacing:-0.3px;line-height:1.2;}
-.nav-links{list-style:none;display:flex;gap:4px;align-items:center;margin:0;padding:0;}
-.nav-links a{text-decoration:none;color:#fff;padding:6px 12px;border-radius:6px;font-size:15px;font-weight:500;transition:.2s;letter-spacing:0.2px;}
-.nav-links a:hover{color:var(--blue);background:var(--glow);}
-.menu-toggle{display:none;font-size:20px;cursor:pointer;color:var(--text);background:none;border:none;padding:4px;}
-
+/* ============ page topbar (candidate name + logout, shown inline on pages) ============ */
+.page-topbar{ display:flex; justify-content:flex-end; margin-bottom:18px; }
 .auth-status{ display:flex; align-items:center; gap:12px; font-size:0.82rem; color:var(--muted); white-space:nowrap; }
 .auth-status .who{ display:flex; flex-direction:column; gap:5px; line-height:1.25; text-align:right; }
 .auth-status .who .name-row{ display:flex; align-items:center; justify-content:flex-end; gap:8px; }
@@ -122,7 +111,7 @@ header.scrolled{background:rgba(5,15,26,0.98);backdrop-filter:blur(20px);box-sha
 .auth-status button:hover{ border-color:var(--blue); background:rgba(77,171,255,0.08); }
 
 /* ============ hero ============ */
-.hero{ padding:76px 0 40px; position:relative; overflow:hidden; }
+.hero{ padding:44px 0 40px; position:relative; overflow:hidden; }
 .hero::before{
   content:''; position:absolute; width:600px; height:600px; border-radius:50%;
   background:radial-gradient(circle, rgba(77,171,255,0.14), transparent 70%);
@@ -263,7 +252,7 @@ header.scrolled{background:rgba(5,15,26,0.98);backdrop-filter:blur(20px);box-sha
 }
 .site-footer .admin-link:hover{ color:var(--blue); }
 
-main{ flex:1; position:relative; z-index:1; padding-top:74px; }
+main{ flex:1; position:relative; z-index:1; }
 
 /* ============ overlay / modal (login + admin) ============ */
 .overlay{
@@ -305,7 +294,7 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
 .modal-wrap{ position:relative; }
 
 /* ============ login page ============ */
-#page-login{ padding:76px 0 90px; position:relative; overflow:hidden; }
+#page-login{ padding:48px 0 90px; position:relative; overflow:hidden; }
 #page-login::before{
   content:''; position:absolute; width:520px; height:520px; border-radius:50%;
   background:radial-gradient(circle, rgba(77,171,255,0.13), transparent 70%);
@@ -325,7 +314,7 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
 .demo-hint b{ color:var(--text); }
 
 /* ============ instructions page ============ */
-.page{ padding:56px 0 90px; animation:fadeIn .25s ease both; position:relative; z-index:1; }
+.page{ padding:36px 0 90px; animation:fadeIn .25s ease both; position:relative; z-index:1; }
 .back-link{
   display:inline-flex; align-items:center; gap:6px; color:var(--blue);
   font-weight:600; font-size:0.88rem; text-decoration:none; margin-bottom:20px;
@@ -474,36 +463,17 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
 @media (max-width:640px){
   .hero{ padding:52px 0 24px; }
   .controls-row{ flex-direction:column; align-items:stretch; }
-  .filter-chips{ overflow-x:auto; flex-wrap:nowrap; padding-bottom:4px; }
   .modal-actions{ flex-direction:column; }
   .exam-nav-btns{ flex-direction:column; }
   .exam-nav-btns .grow{ order:-1; }
-  .navbar{ flex-wrap:wrap; }
-  .auth-status .who{ display:none; }
+  .page-topbar{ justify-content:center; }
+  .auth-status .who{ text-align:center; }
+  .auth-status .who .name-row{ justify-content:center; }
+  .auth-status .who .candidate-badges{ justify-content:center; }
 }
 </style>
 </head>
 <body>
-
-<!-- ============ HEADER ============ -->
-<header id="main-header">
-  <nav class="navbar">
-    <a href="#home" class="logo">
-      <img src="Logo.png" alt="QuadSync Logo" onerror="this.classList.add('broken'); this.onerror=null;">
-      <div>
-        <div class="logo-text">QuadSync Tech Solutions</div>
-      </div>
-    </a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#home">Home</a></li>
-      <li><a href="trainingprograms.html">Training Programs</a></li>
-      <li><a href="assessment.html">Assessment Portal</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="auth-status" id="authStatus"></div>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button>
-  </nav>
-</header>
 
 <main id="mainContent">
 
@@ -535,6 +505,7 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
   <!-- ============ PAGE 1: DASHBOARD ============ -->
   <section id="page-dashboard" class="hidden">
     <div class="hero container">
+      <div class="page-topbar auth-status-slot" style="margin-bottom:28px;"></div>
       <div class="hero-eyebrow" id="dashboardEyebrow">Assessment Center</div>
       <h1>Online Assessment Portal</h1>
       <p class="lead" id="dashboardLead">Pick a test from the list below to check your skills. Read the instructions, and start whenever you're ready.</p>
@@ -659,7 +630,6 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
 
         <div class="result-actions">
           <a class="btn btn-primary" id="submitScreenshotBtn" href="https://docs.google.com/forms/d/e/1FAIpQLSfOkJjnb1P59UQKi9J6kHN2yIR9X5f3dLVtbvpA3L8kMdfExQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Submit Screenshot</a>
-          <button class="btn btn-secondary" id="downloadResultBtn">Download My Result (JSON)</button>
           <button class="btn btn-secondary" id="returnToDashboardBtn">Return to Dashboard</button>
         </div>
       </div>
@@ -669,6 +639,7 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
   <!-- ============ PAGE 5: ADMIN DASHBOARD (only reachable by the admin account) ============ -->
   <section id="page-admin" class="page hidden">
     <div class="container">
+      <div class="page-topbar auth-status-slot" style="margin-bottom:16px;"></div>
       <div class="panel" style="max-width:920px;">
         <div class="panel-header">
           <div>
@@ -1068,7 +1039,7 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     key: key,
     totalQuestions: questions.length,
     totalMarks: questions.length,
-    passingMarks: Math.ceil((questions.length * meta.passingPercent) / 100),
+    passingMarks: Math.min(30, questions.length), // flat passing mark of 30 (capped if a bank has fewer questions)
     questions: questions
   });
 });
@@ -1099,12 +1070,6 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
   const grid = el("assessmentGrid");
   const searchInput = el("searchInput");
   const toast = el("toast");
-  const header = document.getElementById("main-header");
-
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 20) header.classList.add("scrolled");
-    else header.classList.remove("scrolled");
-  });
 
   let toastTimer = null;
   function showToast(msg) {
@@ -1184,24 +1149,28 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     try { sessionStorage.removeItem(AUTH_SESSION_KEY); } catch (e) {}
   }
 
-  const authStatus = el("authStatus");
   function renderAuthStatus() {
-    if (!state.currentUser) { authStatus.innerHTML = ""; return; }
+    const slots = document.querySelectorAll(".auth-status-slot");
+    if (!state.currentUser) { slots.forEach((s) => { s.innerHTML = ""; }); return; }
     const u = state.currentUser;
-    authStatus.innerHTML = `
-      <div class="who">
-        <div class="name-row"><b>${u.name}</b></div>
-        <span class="qts-id">${u.qtsId}</span>
-        <div class="candidate-badges">${candidateBadgesHTML(u)}</div>
-      </div>
-      <button type="button" id="logoutBtn">Logout</button>
-    `;
-    el("logoutBtn").addEventListener("click", () => {
-      clearSession();
-      state.currentUser = null;
-      renderAuthStatus();
-      showPage(pageLogin);
-      showToast("You have been logged out.");
+    slots.forEach((s) => {
+      s.innerHTML = `
+        <div class="who">
+          <div class="name-row"><b>${u.name}</b></div>
+          <span class="qts-id">${u.qtsId}</span>
+          <div class="candidate-badges">${candidateBadgesHTML(u)}</div>
+        </div>
+        <button type="button" class="logoutBtnSlot">Logout</button>
+      `;
+    });
+    document.querySelectorAll(".logoutBtnSlot").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        clearSession();
+        state.currentUser = null;
+        renderAuthStatus();
+        showPage(pageLogin);
+        showToast("You have been logged out.");
+      });
     });
   }
 
@@ -1211,7 +1180,6 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
   const pageAssessment = el("page-assessment");
   const pageResult = el("page-result");
   const pageAdmin = el("page-admin");
-  const mainSiteHeader = document.getElementById("main-header");
 
   function isAdmin(user) {
     return !!user && user.domain === ADMIN_DOMAIN;
@@ -1220,7 +1188,6 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
   function showPage(page) {
     [pageLogin, pageDashboard, pageInstructions, pageAssessment, pageResult, pageAdmin].forEach((p) => p.classList.add("hidden"));
     page.classList.remove("hidden");
-    if (mainSiteHeader) mainSiteHeader.classList.toggle("hidden", page === pageAssessment);
     window.scrollTo({ top: 0, behavior: "instant" in window ? "instant" : "auto" });
   }
 
@@ -1582,11 +1549,6 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     showPage(pageResult);
     if (r.auto) showToast("Your test was auto-submitted as time ran out.");
   }
-
-  el("downloadResultBtn").addEventListener("click", () => {
-    if (!state.lastResult) return;
-    downloadJSON(`${state.lastResult.qtsId}_${state.lastResult.testKey}_result.json`, state.lastResult);
-  });
 
   el("returnToDashboardBtn").addEventListener("click", () => {
     state.currentKey = null;
