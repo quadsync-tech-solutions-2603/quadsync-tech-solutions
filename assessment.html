@@ -423,28 +423,55 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
 
 /* ============ result page ============ */
 .result-panel{
-  max-width:640px; margin:0 auto; text-align:center;
+  max-width:960px; margin:0 auto; text-align:left;
   background:var(--bg3); border:1px solid var(--border);
-  border-radius:var(--radius-lg); padding:46px 34px;
+  border-radius:var(--radius-lg); padding:44px;
 }
+.result-grid{ display:grid; grid-template-columns:1fr 1.15fr; gap:40px; align-items:center; }
+.result-identity{ text-align:center; padding-right:32px; border-right:1px solid var(--border); }
 .result-badge{ width:84px; height:84px; border-radius:50%; margin:0 auto 18px; display:grid; place-items:center; font-size:2.2rem; }
 .result-badge.pass{ background:var(--success-bg); color:var(--success); border:1px solid rgba(52,211,153,0.3); }
 .result-badge.fail{ background:var(--danger-bg); color:var(--danger); border:1px solid rgba(248,113,113,0.3); }
-.result-panel h2{ font-family:var(--font-display); margin:0 0 6px; color:var(--text); }
-.result-panel .status-text{ font-weight:700; margin-bottom:26px; }
+.result-identity h2{ font-family:var(--font-display); margin:0 0 6px; color:var(--text); font-size:1.4rem; }
+.status-text{ font-weight:700; font-size:0.95rem; letter-spacing:0.04em; }
 .status-text.pass{ color:var(--success); }
 .status-text.fail{ color:var(--danger); }
+.result-divider{ height:1px; background:var(--border); margin:20px 0; }
+.result-identity .student-line{ color:var(--muted); font-size:0.86rem; }
+.result-identity .candidate-badges{ margin:10px 0 14px; }
+.result-test-name{ font-family:var(--font-display); font-weight:600; font-size:0.98rem; color:var(--blue); margin-top:2px; }
 
-.score-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:12px; margin:24px 0; }
+.result-scoreboard{ display:flex; flex-direction:column; gap:22px; }
+.score-ring-row{ display:flex; align-items:center; gap:20px; }
+.score-ring{
+  --pct:0; --ring-color:var(--success);
+  width:112px; height:112px; border-radius:50%; position:relative; flex:0 0 auto;
+  display:grid; place-items:center;
+  background:conic-gradient(var(--ring-color) calc(var(--pct)*3.6deg), var(--bg2) 0deg);
+  transition:background 1s ease;
+}
+.score-ring::after{ content:''; position:absolute; inset:9px; background:var(--bg3); border-radius:50%; }
+.score-ring .ring-val{ position:relative; z-index:1; font-family:var(--font-mono); font-weight:700; font-size:1.35rem; color:var(--text); }
+.score-ring-title{ font-family:var(--font-display); font-weight:700; font-size:1.05rem; color:var(--text); margin-bottom:4px; }
+.score-ring-sub{ color:var(--muted); font-size:0.86rem; font-family:var(--font-mono); }
+
+.score-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
 .score-tile{ background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px; }
 .score-tile .val{ font-family:var(--font-mono); font-size:1.4rem; font-weight:700; color:var(--text); }
 .score-tile .lab{ font-size:0.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.03em; }
 
 .screenshot-note{
   background:var(--warning-bg); color:var(--warning); border:1px solid rgba(251,188,5,0.25);
-  border-radius:var(--radius-md); padding:14px 18px; font-size:0.88rem; text-align:left; margin:20px 0; line-height:1.5;
+  border-radius:var(--radius-md); padding:14px 18px; font-size:0.88rem; text-align:left; margin:28px 0 0; line-height:1.5;
 }
-.result-actions{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:10px; }
+.result-actions{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:18px; }
+
+@media (max-width:800px){
+  .result-panel{ padding:30px 24px; }
+  .result-grid{ grid-template-columns:1fr; gap:0; }
+  .result-identity{ border-right:none; border-bottom:1px solid var(--border); padding:0 0 24px; margin-bottom:24px; }
+  .score-ring-row{ justify-content:center; }
+}
 
 /* toast */
 .toast{
@@ -624,19 +651,32 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
   <section id="page-result" class="page hidden">
     <div class="container">
       <div class="result-panel">
-        <div class="result-badge" id="resultBadge">🏆</div>
-        <h2 id="resultStudentName">Well done, Student!</h2>
-        <div class="student-line" id="resultCandidateLine">Candidate: —</div>
-        <div class="candidate-badges center" id="resultBadges" style="margin:10px 0 6px;"></div>
-        <div class="student-line" id="resultTestName">Test Name</div>
-        <div class="status-text" id="resultStatusText">PASS</div>
+        <div class="result-grid">
+          <div class="result-identity">
+            <div class="result-badge" id="resultBadge">🏆</div>
+            <h2 id="resultStudentName">Well done, Student!</h2>
+            <div class="status-text" id="resultStatusText">PASS</div>
+            <div class="result-divider"></div>
+            <div class="student-line" id="resultCandidateLine">QTS ID</div>
+            <div class="candidate-badges center" id="resultBadges"></div>
+            <div class="result-test-name" id="resultTestName">Test Name</div>
+          </div>
 
-        <div class="score-grid">
-          <div class="score-tile"><div class="val" id="resTotalQ">-</div><div class="lab">Total Questions</div></div>
-          <div class="score-tile"><div class="val" id="resCorrect">-</div><div class="lab">Correct</div></div>
-          <div class="score-tile"><div class="val" id="resWrong">-</div><div class="lab">Wrong</div></div>
-          <div class="score-tile"><div class="val" id="resScore">-</div><div class="lab">Score</div></div>
-          <div class="score-tile"><div class="val" id="resPercent">-</div><div class="lab">Percentage</div></div>
+          <div class="result-scoreboard">
+            <div class="score-ring-row">
+              <div class="score-ring" id="resultRing"><div class="ring-val" id="resRingPercent">0%</div></div>
+              <div>
+                <div class="score-ring-title">Your Score</div>
+                <div class="score-ring-sub" id="resRingSub">0 / 50 marks</div>
+              </div>
+            </div>
+            <div class="score-grid">
+              <div class="score-tile"><div class="val" id="resTotalQ">-</div><div class="lab">Total Questions</div></div>
+              <div class="score-tile"><div class="val" id="resCorrect">-</div><div class="lab">Correct</div></div>
+              <div class="score-tile"><div class="val" id="resWrong">-</div><div class="lab">Wrong</div></div>
+              <div class="score-tile"><div class="val" id="resScore">-</div><div class="lab">Score</div></div>
+            </div>
+          </div>
         </div>
 
         <div class="screenshot-note">
@@ -1562,7 +1602,7 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
 
   function showResult(a, r) {
     const u = state.currentUser;
-    el("resultStudentName").textContent = `Well done, ${u.name}!`;
+    el("resultStudentName").textContent = r.passed ? `🎉 Well done, ${u.name}!` : `Keep going, ${u.name}!`;
     el("resultCandidateLine").textContent = `${u.qtsId}`;
     el("resultBadges").innerHTML = candidateBadgesHTML(u);
     el("resultTestName").textContent = a.name;
@@ -1570,10 +1610,15 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     el("resCorrect").textContent = r.correct;
     el("resWrong").textContent = r.wrong;
     el("resScore").textContent = `${r.score} / ${a.totalMarks}`;
-    el("resPercent").textContent = r.percent + "%";
 
     const badge = el("resultBadge");
     const statusText = el("resultStatusText");
+    const ring = el("resultRing");
+    ring.style.setProperty("--pct", r.percent);
+    ring.style.setProperty("--ring-color", r.passed ? "var(--success)" : "var(--danger)");
+    el("resRingPercent").textContent = r.percent + "%";
+    el("resRingSub").textContent = `${r.score} / ${a.totalMarks} marks · needed ${a.passingMarks} to pass`;
+
     if (r.passed) {
       badge.className = "result-badge pass"; badge.textContent = "🏆";
       statusText.className = "status-text pass"; statusText.textContent = "PASS";
