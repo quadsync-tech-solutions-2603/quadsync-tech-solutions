@@ -524,11 +524,11 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
         <form id="loginForm" novalidate>
           <div class="field" id="loginIdField">
             <label for="loginId">QTS ID</label>
-            <input type="text" id="loginId" placeholder="e.g. QTS2608DA0001" autocomplete="username" />
+            <input type="text" id="loginId" placeholder="e.g. QTS2608DA0001" autocomplete="off" />
           </div>
           <div class="field" id="loginPasswordField">
             <label for="loginPassword">Password</label>
-            <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password" />
+            <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="off" />
             <div class="err">Incorrect QTS ID or Password. Please try again.</div>
           </div>
           <button type="submit" class="btn btn-primary btn-block">Login</button>
@@ -1231,10 +1231,20 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
         clearSession();
         state.currentUser = null;
         renderAuthStatus();
+        clearLoginForm();
         showPage(pageLogin);
         showToast("You have been logged out.");
       });
     });
+  }
+
+  // Wipes the QTS ID / password fields (and any invalid-field styling) so a
+  // logged-out session never leaves the previous credential visible on screen.
+  function clearLoginForm() {
+    loginForm.reset();
+    loginIdInput.value = "";
+    loginPasswordInput.value = "";
+    loginPasswordField.classList.remove("invalid");
   }
 
   const pageLogin = el("page-login");
@@ -1734,6 +1744,7 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     renderAuthStatus();
     routeAfterLogin(restored);
   } else {
+    clearLoginForm();
     showPage(pageLogin);
   }
 })();
