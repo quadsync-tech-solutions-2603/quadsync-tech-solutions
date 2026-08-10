@@ -228,6 +228,23 @@ header.scrolled{background:rgba(5,15,26,0.98);backdrop-filter:blur(20px);box-sha
 }
 .attempt-note.pass{ background:var(--success-bg); color:var(--success); border-color:rgba(52,211,153,0.3); }
 .attempt-note.fail{ background:var(--danger-bg); color:var(--danger); border-color:rgba(248,113,113,0.3); }
+.attempt-note.maxed{ background:var(--warning-bg); color:var(--warning); border-color:rgba(251,188,5,0.3); }
+.attempts-left{ font-size:0.72rem; color:var(--muted); font-weight:600; margin-top:-6px; }
+.attempts-left b{ color:var(--text); }
+
+.attempts-info-line{
+  font-size:0.85rem; font-weight:600; color:var(--blue); background:rgba(77,171,255,0.1);
+  border:1px solid rgba(77,171,255,0.25); border-radius:var(--radius-sm); padding:10px 14px; margin:-8px 0 4px;
+}
+
+/* result page: attempts / lock status line */
+.result-attempts-note{
+  margin-top:16px; padding:12px 16px; border-radius:var(--radius-sm);
+  font-size:0.85rem; font-weight:600; text-align:center; border:1px solid transparent;
+}
+.result-attempts-note.pass{ background:var(--success-bg); color:var(--success); border-color:rgba(52,211,153,0.3); }
+.result-attempts-note.retry{ background:var(--warning-bg); color:var(--warning); border-color:rgba(251,188,5,0.3); }
+.result-attempts-note.locked{ background:var(--danger-bg); color:var(--danger); border-color:rgba(248,113,113,0.3); }
 
 .meta-row{
   display:grid; grid-template-columns:repeat(3,1fr); gap:8px;
@@ -590,12 +607,16 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
           <div class="info-tile"><div class="val" id="instrPassMarks">-</div><div class="lab">Passing Marks</div></div>
         </div>
 
+        <div class="attempts-info-line" id="instrAttemptsLine">You have 5 attempts available for this test.</div>
+
         <ul class="rules-list">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Each question carries equal marks.</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> There is no negative marking for wrong answers.</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> The test will auto-submit automatically when the time ends.</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> You can move between questions freely using the question palette.</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Do not refresh or close the tab once the assessment has started.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> You must score at least 30 out of 50 marks to pass.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> You get up to 5 attempts. Passing locks the test permanently — you cannot retake it once you pass.</li>
         </ul>
 
         <button class="btn btn-primary btn-block" id="startAssessmentBtn">Start Assessment</button>
@@ -685,8 +706,11 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
           Please take a screenshot of your result and submit it through the Google Form.
         </div>
 
+        <div class="result-attempts-note hidden" id="resultAttemptsNote"></div>
+
         <div class="result-actions">
           <a class="btn btn-primary" id="submitScreenshotBtn" href="https://docs.google.com/forms/d/e/1FAIpQLSfOkJjnb1P59UQKi9J6kHN2yIR9X5f3dLVtbvpA3L8kMdfExQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Submit Screenshot</a>
+          <button class="btn btn-primary hidden" id="retakeTestBtn">Retake Test</button>
           <button class="btn btn-secondary" id="returnToDashboardBtn">Return to Dashboard</button>
         </div>
       </div>
@@ -1103,6 +1127,13 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
   QUESTION_BANKS[key] = seed.concat(placeholders).slice(0, 50);
 });
 
+// Every subject/domain uses the same pass rule: 30 marks out of 50 to pass.
+// (Question banks are always padded/trimmed to exactly 50 questions above,
+// so totalMarks is always 50 and passingMarks is always 30.)
+const TOTAL_MARKS_PER_TEST = 50;
+const PASSING_MARKS_PER_TEST = 30;
+const MAX_ATTEMPTS = 5; // each candidate gets at most 5 tries per test
+
 const ASSESSMENTS = {};
 Object.keys(ASSESSMENT_META).forEach((key) => {
   const meta = ASSESSMENT_META[key];
@@ -1110,8 +1141,8 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
   ASSESSMENTS[key] = Object.assign({}, meta, {
     key: key,
     totalQuestions: questions.length,
-    totalMarks: questions.length,
-    passingMarks: Math.min(30, questions.length), // flat passing mark of 30 (capped if a bank has fewer questions)
+    totalMarks: Math.min(TOTAL_MARKS_PER_TEST, questions.length) || questions.length,
+    passingMarks: Math.min(PASSING_MARKS_PER_TEST, questions.length), // 30/50 for every subject
     questions: questions
   });
 });
@@ -1201,10 +1232,30 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
       localStorage.setItem(RESULTS_STORAGE_KEY, JSON.stringify(all));
     } catch (e) { /* ignore */ }
   }
-  // Returns the stored result if this candidate has already taken this test, or
-  // null otherwise. Each assessment can only ever be attempted once per candidate.
+  // All of this candidate's past attempts at this test, oldest first.
+  function getAttempts(qtsId, testKey) {
+    return getAllResults().filter((r) => r.qtsId === qtsId && r.testKey === testKey);
+  }
+  // Most recent attempt (used for card summaries), or null if never attempted.
   function findAttempt(qtsId, testKey) {
-    return getAllResults().find((r) => r.qtsId === qtsId && r.testKey === testKey) || null;
+    const attempts = getAttempts(qtsId, testKey);
+    return attempts.length ? attempts[attempts.length - 1] : null;
+  }
+  function hasPassed(qtsId, testKey) {
+    return getAttempts(qtsId, testKey).some((r) => r.passed);
+  }
+  function attemptsRemaining(qtsId, testKey) {
+    return Math.max(0, MAX_ATTEMPTS - getAttempts(qtsId, testKey).length);
+  }
+  // Once a candidate has passed, or has used all MAX_ATTEMPTS tries and still
+  // failed, the test is locked and they cannot appear for it again.
+  function isTestLocked(qtsId, testKey) {
+    return hasPassed(qtsId, testKey) || attemptsRemaining(qtsId, testKey) <= 0;
+  }
+  function lockReason(qtsId, testKey) {
+    if (hasPassed(qtsId, testKey)) return "passed";
+    if (attemptsRemaining(qtsId, testKey) <= 0) return "maxed";
+    return null;
   }
 
   /* ---------------- auth ---------------- */
@@ -1342,20 +1393,37 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     return "intermediate";
   }
 
-  // Shared card markup for one assessment. `attempt` is the candidate's prior
-  // result for this test, if any — a test can only ever be attempted once, so
-  // once `attempt` exists the card locks and shows the past score instead of a
-  // clickable button. The admin account is exempt (it never has an `attempt`
-  // passed in) so it can keep opening any course to preview it.
-  function assessmentCardHTML(a, attempt) {
-    const actionBtn = attempt
-      ? `<button class="btn btn-secondary btn-block" disabled title="This test can only be attempted once">Already Attempted</button>`
-      : `<button class="btn btn-primary btn-block" data-start="${a.key}">Start Test</button>`;
-    const attemptNote = attempt
-      ? `<div class="attempt-note ${attempt.passed ? "pass" : "fail"}">Attempted · ${attempt.score}/${attempt.totalMarks} · ${attempt.passed ? "PASS" : "FAIL"}</div>`
-      : "";
+  // Shared card markup for one assessment, for a given candidate (qtsId).
+  // Pass rule: 30/50 marks. Attempt rule: up to MAX_ATTEMPTS (5) tries.
+  // - Passed at any point  -> locked forever, no retake, shown as PASS.
+  // - Failed MAX_ATTEMPTS times -> locked forever, shown as FAIL (attempts used up).
+  // - Failed but attempts remain -> unlocked, button reads "Retake Test".
+  // - Admin is exempt (isAdmin check happens at the call site by passing null qtsId).
+  function assessmentCardHTML(a, qtsId) {
+    const attempts = qtsId ? getAttempts(qtsId, a.key) : [];
+    const latest = attempts.length ? attempts[attempts.length - 1] : null;
+    const passed = qtsId ? hasPassed(qtsId, a.key) : false;
+    const remaining = qtsId ? attemptsRemaining(qtsId, a.key) : MAX_ATTEMPTS;
+    const locked = qtsId ? isTestLocked(qtsId, a.key) : false;
+
+    let actionBtn, attemptNote, attemptsLeftLine = "";
+    if (!latest) {
+      actionBtn = `<button class="btn btn-primary btn-block" data-start="${a.key}">Start Test</button>`;
+      attemptNote = "";
+    } else if (passed) {
+      actionBtn = `<button class="btn btn-secondary btn-block" disabled title="You already passed this test — it cannot be retaken">Passed · Locked</button>`;
+      attemptNote = `<div class="attempt-note pass">Passed · ${latest.score}/${latest.totalMarks} · attempt ${attempts.length}/${MAX_ATTEMPTS}</div>`;
+    } else if (locked) {
+      actionBtn = `<button class="btn btn-secondary btn-block" disabled title="No attempts remaining">Attempts Used · Locked</button>`;
+      attemptNote = `<div class="attempt-note maxed">FAIL · ${latest.score}/${latest.totalMarks} · all ${MAX_ATTEMPTS} attempts used</div>`;
+    } else {
+      actionBtn = `<button class="btn btn-primary btn-block" data-start="${a.key}">Retake Test</button>`;
+      attemptNote = `<div class="attempt-note fail">FAIL · ${latest.score}/${latest.totalMarks} · attempt ${attempts.length}/${MAX_ATTEMPTS}</div>`;
+      attemptsLeftLine = `<div class="attempts-left"><b>${remaining}</b> attempt${remaining === 1 ? "" : "s"} remaining</div>`;
+    }
+
     return `
-      <article class="card${attempt ? " card-locked" : ""}">
+      <article class="card${latest && (passed || locked) ? " card-locked" : ""}">
         <div class="card-top">
           <div class="card-icon">${iconMarkup(a)}</div>
           <span class="difficulty-badge ${difficultyClass(a.difficulty)}">${a.difficulty}</span>
@@ -1364,6 +1432,7 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
         <div class="subject">${a.subject}</div>
         <p class="desc">${a.description}</p>
         ${attemptNote}
+        ${attemptsLeftLine}
         <div class="meta-row">
           <div class="meta-item"><div class="val">${a.totalQuestions}</div><div class="lab">Questions</div></div>
           <div class="meta-item"><div class="val">${a.totalMarks}</div><div class="lab">Marks</div></div>
@@ -1397,7 +1466,7 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
       return;
     }
 
-    grid.innerHTML = items.map((a) => assessmentCardHTML(a, findAttempt(u.qtsId, a.key))).join("");
+    grid.innerHTML = items.map((a) => assessmentCardHTML(a, isAdmin(u) ? null : u.qtsId)).join("");
 
     grid.querySelectorAll("[data-start]").forEach((btn) => {
       btn.addEventListener("click", () => showInstructions(btn.dataset.start));
@@ -1421,11 +1490,20 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
       routeAfterLogin(u);
       return;
     }
-    // Each test can only ever be attempted once per candidate (admin exempt).
-    if (!isAdmin(u) && findAttempt(u.qtsId, key)) {
-      showToast("You've already attempted this test — it can only be taken once.");
-      routeAfterLogin(u);
-      return;
+    // Pass rule: 30/50. Attempt rule: up to MAX_ATTEMPTS (5) tries per test,
+    // and passing locks the test forever (admin exempt from all of this).
+    if (!isAdmin(u)) {
+      const reason = lockReason(u.qtsId, key);
+      if (reason === "passed") {
+        showToast("You've already passed this test — it's locked and cannot be retaken.");
+        routeAfterLogin(u);
+        return;
+      }
+      if (reason === "maxed") {
+        showToast(`You've used all ${MAX_ATTEMPTS} attempts for this test and did not pass. It is now locked.`);
+        routeAfterLogin(u);
+        return;
+      }
     }
     state.currentKey = key;
     el("instrIcon").innerHTML = iconMarkup(a);
@@ -1436,6 +1514,14 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     el("instrTotalMarks").textContent = a.totalMarks;
     el("instrDuration").textContent = a.duration + " min";
     el("instrPassMarks").textContent = a.passingMarks;
+    if (!isAdmin(u)) {
+      const used = getAttempts(u.qtsId, key).length;
+      el("instrAttemptsLine").textContent = used > 0
+        ? `Attempt ${used + 1} of ${MAX_ATTEMPTS} · ${attemptsRemaining(u.qtsId, key)} remaining after this`
+        : `You have ${MAX_ATTEMPTS} attempts available for this test.`;
+    } else {
+      el("instrAttemptsLine").textContent = "Admin preview — attempt limits don't apply.";
+    }
     showPage(pageInstructions);
   }
 
@@ -1477,8 +1563,11 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
   function startAssessment(key) {
     const a = ASSESSMENTS[key];
     const u = state.currentUser;
-    if (!isAdmin(u) && findAttempt(u.qtsId, key)) {
-      showToast("You've already attempted this test — it can only be taken once.");
+    if (!isAdmin(u) && isTestLocked(u.qtsId, key)) {
+      const reason = lockReason(u.qtsId, key);
+      showToast(reason === "passed"
+        ? "You've already passed this test — it's locked and cannot be retaken."
+        : `You've used all ${MAX_ATTEMPTS} attempts for this test. It is now locked.`);
       routeAfterLogin(u);
       return;
     }
@@ -1671,6 +1760,38 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
       statusText.className = "status-text fail"; statusText.textContent = "FAIL";
     }
 
+    // Attempts / lock status line + Retake button, based on the 30/50 pass
+    // rule and the 5-attempt cap. Admin previews are exempt from all of this.
+    const attemptsNote = el("resultAttemptsNote");
+    const retakeBtn = el("retakeTestBtn");
+    if (isAdmin(u)) {
+      attemptsNote.classList.add("hidden");
+      retakeBtn.classList.add("hidden");
+    } else {
+      const used = getAttempts(u.qtsId, a.key).length;
+      const remaining = attemptsRemaining(u.qtsId, a.key);
+      attemptsNote.classList.remove("hidden");
+      if (r.passed) {
+        attemptsNote.className = "result-attempts-note pass";
+        attemptsNote.textContent = "🔒 You passed! This test is now locked — you cannot appear for it again.";
+        retakeBtn.classList.add("hidden");
+      } else if (remaining <= 0) {
+        attemptsNote.className = "result-attempts-note locked";
+        attemptsNote.textContent = `🔒 No attempts remaining (${used}/${MAX_ATTEMPTS} used). This test is now locked.`;
+        retakeBtn.classList.add("hidden");
+      } else {
+        attemptsNote.className = "result-attempts-note retry";
+        attemptsNote.textContent = `You did not pass. ${remaining} of ${MAX_ATTEMPTS} attempt${remaining === 1 ? "" : "s"} remaining — you can try again.`;
+        retakeBtn.classList.remove("hidden");
+        retakeBtn.onclick = () => {
+          state.currentKey = null;
+          state.answers = {};
+          state.currentIndex = 0;
+          showInstructions(a.key);
+        };
+      }
+    }
+
     showPage(pageResult);
     if (r.auto) showToast("Your test was auto-submitted as time ran out.");
   }
@@ -1758,7 +1879,7 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     const items = Object.values(ASSESSMENTS).filter(
       (a) => state.adminCourseFilter === "All" || a.category === state.adminCourseFilter
     );
-    adminCoursesGrid.innerHTML = items.map((a) => assessmentCardHTML(a)).join("");
+    adminCoursesGrid.innerHTML = items.map((a) => assessmentCardHTML(a, null)).join("");
     adminCoursesGrid.querySelectorAll("[data-start]").forEach((btn) => {
       btn.addEventListener("click", () => showInstructions(btn.dataset.start));
     });
