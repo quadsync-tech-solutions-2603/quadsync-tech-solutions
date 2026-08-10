@@ -219,6 +219,16 @@ header.scrolled{background:rgba(5,15,26,0.98);backdrop-filter:blur(20px);box-sha
 .card .subject{ font-size:0.82rem; color:var(--blue); font-weight:600; margin-top:-8px; }
 .card .desc{ font-size:0.88rem; color:var(--muted); line-height:1.6; margin:0; flex:1; }
 
+/* Already-attempted cards: dimmed, no hover lift, with a pass/fail summary pill */
+.card.card-locked{ opacity:0.72; }
+.card.card-locked:hover{ transform:none; box-shadow:none; border-color:var(--border); }
+.attempt-note{
+  font-size:0.76rem; font-weight:700; padding:8px 12px; border-radius:var(--radius-sm);
+  border:1px solid transparent; letter-spacing:0.02em;
+}
+.attempt-note.pass{ background:var(--success-bg); color:var(--success); border-color:rgba(52,211,153,0.3); }
+.attempt-note.fail{ background:var(--danger-bg); color:var(--danger); border-color:rgba(248,113,113,0.3); }
+
 .meta-row{
   display:grid; grid-template-columns:repeat(3,1fr); gap:8px;
   border-top:1px solid var(--border); border-bottom:1px solid var(--border);
@@ -1190,6 +1200,11 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
       localStorage.setItem(RESULTS_STORAGE_KEY, JSON.stringify(all));
     } catch (e) { /* ignore */ }
   }
+  // Returns the stored result if this candidate has already taken this test, or
+  // null otherwise. Each assessment can only ever be attempted once per candidate.
+  function findAttempt(qtsId, testKey) {
+    return getAllResults().find((r) => r.qtsId === qtsId && r.testKey === testKey) || null;
+  }
 
   /* ---------------- auth ---------------- */
   function attemptLogin(id, password) {
@@ -1326,12 +1341,20 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     return "intermediate";
   }
 
-  // Shared card markup for one assessment. Both students and the admin account
-  // can click "Start Test" — the admin can attempt any course to see what a
-  // student sees; showInstructions() below is what actually enforces domain locking.
-  function assessmentCardHTML(a) {
+  // Shared card markup for one assessment. `attempt` is the candidate's prior
+  // result for this test, if any — a test can only ever be attempted once, so
+  // once `attempt` exists the card locks and shows the past score instead of a
+  // clickable button. The admin account is exempt (it never has an `attempt`
+  // passed in) so it can keep opening any course to preview it.
+  function assessmentCardHTML(a, attempt) {
+    const actionBtn = attempt
+      ? `<button class="btn btn-secondary btn-block" disabled title="This test can only be attempted once">Already Attempted</button>`
+      : `<button class="btn btn-primary btn-block" data-start="${a.key}">Start Test</button>`;
+    const attemptNote = attempt
+      ? `<div class="attempt-note ${attempt.passed ? "pass" : "fail"}">Attempted · ${attempt.score}/${attempt.totalMarks} · ${attempt.passed ? "PASS" : "FAIL"}</div>`
+      : "";
     return `
-      <article class="card">
+      <article class="card${attempt ? " card-locked" : ""}">
         <div class="card-top">
           <div class="card-icon">${iconMarkup(a)}</div>
           <span class="difficulty-badge ${difficultyClass(a.difficulty)}">${a.difficulty}</span>
@@ -1339,12 +1362,13 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
         <h3>${a.name}</h3>
         <div class="subject">${a.subject}</div>
         <p class="desc">${a.description}</p>
+        ${attemptNote}
         <div class="meta-row">
           <div class="meta-item"><div class="val">${a.totalQuestions}</div><div class="lab">Questions</div></div>
           <div class="meta-item"><div class="val">${a.totalMarks}</div><div class="lab">Marks</div></div>
           <div class="meta-item"><div class="val">${a.duration}m</div><div class="lab">Duration</div></div>
         </div>
-        <button class="btn btn-primary btn-block" data-start="${a.key}">Start Test</button>
+        ${actionBtn}
       </article>`;
   }
 
@@ -1372,7 +1396,7 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
       return;
     }
 
-    grid.innerHTML = items.map((a) => assessmentCardHTML(a)).join("");
+    grid.innerHTML = items.map((a) => assessmentCardHTML(a, findAttempt(u.qtsId, a.key))).join("");
 
     grid.querySelectorAll("[data-start]").forEach((btn) => {
       btn.addEventListener("click", () => showInstructions(btn.dataset.start));
@@ -1393,6 +1417,12 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     // and attempt any course, in any domain, to see exactly what students see.
     if (!a || (!isAdmin(u) && a.category !== u.domain)) {
       showToast("That assessment isn't available for your domain.");
+      routeAfterLogin(u);
+      return;
+    }
+    // Each test can only ever be attempted once per candidate (admin exempt).
+    if (!isAdmin(u) && findAttempt(u.qtsId, key)) {
+      showToast("You've already attempted this test — it can only be taken once.");
       routeAfterLogin(u);
       return;
     }
@@ -1445,6 +1475,12 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
 
   function startAssessment(key) {
     const a = ASSESSMENTS[key];
+    const u = state.currentUser;
+    if (!isAdmin(u) && findAttempt(u.qtsId, key)) {
+      showToast("You've already attempted this test — it can only be taken once.");
+      routeAfterLogin(u);
+      return;
+    }
     const saved = loadProgress(key);
 
     if (saved) {
