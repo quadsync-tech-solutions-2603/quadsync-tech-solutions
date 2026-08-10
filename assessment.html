@@ -100,23 +100,44 @@ button:focus-visible, input:focus-visible, a:focus-visible, [tabindex]:focus-vis
 /* ============ header (logo + company name + candidate details on the right) ============ */
 header{position:fixed;width:100%;z-index:1000;top:0;transition:.3s;background:rgba(5,15,26,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 header.scrolled{background:rgba(5,15,26,0.98);backdrop-filter:blur(20px);box-shadow:0 6px 24px rgba(0,0,0,0.35);}
-.navbar{display:flex;justify-content:space-between;align-items:center;padding:14px 7%;transition:.3s;gap:16px;}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;min-height:48px;}
-.logo img{height:44px;width:auto;border-radius:8px;}
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:12px 7%;transition:.3s;gap:16px;}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;min-height:48px;flex:0 1 auto;min-width:0;}
+.logo img{height:44px;width:auto;border-radius:8px;flex:0 0 auto;}
 .logo img.broken{ display:none; }
-.logo-text{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:var(--blue);letter-spacing:-0.3px;line-height:1.2;}
+.logo-text{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:var(--blue);letter-spacing:-0.3px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
-.auth-status{ display:flex; align-items:center; gap:12px; font-size:0.82rem; color:var(--muted); white-space:nowrap; }
-.auth-status .who{ display:flex; flex-direction:column; gap:5px; line-height:1.25; text-align:right; }
-.auth-status .who .name-row{ display:flex; align-items:center; justify-content:flex-end; gap:8px; }
-.auth-status .who b{ color:var(--text); font-size:0.85rem; }
-.auth-status .who .qts-id{ font-family:var(--font-mono); font-size:0.7rem; color:var(--muted); }
-.auth-status .who .candidate-badges{ justify-content:flex-end; }
-.auth-status button{
-  background:transparent; border:1.5px solid rgba(77,171,255,0.35); color:var(--blue);
-  padding:8px 14px; border-radius:100px; font-size:0.8rem; font-weight:600; transition:.2s;
+.auth-status{
+  display:flex; align-items:center; gap:10px;
+  background:var(--bg3); border:1px solid var(--border);
+  padding:6px 8px 6px 6px; border-radius:100px;
+  font-size:0.82rem; color:var(--muted); white-space:nowrap;
+  transition:border-color .2s, background .2s;
+  flex:0 1 auto; min-width:0;
 }
-.auth-status button:hover{ border-color:var(--blue); background:rgba(77,171,255,0.08); }
+.auth-status:hover{ border-color:rgba(77,171,255,0.35); }
+.auth-status:empty{ display:none; }
+
+.profile-avatar{
+  width:38px; height:38px; border-radius:50%; flex:0 0 auto;
+  display:grid; place-items:center;
+  font-family:var(--font-mono); font-weight:700; font-size:0.85rem;
+  color:#04101d; background:var(--avatar-color, var(--blue));
+  box-shadow:0 0 0 2px var(--bg2), 0 0 0 3px var(--border);
+}
+
+.auth-status .who{ display:flex; flex-direction:column; gap:4px; line-height:1.25; text-align:left; min-width:0; flex:1 1 auto; }
+.auth-status .who .name-row{ display:flex; align-items:center; gap:8px; min-width:0; }
+.auth-status .who b{ color:var(--text); font-size:0.85rem; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:block; min-width:0; }
+.auth-status .who .qts-id{ font-family:var(--font-mono); font-size:0.68rem; color:var(--muted); letter-spacing:0.02em; }
+.auth-status .who .candidate-badges{ margin-top:1px; justify-content:flex-start; }
+
+.auth-status .logoutBtnSlot{
+  display:flex; align-items:center; gap:6px; flex:0 0 auto; margin-left:2px;
+  background:transparent; border:1.5px solid rgba(77,171,255,0.35); color:var(--blue);
+  padding:9px 16px; border-radius:100px; font-size:0.8rem; font-weight:600; transition:.2s;
+}
+.auth-status .logoutBtnSlot svg{ width:14px; height:14px; flex:0 0 auto; }
+.auth-status .logoutBtnSlot:hover{ border-color:var(--blue); background:rgba(77,171,255,0.1); }
 
 /* ============ hero ============ */
 .hero{ padding:76px 0 40px; position:relative; overflow:hidden; }
@@ -522,7 +543,20 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
   .modal-actions{ flex-direction:column; }
   .exam-nav-btns{ flex-direction:column; }
   .exam-nav-btns .grow{ order:-1; }
-  .navbar{ flex-wrap:wrap; }
+  .navbar{ flex-wrap:nowrap; padding:10px 4%; gap:8px; }
+  .logo-text{ font-size:16px; max-width:34vw; }
+  .logo img{ height:32px; }
+  main{ padding-top:64px; }
+  .auth-status{ gap:6px; padding:5px 5px 5px 5px; }
+  .profile-avatar{ width:32px; height:32px; font-size:0.72rem; }
+  .auth-status .who .qts-id,
+  .auth-status .who .candidate-badges{ display:none; }
+  .auth-status .who{ max-width:22vw; }
+  .auth-status .logoutBtnSlot .logout-label{ display:none; }
+  .auth-status .logoutBtnSlot{ padding:9px; }
+}
+@media (max-width:420px){
+  .logo-text{ max-width:28vw; }
   .auth-status .who{ display:none; }
 }
 </style>
@@ -1191,6 +1225,23 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     if (domain === "admin") return "🛠️";
     return "🎓";
   }
+  // Ties each domain to the same accent color used on its pill elsewhere in
+  // the UI, so the profile avatar always matches the candidate's domain badge.
+  function domainAvatarColor(domain) {
+    if (domain === "MERN Stack Development") return "var(--violet)";
+    if (domain === "HR") return "var(--amber)";
+    if (domain === "Data Analyst") return "var(--teal)";
+    if (domain === "admin") return "var(--text)";
+    return "var(--blue)";
+  }
+  // First letter of up to the first two words of the name, e.g. "Vivek Singh" -> "VS".
+  function initials(name) {
+    if (!name) return "?";
+    const parts = name.trim().split(/\s+/).filter(Boolean);
+    if (parts.length === 0) return "?";
+    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }
   function candidateBadgesHTML(u) {
     if (!u) return "";
     return `<span class="domain-pill" data-domain="${u.domain}">${domainIcon(u.domain)} ${u.domain}</span><span class="batchcode-pill">🏷️ ${u.batchCode}</span>`;
@@ -1285,12 +1336,16 @@ Object.keys(ASSESSMENT_META).forEach((key) => {
     const u = state.currentUser;
     slots.forEach((s) => {
       s.innerHTML = `
+        <div class="profile-avatar" style="--avatar-color:${domainAvatarColor(u.domain)}">${initials(u.name)}</div>
         <div class="who">
-          <div class="name-row"><b>${u.name}</b></div>
+          <div class="name-row"><b title="${u.name}">${u.name}</b></div>
           <span class="qts-id">${u.qtsId}</span>
           <div class="candidate-badges">${candidateBadgesHTML(u)}</div>
         </div>
-        <button type="button" class="logoutBtnSlot">Logout</button>
+        <button type="button" class="logoutBtnSlot" title="Log out" aria-label="Log out">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          <span class="logout-label">Logout</span>
+        </button>
       `;
     });
     document.querySelectorAll(".logoutBtnSlot").forEach((btn) => {
