@@ -247,18 +247,17 @@ header.scrolled{background:rgba(5,15,26,0.98);backdrop-filter:blur(20px);box-sha
   border-top:1px solid var(--border);
   background:var(--bg2);
   color:var(--muted);
-  padding:30px 0;
+  padding:22px 0;
   margin-top:auto;
   position:relative; z-index:1;
 }
 .site-footer .container{ text-align:center; }
-.site-footer strong{ color:var(--text); font-family:var(--font-display); }
-.site-footer p{ margin:4px 0; font-size:0.83rem; }
-.site-footer .admin-link{
-  background:none; border:none; color:var(--muted); font-size:0.76rem;
-  text-decoration:underline; margin-top:10px; padding:0;
+.footer-inline{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:center;
+  gap:8px; font-size:0.83rem;
 }
-.site-footer .admin-link:hover{ color:var(--blue); }
+.footer-inline strong{ color:var(--text); font-family:var(--font-display); }
+.footer-inline .dot{ color:var(--border); }
 
 main{ flex:1; position:relative; z-index:1; padding-top:74px; }
 
@@ -315,11 +314,6 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
 }
 #page-login h1{ font-family:var(--font-display); font-size:1.7rem; margin:0 0 8px; color:var(--text); }
 #page-login .lead-sm{ color:var(--muted); font-size:0.9rem; margin:0 0 26px; line-height:1.6; }
-.demo-hint{
-  margin-top:20px; background:var(--bg2); border:1px dashed var(--border); border-radius:var(--radius-md);
-  padding:12px 14px; font-size:0.76rem; color:var(--muted); line-height:1.6;
-}
-.demo-hint b{ color:var(--text); }
 
 /* ============ instructions page ============ */
 .page{ padding:56px 0 90px; animation:fadeIn .25s ease both; position:relative; z-index:1; }
@@ -539,9 +533,6 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
           </div>
           <button type="submit" class="btn btn-primary btn-block">Login</button>
         </form>
-        <div class="demo-hint">
-          <b>Note:</b> Logins are matched against a list stored in this page's own code (no backend/database). Your name, domain and batch code are pulled from that list automatically once you log in — you won't be asked to type your name again.
-        </div>
       </div>
     </div>
   </section>
@@ -736,9 +727,13 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
 <!-- ============ FOOTER (visible on every page) ============ -->
 <footer class="site-footer">
   <div class="container">
-    <p><strong>© 2026 QuadSync Tech Solutions</strong></p>
-    <p>Synchronizing Innovations with Success</p>
-    <p>All Rights Reserved.</p>
+    <div class="footer-inline">
+      <strong>© 2026 QuadSync Tech Solutions</strong>
+      <span class="dot">•</span>
+      <span>Synchronizing Innovations with Success</span>
+      <span class="dot">•</span>
+      <span>All Rights Reserved.</span>
+    </div>
   </div>
 </footer>
 
