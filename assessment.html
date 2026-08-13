@@ -595,7 +595,7 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
           </div>
           <div class="field" id="loginPasswordField">
             <label for="loginPassword">Password</label>
-            <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="off" />
+            <input type="password" id="loginPassword" placeholder="Enter your password (DOB: DDMMYYYY, no separators)" autocomplete="off"/>
             <div class="err">Incorrect QTS ID or Password. Please try again.</div>
           </div>
           <button type="submit" class="btn btn-primary btn-block">Login</button>
@@ -828,21 +828,21 @@ main{ flex:1; position:relative; z-index:1; padding-top:74px; }
 
 const CREDENTIALS = [
   /* ---- Data Analyst · Batch IOTPDAB0001 ---- */
-  { qtsId: "QTS2608DA0001", name: "Vaishnavi Shantappa",              password: "vaishnavi@123",  domain: "Data Analyst", batchCode: "IOTPDAB0001" },
-  { qtsId: "QTS2608DA0002", name: "Nikita Nimbark",                   password: "nikita@123",     domain: "Data Analyst", batchCode: "IOTPDAB0001" },
-  { qtsId: "QTS2608DA0003", name: "Vivek Singh",                      password: "vivek@123",      domain: "Data Analyst", batchCode: "IOTPDAB0001" },
-  { qtsId: "QTS2608DA0004", name: "Kiran Prakash Pradhan",            password: "kiran@123",      domain: "Data Analyst", batchCode: "IOTPDAB0001" },
-  { qtsId: "QTS2608DA0005", name: "Prerana Kamlakar Patil",           password: "prerana@123",    domain: "Data Analyst", batchCode: "IOTPDAB0001" },
-  { qtsId: "QTS2608DA0006", name: "Dinesh",                           password: "dinesh@123",     domain: "Data Analyst", batchCode: "IOTPDAB0001" },
-  { qtsId: "QTS2608DA0007", name: "Lakshya Gargav",                   password: "lakshya@123",    domain: "Data Analyst", batchCode: "IOTPDAB0001" },
-  { qtsId: "QTS2608DA0008", name: "Laxmi",                            password: "laxmi@123",      domain: "Data Analyst", batchCode: "IOTPDAB0001" },
+  { qtsId: "QTS2608DA0001", name: "Vaishnavi Shantappa",              password: "qwerty1234",  domain: "Data Analyst", batchCode: "IOTPDAB0001" },
+  { qtsId: "QTS2608DA0002", name: "Nikita Nimbark",                   password: "qwerty1234",     domain: "Data Analyst", batchCode: "IOTPDAB0001" },
+  { qtsId: "QTS2608DA0003", name: "Vivek Singh",                      password: "qwerty1234",      domain: "Data Analyst", batchCode: "IOTPDAB0001" },
+  { qtsId: "QTS2608DA0004", name: "Kiran Prakash Pradhan",            password: "29092005",      domain: "Data Analyst", batchCode: "IOTPDAB0001" },
+  { qtsId: "QTS2608DA0005", name: "Prerana Kamlakar Patil",           password: "21012006",    domain: "Data Analyst", batchCode: "IOTPDAB0001" },
+  { qtsId: "QTS2608DA0006", name: "Dinesh",                           password: "qwerty1234",     domain: "Data Analyst", batchCode: "IOTPDAB0001" },
+  { qtsId: "QTS2608DA0007", name: "Lakshya Gargav",                   password: "qwerty1234",    domain: "Data Analyst", batchCode: "IOTPDAB0001" },
+  { qtsId: "QTS2608DA0008", name: "Laxmi",                            password: "qwerty1234",      domain: "Data Analyst", batchCode: "IOTPDAB0001" },
 
   /* ---- Web Development · Batch IOTPWDB0001 ---- */
-  { qtsId: "QTS2608WD0001", name: "Vaishnavi Vijayakumar Sanade",     password: "vaishnaviv@123", domain: "MERN Stack Development", batchCode: "IOTPWDB0001" },
-  { qtsId: "QTS2608WD0002", name: "Chityala Likhitha Satyanarayana", password: "likhitha@123",   domain: "MERN Stack Development", batchCode: "IOTPWDB0001" },
-  { qtsId: "QTS2608WD0003", name: "Sneha Maurya",                     password: "sneha@123",      domain: "MERN Stack Development", batchCode: "IOTPWDB0001" },
-  { qtsId: "QTS2608WD0004", name: "Swarnapreeti Khuntia",             password: "swarnapreeti@123", domain: "MERN Stack Development", batchCode: "IOTPWDB0001" },
-  { qtsId: "QTS2608WD0005", name: "Sahana",                           password: "sahana@123",     domain: "MERN Stack Development", batchCode: "IOTPWDB0001" },
+  { qtsId: "QTS2608WD0001", name: "Vaishnavi Vijayakumar Sanade",     password: "qwerty1234", domain: "MERN Stack Development", batchCode: "IOTPWDB0001" },
+  { qtsId: "QTS2608WD0002", name: "Chityala Likhitha Satyanarayana", password: "qwerty1234",   domain: "MERN Stack Development", batchCode: "IOTPWDB0001" },
+  { qtsId: "QTS2608WD0003", name: "Sneha Maurya",                     password: "qwerty1234",      domain: "MERN Stack Development", batchCode: "IOTPWDB0001" },
+  { qtsId: "QTS2608WD0004", name: "Swarnapreeti Khuntia",             password: "qwerty1234", domain: "MERN Stack Development", batchCode: "IOTPWDB0001" },
+  { qtsId: "QTS2608WD0005", name: "Sahana",                           password: "qwerty1234",     domain: "MERN Stack Development", batchCode: "IOTPWDB0001" },
 
   /* ---- Admin account · sees every stored result, never sees the test dashboard ---- */
   { qtsId: "admin1@qts.in", name: "Gaurav S. Borse", password: "admin1@qts.in", domain: "admin", batchCode: "admin" },
