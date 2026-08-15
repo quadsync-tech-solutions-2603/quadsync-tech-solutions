@@ -64,18 +64,31 @@ body::before {
 /* =====================================================
    HEADER / NAVBAR
    ===================================================== */
+/* =====================================================
+   HEADER / NAVBAR
+   ===================================================== */
+
 header {
   position: fixed;
   width: 100%;
   z-index: 1000;
-  top: 40px; /* Offer bar height */
-  transition: .3s;
+  top: 40px;
+
+  background: transparent;
+  border-bottom: 1px solid transparent;
+
+  transition:
+    background 0.35s ease,
+    backdrop-filter 0.35s ease,
+    border-color 0.35s ease;
 }
 
+/* Header becomes glass while scrolling */
 header.scrolled {
-  background: rgba(5,15,26,0.94);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--border);
+  background: rgba(5, 15, 26, 0.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(77,171,255,0.12);
 }
 .navbar {
   display: flex;
@@ -973,7 +986,6 @@ footer a { color: var(--blue); text-decoration: none; }
 
 /* =====================================================
    INDEPENDENCE DAY OFFER
-   Fixed at the very top
    ===================================================== */
 
 .independence-offer {
@@ -985,6 +997,15 @@ footer a { color: var(--blue); text-decoration: none; }
   z-index: 1001;
   background: transparent;
   overflow: hidden;
+  transition: background 0.35s ease, backdrop-filter 0.35s ease;
+}
+
+/* Background appears when page is scrolled */
+.independence-offer.scrolled {
+  background: rgba(5, 15, 26, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(77,171,255,0.12);
 }
 
 .independence-offer .offer-strip {
@@ -1001,7 +1022,6 @@ footer a { color: var(--blue); text-decoration: none; }
   display: flex;
   align-items: center;
   background: transparent;
-  position: relative;
 }
 
 .independence-offer .offer-track {
@@ -1037,13 +1057,6 @@ footer a { color: var(--blue); text-decoration: none; }
 
   100% {
     transform: translateX(-100%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .independence-offer .offer-track {
-    animation: none;
-    padding-left: 16px;
   }
 }
 </style>
@@ -1696,8 +1709,18 @@ footer a { color: var(--blue); text-decoration: none; }
 <script>
 // ── Sticky header shadow on scroll ─────────────────────────────
 const header = document.getElementById('main-header');
+const independenceOffer = document.querySelector('.independence-offer');
+
 window.addEventListener('scroll', () => {
-  if (header) header.classList.toggle('scrolled', window.scrollY > 30);
+  const isScrolled = window.scrollY > 30;
+
+  if (header) {
+    header.classList.toggle('scrolled', isScrolled);
+  }
+
+  if (independenceOffer) {
+    independenceOffer.classList.toggle('scrolled', isScrolled);
+  }
 });
 
 // ── Mobile hamburger menu toggle ───────────────────────────────
