@@ -1152,6 +1152,33 @@ footer a { color: var(--blue); text-decoration: none; }
     transform: translateX(-100%);
   }
 }
+     
+/* ------------------------------------------------------
+Independence Day title at HERO section     
+------------------------------------------------------ */ 
+
+.independence-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(36px, 5.5vw, 64px);
+  font-weight: 700;
+  letter-spacing: -2px;
+  line-height: 1.08;
+  margin-bottom: 18px;
+
+  background: linear-gradient(
+    90deg,
+    #FF9933 0%,
+    #FF9933 33%,
+    #FFFFFF 50%,
+    #FFFFFF 50%,
+    #138808 67%,
+    #138808 100%
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 </style>
 </head>
 
@@ -1233,7 +1260,9 @@ footer a { color: var(--blue); text-decoration: none; }
      PAGE HERO — Title + Program Switcher
      ===================================================== -->
 <section class="page-hero">
-  <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+  <!-- <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a> -->
+
+  <h1 class="independence-title">Independence Day Special Offer</h1>
 
   <h1><span class="hero-accent">Industry-Oriented</span> Training Programs</h1>
   <p>Industry-focused 08 Weeks Training programs designed to make students job-ready with real skills, hands-on projects, and a verified certificate.</p>
