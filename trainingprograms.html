@@ -367,6 +367,14 @@ header.scrolled {
    CTA / PRICE BADGE
    ===================================================== */
 
+.hero-badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
 .tagline-badge {
   display: inline-flex;
 
@@ -431,6 +439,11 @@ header.scrolled {
   font-weight: 700;
 }
 
+.tagline-badge-wide strong {
+  font-size: 15px;
+  font-weight: 600;
+}
+
 @media (max-width: 480px) {
   .tagline-badge {
     flex-wrap: wrap;
@@ -438,6 +451,9 @@ header.scrolled {
   }
   .tagline-badge strong {
     font-size: 15px;
+  }
+  .tagline-badge-wide strong {
+    font-size: 13px;
   }
 }
 
@@ -1936,12 +1952,18 @@ footer a { color: var(--blue); text-decoration: none; }
     job-ready with real skills, hands-on projects, and a verified certificate.
   </p>
 
-  <!-- CTA Badge -->
-  <div class="tagline-badge">
-    <i class="fa-solid fa-rocket"></i>
-    <strong>₹999 Only</strong>
-    <span class="tagline-badge-sep">—</span>
-    <span class="tagline-badge-save">Save ₹1,500 (60% OFF)</span>
+  <!-- CTA Badges -->
+  <div class="hero-badges">
+    <div class="tagline-badge">
+      <i class="fa-solid fa-rocket"></i>
+      <strong>₹999 Only</strong>
+      <span class="tagline-badge-sep">—</span>
+      <span class="tagline-badge-save">Save ₹1,500 (60% OFF)</span>
+    </div>
+    <div class="tagline-badge tagline-badge-wide">
+      <i class="fa-solid fa-bolt"></i>
+      <strong>Become Job-Ready in 60 Days — Industry-Oriented Training Program</strong>
+    </div>
   </div>
 
   <div class="prog-switcher">
