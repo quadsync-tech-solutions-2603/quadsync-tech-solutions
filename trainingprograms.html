@@ -312,87 +312,6 @@ header.scrolled {
 
 
 /* =====================================================
-   DISCOUNT OFFER
-   ===================================================== */
-
-.discount-offer {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 12px;
-
-  margin-bottom: 30px;
-
-  padding: 9px 22px;
-
-  border: 1px solid rgba(255, 153, 51, 0.35);
-
-  border-radius: 100px;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255, 153, 51, 0.10),
-      rgba(255, 255, 255, 0.045),
-      rgba(19, 136, 8, 0.10)
-    );
-
-  box-shadow:
-    0 8px 30px rgba(255, 153, 51, 0.08),
-    inset 0 0 20px rgba(255, 255, 255, 0.025);
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-
-/* Small Text */
-
-.discount-top {
-  color: #ff9933;
-
-  font-size: 10px;
-  font-weight: 800;
-
-  letter-spacing: 1.4px;
-}
-
-
-/* ₹1500 */
-
-.discount-amount {
-  font-family: "Sora", sans-serif;
-
-  font-size: 25px;
-  font-weight: 800;
-
-  background: linear-gradient(
-    180deg,
-    #ff9933 0%,
-    #ffffff 50%,
-    #138808 100%
-  );
-
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-
-/* Flat Discount */
-
-.discount-text {
-  color: #138808;
-
-  font-size: 10px;
-  font-weight: 800;
-
-  letter-spacing: 1.4px;
-}
-
-
-/* =====================================================
    MAIN HERO HEADING
    ===================================================== */
 
@@ -499,6 +418,27 @@ header.scrolled {
   color: #ffffff;
 
   font-weight: 700;
+  font-size: 17px;
+}
+
+.tagline-badge-sep {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.tagline-badge-save {
+  color: var(--green);
+  font-weight: 700;
+}
+
+@media (max-width: 480px) {
+  .tagline-badge {
+    flex-wrap: wrap;
+    row-gap: 4px;
+  }
+  .tagline-badge strong {
+    font-size: 15px;
+  }
 }
 
 
@@ -572,27 +512,6 @@ header.scrolled {
     font-size: 75px;
   }
 
-  .discount-offer {
-    gap: 8px;
-
-    padding:
-      8px
-      15px;
-
-    margin-bottom: 25px;
-  }
-
-  .discount-top,
-  .discount-text {
-    font-size: 8px;
-
-    letter-spacing: 0.8px;
-  }
-
-  .discount-amount {
-    font-size: 21px;
-  }
-
   .page-hero > h1 {
     font-size: clamp(34px, 10vw, 48px);
 
@@ -635,18 +554,6 @@ header.scrolled {
 
   .flag-bg {
     font-size: 65px;
-  }
-
-  .discount-offer {
-    padding:
-      7px
-      12px;
-
-    gap: 6px;
-  }
-
-  .discount-amount {
-    font-size: 19px;
   }
 
   .page-hero > h1 {
@@ -2008,13 +1915,6 @@ footer a { color: var(--blue); text-decoration: none; }
     <h2 class="independence-title">Independence Day Special Offer</h2>
   </div>
 
-  <!-- Discount -->
-  <div class="discount-offer">
-    <span class="discount-top">SPECIAL FREEDOM OFFER</span>
-    <span class="discount-amount">₹1500</span>
-    <span class="discount-text">FLAT DISCOUNT</span>
-  </div>
-
   <!-- Main Heading -->
   <h1>
     <span class="hero-accent">Industry-Oriented</span>
@@ -2029,7 +1929,9 @@ footer a { color: var(--blue); text-decoration: none; }
   <!-- CTA Badge -->
   <div class="tagline-badge">
     <i class="fa-solid fa-rocket"></i>
-    <strong>Become Job-Ready in 60 Days — ₹999 Only</strong>
+    <strong>₹999 Only</strong>
+    <span class="tagline-badge-sep">—</span>
+    <span class="tagline-badge-save">Save ₹1,500 (60% OFF)</span>
   </div>
 
   <div class="prog-switcher">
