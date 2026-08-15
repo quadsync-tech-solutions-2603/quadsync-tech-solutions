@@ -237,7 +237,511 @@ header.scrolled {
 /* =====================================================
    PAGE HERO
    ===================================================== */
+
+/* =====================================================
+   PREMIUM HERO SECTION
+   ===================================================== */
+
 .page-hero {
+  position: relative;
+  min-height: 820px;
+  padding: 170px 7% 90px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+
+/* =====================================================
+   HERO BACKGROUND GLOW
+   ===================================================== */
+
+.page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 25%,
+      rgba(255, 153, 51, 0.10) 0%,
+      rgba(255, 255, 255, 0.035) 25%,
+      rgba(19, 136, 8, 0.07) 48%,
+      transparent 70%
+    );
+
+  pointer-events: none;
+  z-index: -2;
+}
+
+.page-hero::after {
+  content: "";
+  position: absolute;
+
+  width: 650px;
+  height: 650px;
+
+  left: 50%;
+  top: 40%;
+
+  transform: translate(-50%, -50%);
+
+  background: radial-gradient(
+    circle,
+    rgba(77, 171, 255, 0.08),
+    transparent 68%
+  );
+
+  filter: blur(20px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+/* =====================================================
+   INDEPENDENCE DAY HEADING
+   ===================================================== */
+
+.independence-heading {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 20px;
+  padding: 8px 25px;
+}
+
+
+/* Faint Indian Flag */
+
+.flag-bg {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  font-size: 100px;
+  line-height: 1;
+
+  opacity: 0.11;
+
+  filter: blur(0.3px);
+
+  pointer-events: none;
+  z-index: -1;
+
+  animation: flagFloat 5s ease-in-out infinite;
+}
+
+@keyframes flagFloat {
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.08;
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.06);
+    opacity: 0.13;
+  }
+}
+
+
+/* Tricolor Independence Heading */
+
+.independence-title {
+  margin: 0;
+
+  font-family: "Sora", sans-serif;
+
+  font-size: clamp(28px, 4vw, 46px);
+
+  font-weight: 700;
+
+  letter-spacing: -1.2px;
+  line-height: 1.15;
+
+  background: linear-gradient(
+    90deg,
+    #ff9933 0%,
+    #ffb866 25%,
+    #ffffff 50%,
+    #8bcf78 75%,
+    #138808 100%
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  text-shadow:
+    0 0 30px rgba(255, 153, 51, 0.08);
+}
+
+
+/* =====================================================
+   DISCOUNT OFFER
+   ===================================================== */
+
+.discount-offer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  margin-bottom: 30px;
+
+  padding: 9px 22px;
+
+  border: 1px solid rgba(255, 153, 51, 0.35);
+
+  border-radius: 100px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 153, 51, 0.10),
+      rgba(255, 255, 255, 0.045),
+      rgba(19, 136, 8, 0.10)
+    );
+
+  box-shadow:
+    0 8px 30px rgba(255, 153, 51, 0.08),
+    inset 0 0 20px rgba(255, 255, 255, 0.025);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+
+/* Small Text */
+
+.discount-top {
+  color: #ff9933;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 1.4px;
+}
+
+
+/* ₹1500 */
+
+.discount-amount {
+  font-family: "Sora", sans-serif;
+
+  font-size: 25px;
+  font-weight: 800;
+
+  background: linear-gradient(
+    180deg,
+    #ff9933 0%,
+    #ffffff 50%,
+    #138808 100%
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+
+/* Flat Discount */
+
+.discount-text {
+  color: #138808;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 1.4px;
+}
+
+
+/* =====================================================
+   MAIN HERO HEADING
+   ===================================================== */
+
+.page-hero > h1 {
+  margin: 0 0 20px;
+
+  max-width: 900px;
+
+  font-family: "Sora", sans-serif;
+
+  font-size: clamp(40px, 5.5vw, 68px);
+
+  font-weight: 700;
+
+  letter-spacing: -2.8px;
+
+  line-height: 1.05;
+
+  color: #ffffff;
+}
+
+
+/* Blue Highlight */
+
+.hero-accent {
+  color: var(--blue);
+
+  text-shadow:
+    0 0 30px rgba(77, 171, 255, 0.18);
+}
+
+
+/* =====================================================
+   HERO DESCRIPTION
+   ===================================================== */
+
+.page-hero > p {
+  max-width: 680px;
+
+  margin: 0 auto 28px;
+
+  color: var(--muted);
+
+  font-size: 17px;
+
+  line-height: 1.8;
+
+  font-weight: 400;
+}
+
+
+/* =====================================================
+   CTA / PRICE BADGE
+   ===================================================== */
+
+.tagline-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  padding: 12px 27px;
+
+  border-radius: 100px;
+
+  border: 1px solid rgba(77, 171, 255, 0.45);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(77, 171, 255, 0.17),
+      rgba(30, 136, 229, 0.07)
+    );
+
+  color: #ffffff;
+
+  font-size: 15px;
+
+  box-shadow:
+    0 8px 30px rgba(77, 171, 255, 0.12),
+    inset 0 0 20px rgba(77, 171, 255, 0.04);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  animation: badgeGlow 3s ease-in-out infinite;
+}
+
+
+/* Rocket */
+
+.tagline-badge i {
+  color: var(--blue);
+
+  font-size: 15px;
+}
+
+
+/* CTA Text */
+
+.tagline-badge strong {
+  color: #ffffff;
+
+  font-weight: 700;
+}
+
+
+/* Subtle CTA Animation */
+
+@keyframes badgeGlow {
+
+  0%,
+  100% {
+    box-shadow:
+      0 8px 30px rgba(77, 171, 255, 0.10),
+      inset 0 0 20px rgba(77, 171, 255, 0.03);
+  }
+
+  50% {
+    box-shadow:
+      0 10px 38px rgba(77, 171, 255, 0.20),
+      inset 0 0 25px rgba(77, 171, 255, 0.06);
+  }
+}
+
+
+/* =====================================================
+   PROGRAM SWITCHER
+   ===================================================== */
+
+.prog-switcher {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+
+  margin-top: 24px;
+}
+
+
+/* =====================================================
+   MOBILE RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+  .page-hero {
+    min-height: 760px;
+
+    padding:
+      135px
+      5%
+      70px;
+  }
+
+  .independence-heading {
+    margin-bottom: 16px;
+
+    padding:
+      7px
+      12px;
+  }
+
+  .independence-title {
+    font-size: 26px;
+
+    letter-spacing: -0.8px;
+  }
+
+  .flag-bg {
+    font-size: 75px;
+  }
+
+  .discount-offer {
+    gap: 8px;
+
+    padding:
+      8px
+      15px;
+
+    margin-bottom: 25px;
+  }
+
+  .discount-top,
+  .discount-text {
+    font-size: 8px;
+
+    letter-spacing: 0.8px;
+  }
+
+  .discount-amount {
+    font-size: 21px;
+  }
+
+  .page-hero > h1 {
+    font-size: clamp(34px, 10vw, 48px);
+
+    letter-spacing: -1.6px;
+
+    line-height: 1.08;
+  }
+
+  .page-hero > p {
+    font-size: 14px;
+
+    line-height: 1.7;
+
+    max-width: 95%;
+  }
+
+  .tagline-badge {
+    font-size: 13px;
+
+    padding:
+      10px
+      18px;
+  }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+   ===================================================== */
+
+@media (max-width: 480px) {
+
+  .page-hero {
+    padding-top: 125px;
+  }
+
+  .independence-title {
+    font-size: 23px;
+  }
+
+  .flag-bg {
+    font-size: 65px;
+  }
+
+  .discount-offer {
+    padding:
+      7px
+      12px;
+
+    gap: 6px;
+  }
+
+  .discount-amount {
+    font-size: 19px;
+  }
+
+  .page-hero > h1 {
+    font-size: 33px;
+  }
+
+  .tagline-badge {
+    font-size: 12px;
+
+    padding:
+      9px
+      15px;
+  }
+}
+     
+/* .page-hero {
   min-height: 774px;
   padding: 190px 7% 100px;
 
@@ -314,7 +818,7 @@ header.scrolled {
 @keyframes badgeGlow {
   0%, 100% { box-shadow: 0 8px 28px rgba(77,171,255,0.18); }
   60%       { box-shadow: 0 8px 42px rgba(77,171,255,0.42); }
-}
+} */
 
 /* =====================================================
    PROGRAM SWITCHER TABS (top of hero)
@@ -1157,7 +1661,7 @@ footer a { color: var(--blue); text-decoration: none; }
 Independence Day title at HERO section     
 ------------------------------------------------------ */ 
 
-.independence-title {
+/* .independence-title {
   position: relative;
   display: inline-block;
   font-family: 'Sora', sans-serif;
@@ -1192,7 +1696,7 @@ Independence Day title at HERO section
   pointer-events: none;
   filter: blur(0.3px);
 }
-     
+      */
 </style>
 </head>
 
@@ -1273,10 +1777,49 @@ Independence Day title at HERO section
 <!-- =====================================================
      PAGE HERO — Title + Program Switcher
      ===================================================== -->
+
 <section class="page-hero">
+
+  <!-- Independence Day Offer -->
+  <div class="independence-heading">
+    <span class="flag-bg">🇮🇳</span>
+    <h2 class="independence-title">Independence Day Special Offer</h2>
+  </div>
+
+  <!-- Discount -->
+  <div class="discount-offer">
+    <span class="discount-top">SPECIAL FREEDOM OFFER</span>
+    <span class="discount-amount">₹1500</span>
+    <span class="discount-text">FLAT DISCOUNT</span>
+  </div>
+
+  <!-- Main Heading -->
+  <h1>
+    <span class="hero-accent">Industry-Oriented</span>
+    Training Programs
+  </h1>
+
+  <p>
+    Industry-focused 08 Weeks Training programs designed to make students
+    job-ready with real skills, hands-on projects, and a verified certificate.
+  </p>
+
+  <!-- CTA Badge -->
+  <div class="tagline-badge">
+    <i class="fa-solid fa-rocket"></i>
+    <strong>Become Job-Ready in 60 Days — ₹999 Only</strong>
+  </div>
+
+  <div class="prog-switcher">
+    <!-- Program buttons can be added here -->
+  </div>
+
+</section>
+     
+<!-- <section class="page-hero"> -->
   <!-- <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Home</a> -->
 
-  <h2 class="independence-title"><span class="flag-bg">🇮🇳</span>Independence Day Special Offer</h2>
+  <!-- <h2 class="independence-title"><span class="flag-bg">🇮🇳</span>Independence Day Special Offer</h2>
 
   <h3> Get flat ₹1500 Discount </h3>
 
@@ -1286,14 +1829,14 @@ Independence Day title at HERO section
   <div class="tagline-badge">
     <i class="fa-solid fa-rocket"></i>
     <strong>Become Job-Ready in 60 Days &mdash; ₹999 Only</strong>
-  </div>
+  </div> -->
 
   <!-- =====================================================
        PROGRAM SWITCHER TABS
        To add a new program: add a new .prog-btn + create
        a matching <div id="XX-program"> block below. 
        ===================================================== -->
-  <div class="prog-switcher">
+  <!-- <div class="prog-switcher"> -->
     <!-- <button class="prog-btn active" onclick="showProgram('da')" id="da-btn">
       <i class="fa-solid fa-chart-line"></i> Data Analyst — 8 Weeks
     </button> -->
@@ -1303,8 +1846,8 @@ Independence Day title at HERO section
     <!-- <button class="prog-btn" onclick="showProgram('wd')" id="wd-btn">
       <i class="fa-solid fa-code"></i> Web Development — 8 Weeks
     </button> -->
-  </div>
-</section>
+  <!-- </div> -->
+<!-- </section> -->
 
 
 <!-- =============================================================
