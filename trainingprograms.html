@@ -968,6 +968,55 @@ footer a { color: var(--blue); text-decoration: none; }
   .apply-cta-section { padding: 50px 5%; }
   .syllabus-table td:last-child { display: none; }
 }
+
+
+/* =====================================================
+   INDEPENDENCE DAY OFFER STRIP
+   Thin tricolor-accented marquee bar pinned above the header.
+   To edit the message: change the text inside .offer-track spans.
+   To change the date: edit the offer-end text.
+   ===================================================== */
+.offer-strip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1001;
+  background: linear-gradient(90deg, #FF9933 0%, #FF9933 18%, #ffffff 18%, #ffffff 20%, #0a1e35 20%, #0a1e35 80%, #ffffff 80%, #ffffff 82%, #138808 82%, #138808 100%);
+  background-size: 100% 100%;
+}
+.offer-strip-inner {
+  background: rgba(5,15,26,0.88);
+  backdrop-filter: blur(6px);
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 9px 0;
+  position: relative;
+}
+.offer-track {
+  display: inline-block;
+  padding-left: 100%;
+  animation: offerScroll 22s linear infinite;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #fff;
+}
+.offer-track span {
+  margin: 0 28px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.offer-track .hl { color: var(--saffron); }
+.offer-track .hl2 { color: var(--india-green); }
+@keyframes offerScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .offer-track { animation: none; padding-left: 16px; }
+}
 </style>
 </head>
 
@@ -980,6 +1029,22 @@ footer a { color: var(--blue); text-decoration: none; }
 </a>
 
 <body>
+
+<!-- =====================================================
+     INDEPENDENCE DAY OFFER STRIP
+     Scrolling marquee bar pinned above the header.
+     To edit the message: change the text inside the spans below.
+     ===================================================== -->
+<div class="offer-strip">
+  <div class="offer-strip-inner">
+    <div class="offer-track">
+      <span>🇮🇳 <span class="hl">Independence Day Special Offer</span> 🎉 Enroll in the 8-Week Data Analyst Program for just ₹999 <span class="hl2">🎊</span></span>
+      <span>🎆 Freedom Sale — Save 60% before seats run out <span class="hl">🇮🇳</span></span>
+      <span>🇮🇳 <span class="hl">Independence Day Special Offer</span> 🎉 Enroll in the 8-Week Data Analyst Program for just ₹999 <span class="hl2">🎊</span></span>
+      <span>🎆 Freedom Sale — Save 60% before seats run out <span class="hl">🇮🇳</span></span>
+    </div>
+  </div>
+</div>
 
 <!-- =====================================================
      HEADER / NAVIGATION
