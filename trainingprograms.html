@@ -1112,78 +1112,77 @@ header.scrolled {
    TECH STACK
    ===================================================== */
 
+/* =====================================================
+   PROGRAM DETAILS AREA
+   ===================================================== */
+
 .tech-stack {
-  width: 100%;
-  max-width: 900px;
+  width: min(100%, 980px);
+  margin: 35px auto 28px;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
   flex-wrap: wrap;
-  gap: 10px;
 
-  margin: 28px auto 30px;
-}
-
-.tech-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 8px;
-
-  min-height: 38px;
-  padding: 7px 14px;
-
-  color: #dce9f7;
-
-  font-size: 13px;
-  font-weight: 600;
-
-  background: rgba(255, 255, 255, 0.035);
-
-  border: 1px solid rgba(255, 255, 255, 0.10);
-
-  border-radius: 10px;
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  transition:
-    transform 0.25s ease,
-    border-color 0.25s ease,
-    background 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.tech-pill img {
-  width: 21px;
-  height: 21px;
-
-  object-fit: contain;
-}
-
-.tech-pill i {
-  font-size: 17px;
-  color: var(--blue);
-}
-
-.tech-pill:hover {
-  transform: translateY(-3px);
-
-  background: rgba(77, 171, 255, 0.08);
-
-  border-color: rgba(77, 171, 255, 0.35);
-
-  box-shadow:
-    0 8px 20px rgba(0, 0, 0, 0.20),
-    0 0 15px rgba(77, 171, 255, 0.06);
+  gap: 9px;
 }
 
 
 /* =====================================================
-   PRICING ROW
+   TECHNOLOGY PILLS
+   ===================================================== */
+
+.tech-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  height: 38px;
+  padding: 0 13px;
+
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+
+  color: #cbd7e5;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  transition:
+    background .25s ease,
+    border-color .25s ease,
+    transform .25s ease,
+    color .25s ease;
+}
+
+.tech-pill img {
+  width: 19px;
+  height: 19px;
+  object-fit: contain;
+}
+
+.tech-pill i {
+  font-size: 16px;
+  color: var(--blue);
+}
+
+.tech-pill:hover {
+  transform: translateY(-2px);
+
+  color: #fff;
+
+  background: rgba(77, 171, 255, 0.08);
+  border-color: rgba(77, 171, 255, 0.25);
+}
+
+
+/* =====================================================
+   PRICING
    ===================================================== */
 
 .pricing-row {
@@ -1191,49 +1190,36 @@ header.scrolled {
 
   display: flex;
   justify-content: center;
-  align-items: center;
 
   margin: 5px auto 25px;
 }
 
-
-/* =====================================================
-   PREMIUM PRICE CARD
-   ===================================================== */
-
 .price-card {
   position: relative;
 
-  width: min(100%, 440px);
+  width: 430px;
+  max-width: 100%;
 
-  padding: 25px 28px 22px;
+  padding: 24px 28px 22px;
 
   text-align: center;
 
-  border-radius: 18px;
+  background: rgba(10, 23, 38, 0.72);
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255, 153, 51, 0.08),
-      rgba(255, 255, 255, 0.035),
-      rgba(19, 136, 8, 0.07)
-    );
+  border: 1px solid rgba(77, 171, 255, 0.18);
 
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
 
   box-shadow:
-    0 18px 50px rgba(0, 0, 0, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    0 18px 45px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-
-  overflow: hidden;
 }
 
 
-/* Tricolor top line */
+/* Small blue accent line */
 
 .price-card::before {
   content: "";
@@ -1241,45 +1227,42 @@ header.scrolled {
   position: absolute;
 
   top: 0;
-  left: 0;
+  left: 50%;
 
-  width: 100%;
+  width: 70px;
   height: 3px;
 
-  background: linear-gradient(
-    90deg,
-    #ff9933 0%,
-    #ffffff 50%,
-    #138808 100%
-  );
+  transform: translateX(-50%);
+
+  background: var(--blue);
+
+  border-radius: 0 0 6px 6px;
 }
 
 
 /* =====================================================
-   PRICE BADGE
+   POPULAR BADGE
    ===================================================== */
 
 .price-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
 
   margin-bottom: 13px;
 
-  padding: 6px 13px;
+  padding: 5px 12px;
 
   border-radius: 50px;
 
-  background: rgba(255, 153, 51, 0.10);
+  background: rgba(77, 171, 255, 0.08);
 
-  border: 1px solid rgba(255, 153, 51, 0.25);
+  border: 1px solid rgba(77, 171, 255, 0.20);
 
-  color: #ffb866;
+  color: #82c7ff;
 
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 800;
 
-  letter-spacing: 0.8px;
+  letter-spacing: 1px;
 }
 
 
@@ -1288,15 +1271,15 @@ header.scrolled {
    ===================================================== */
 
 .price-label {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 
-  color: var(--muted);
+  color: #8293a6;
 
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
 
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }
 
 
@@ -1307,39 +1290,39 @@ header.scrolled {
 .price-amount {
   display: flex;
 
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
 
-  gap: 3px;
+  gap: 4px;
 
-  margin: 2px 0 9px;
+  margin: 0 0 10px;
 
-  font-family: "Sora", sans-serif;
+  font-family: 'Sora', sans-serif;
+
+  color: #fff;
 
   font-size: 52px;
   font-weight: 800;
 
   line-height: 1;
-
-  color: #ffffff;
 }
 
 .price-del {
-  margin-right: 7px;
+  margin-right: 5px;
 
-  color: #78899c;
+  color: #637386;
 
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 500;
 
   text-decoration: line-through;
 }
 
 .rupee {
-  font-size: 30px;
-  font-weight: 700;
+  color: var(--blue);
 
-  color: #ff9933;
+  font-size: 29px;
+  font-weight: 700;
 }
 
 
@@ -1350,153 +1333,146 @@ header.scrolled {
 .savings-badge {
   display: inline-block;
 
-  margin-bottom: 10px;
+  margin-bottom: 9px;
 
-  padding: 5px 12px;
+  padding: 5px 11px;
 
   border-radius: 50px;
 
-  background: rgba(19, 136, 8, 0.10);
+  background: rgba(52, 211, 153, 0.07);
 
-  border: 1px solid rgba(19, 136, 8, 0.25);
+  border: 1px solid rgba(52, 211, 153, 0.18);
 
-  color: #65c956;
+  color: #62d8ac;
 
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
 }
 
 .price-note {
-  color: #8292a5;
+  color: #718196;
 
-  font-size: 11px;
+  font-size: 10px;
 }
 
 
 /* =====================================================
-   CTA ROW
+   CTA SECTION
    ===================================================== */
 
 .cta-row {
   width: 100%;
+  max-width: 850px;
 
-  display: flex;
+  display: grid;
 
-  justify-content: center;
-  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
 
-  flex-wrap: wrap;
+  gap: 10px;
 
-  gap: 11px;
-
-  margin: 5px auto 20px;
+  margin: 0 auto 18px;
 }
 
 
-/* Common button */
+/* All buttons */
 
 .cta-row a {
-  min-height: 45px;
+  min-height: 46px;
 
-  display: inline-flex;
-
+  display: flex;
   align-items: center;
   justify-content: center;
 
   gap: 8px;
 
-  padding: 10px 19px;
+  padding: 10px 14px;
 
-  border-radius: 9px;
+  border-radius: 8px;
 
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
 
   text-decoration: none;
 
   transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease,
-    border-color 0.25s ease;
+    transform .25s ease,
+    background .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
 }
 
 .cta-row a:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 
 /* =====================================================
-   PRIMARY BUTTON
+   REGISTER
    ===================================================== */
 
 .btn-primary {
-  color: #ffffff;
+  color: #fff;
 
   background: var(--blue);
 
   border: 1px solid var(--blue);
 
   box-shadow:
-    0 8px 22px rgba(77, 171, 255, 0.18);
+    0 7px 20px rgba(77, 171, 255, 0.16);
 }
 
 .btn-primary:hover {
-  background: #3299ee;
+  background: #3299ed;
 
   box-shadow:
-    0 12px 28px rgba(77, 171, 255, 0.28);
+    0 10px 25px rgba(77, 171, 255, 0.25);
 }
 
 
 /* =====================================================
-   WHATSAPP BUTTON
+   WHATSAPP
    ===================================================== */
 
 .btn-outline {
-  color: #63d65c;
-
-  background: rgba(37, 211, 102, 0.06);
-
-  border: 1px solid rgba(37, 211, 102, 0.30);
-}
-
-.btn-outline:hover {
-  background: rgba(37, 211, 102, 0.12);
-
-  border-color: rgba(37, 211, 102, 0.55);
-
-  box-shadow:
-    0 8px 22px rgba(37, 211, 102, 0.12);
-}
-
-
-/* =====================================================
-   DOWNLOAD SYLLABUS
-   ===================================================== */
-
-.btn-download {
-  color: #dce9f7;
+  color: #d5dee8;
 
   background: rgba(255, 255, 255, 0.035);
 
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.btn-download:hover {
-  color: #ffffff;
+.btn-outline:hover {
+  color: #fff;
 
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.07);
 
-  border-color: rgba(255, 255, 255, 0.28);
-
-  box-shadow:
-    0 8px 22px rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 
 /* =====================================================
-   BATCH STARTING NOTE
+   DOWNLOAD
+   ===================================================== */
+
+.btn-download {
+  color: #d5dee8;
+
+  background: rgba(255, 255, 255, 0.035);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.btn-download:hover {
+  color: #fff;
+
+  background: rgba(77, 171, 255, 0.07);
+
+  border-color: rgba(77, 171, 255, 0.25);
+}
+
+
+/* =====================================================
+   BATCH ANNOUNCEMENT
    ===================================================== */
 
 .coming-soon-note {
@@ -1507,25 +1483,41 @@ header.scrolled {
 
   gap: 7px;
 
-  margin-top: 3px;
+  width: 100%;
 
-  color: #8191a4;
+  margin-top: 4px;
 
-  font-size: 12px;
+  color: #718196;
 
-  line-height: 1.5;
+  font-size: 11px;
+
+  text-align: center;
 }
 
 .coming-soon-note i {
   color: var(--blue);
-
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .coming-soon-note strong {
-  color: #ffffff;
-
+  color: #dce7f2;
   font-weight: 700;
+}
+
+
+/* =====================================================
+   TABLET
+   ===================================================== */
+
+@media (max-width: 800px) {
+
+  .tech-stack {
+    max-width: 680px;
+  }
+
+  .cta-row {
+    max-width: 650px;
+  }
 }
 
 
@@ -1533,97 +1525,85 @@ header.scrolled {
    MOBILE
    ===================================================== */
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
 
   .tech-stack {
-    gap: 8px;
-
-    margin-top: 22px;
+    margin-top: 25px;
     margin-bottom: 25px;
+
+    gap: 7px;
   }
 
   .tech-pill {
-    min-height: 35px;
+    height: 35px;
 
-    padding: 6px 11px;
+    padding: 0 10px;
 
-    font-size: 12px;
+    font-size: 11px;
   }
 
   .tech-pill img {
-    width: 18px;
-    height: 18px;
+    width: 17px;
+    height: 17px;
   }
 
   .tech-pill i {
-    font-size: 15px;
+    font-size: 14px;
   }
+
+
+  /* Pricing */
 
   .price-card {
     width: 100%;
 
-    padding: 22px 18px 19px;
+    padding: 22px 18px 20px;
+
+    border-radius: 14px;
   }
 
   .price-amount {
-    font-size: 44px;
+    font-size: 45px;
   }
 
   .price-del {
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .rupee {
-    font-size: 26px;
+    font-size: 25px;
   }
 
+
+  /* Buttons */
+
   .cta-row {
+    display: flex;
+
     flex-direction: column;
 
-    width: 100%;
+    align-items: center;
+
+    gap: 8px;
   }
 
   .cta-row a {
     width: 100%;
-    max-width: 340px;
+    max-width: 360px;
   }
+
+
+  /* Batch note */
 
   .coming-soon-note {
     flex-wrap: wrap;
 
-    max-width: 330px;
+    max-width: 340px;
 
-    text-align: center;
-  }
-}
+    margin-left: auto;
+    margin-right: auto;
 
-
-/* =====================================================
-   SMALL MOBILE
-   ===================================================== */
-
-@media (max-width: 430px) {
-
-  .tech-pill {
-    padding: 6px 9px;
-
-    font-size: 11px;
-  }
-
-  .price-card {
-    border-radius: 15px;
-  }
-
-  .price-badge {
-    font-size: 9px;
-  }
-
-  .price-amount {
-    font-size: 40px;
-  }
-
-  .savings-badge {
-    font-size: 11px;
+    line-height: 1.6;
   }
 }
 
