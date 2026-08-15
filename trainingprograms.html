@@ -68,9 +68,10 @@ header {
   position: fixed;
   width: 100%;
   z-index: 1000;
-  top: 38px;
+  top: 40px; /* Offer bar height */
   transition: .3s;
 }
+
 header.scrolled {
   background: rgba(5,15,26,0.94);
   backdrop-filter: blur(18px);
@@ -971,35 +972,43 @@ footer a { color: var(--blue); text-decoration: none; }
 }
 
 /* =====================================================
-   INDEPENDENCE DAY OFFER SECTION
-   Normal page section above the fixed navbar
+   INDEPENDENCE DAY OFFER
+   Fixed at the very top
    ===================================================== */
 
 .independence-offer {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  position: relative;
-  z-index: 1002;
+  height: 40px;
+  z-index: 1001;
   background: transparent;
+  overflow: hidden;
 }
 
 .independence-offer .offer-strip {
   width: 100%;
+  height: 40px;
   background: transparent;
 }
 
 .independence-offer .offer-strip-inner {
   width: 100%;
+  height: 40px;
   overflow: hidden;
   white-space: nowrap;
-  padding: 9px 0;
-  position: relative;
+  display: flex;
+  align-items: center;
   background: transparent;
+  position: relative;
 }
 
 .independence-offer .offer-track {
   display: inline-block;
   padding-left: 100%;
   animation: offerScroll 22s linear infinite;
+
   font-size: 13.5px;
   font-weight: 700;
   letter-spacing: 0.3px;
