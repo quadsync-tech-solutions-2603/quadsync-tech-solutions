@@ -68,7 +68,7 @@ header {
   position: fixed;
   width: 100%;
   z-index: 1000;
-  top: 0;
+  top: 38px;
   transition: .3s;
 }
 header.scrolled {
@@ -137,7 +137,8 @@ header.scrolled {
    PAGE HERO
    ===================================================== */
 .page-hero {
-  padding: 140px 7% 60px;
+  /* padding: 140px 7% 60px; */
+  padding: 158px 5% 50px;
   text-align: center;
   position: relative;
   z-index: 1;
@@ -969,31 +970,33 @@ footer a { color: var(--blue); text-decoration: none; }
   .syllabus-table td:last-child { display: none; }
 }
 
-
 /* =====================================================
-   INDEPENDENCE DAY OFFER STRIP
-   Thin tricolor-accented marquee bar pinned above the header.
-   To edit the message: change the text inside .offer-track spans.
-   To change the date: edit the offer-end text.
+   INDEPENDENCE DAY OFFER SECTION
+   Normal page section above the fixed navbar
    ===================================================== */
-.offer-strip {
-  position: fixed;
-  top: 0;
-  left: 0;
+
+.independence-offer {
   width: 100%;
-  z-index: 1001;
+  position: relative;
+  z-index: 1002;
   background: transparent;
 }
 
-.offer-strip-inner {
+.independence-offer .offer-strip {
+  width: 100%;
   background: transparent;
-  backdrop-filter: none;
+}
+
+.independence-offer .offer-strip-inner {
+  width: 100%;
   overflow: hidden;
   white-space: nowrap;
   padding: 9px 0;
   position: relative;
+  background: transparent;
 }
-.offer-track {
+
+.independence-offer .offer-track {
   display: inline-block;
   padding-left: 100%;
   animation: offerScroll 22s linear infinite;
@@ -1002,20 +1005,37 @@ footer a { color: var(--blue); text-decoration: none; }
   letter-spacing: 0.3px;
   color: #fff;
 }
-.offer-track span {
+
+.independence-offer .offer-track > span {
   margin: 0 28px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
-.offer-track .hl { color: var(--saffron); }
-.offer-track .hl2 { color: var(--india-green); }
-@keyframes offerScroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+
+.independence-offer .offer-track .hl {
+  color: #FF9933;
 }
+
+.independence-offer .offer-track .hl2 {
+  color: #138808;
+}
+
+@keyframes offerScroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .offer-track { animation: none; padding-left: 16px; }
+  .independence-offer .offer-track {
+    animation: none;
+    padding-left: 16px;
+  }
 }
 </style>
 </head>
