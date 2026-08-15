@@ -1113,12 +1113,11 @@ header.scrolled {
    ===================================================== */
 
 /* =====================================================
-   PROGRAM DETAILS AREA
+   PROGRAM DETAILS SECTION
    ===================================================== */
 
 .tech-stack {
-  width: min(100%, 980px);
-  margin: 35px auto 28px;
+  width: min(100%, 900px);
 
   display: flex;
   align-items: center;
@@ -1126,24 +1125,25 @@ header.scrolled {
   flex-wrap: wrap;
 
   gap: 9px;
+
+  margin: 30px auto 28px;
 }
-
-
-/* =====================================================
-   TECHNOLOGY PILLS
-   ===================================================== */
 
 .tech-pill {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+
   gap: 8px;
 
   height: 38px;
+
   padding: 0 13px;
 
   border-radius: 8px;
 
   background: rgba(255, 255, 255, 0.035);
+
   border: 1px solid rgba(255, 255, 255, 0.09);
 
   color: #cbd7e5;
@@ -1154,16 +1154,19 @@ header.scrolled {
   white-space: nowrap;
 
   transition:
-    background .25s ease,
-    border-color .25s ease,
-    transform .25s ease,
-    color .25s ease;
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
 }
 
 .tech-pill img {
   width: 19px;
   height: 19px;
+
   object-fit: contain;
+
+  flex-shrink: 0;
 }
 
 .tech-pill i {
@@ -1174,33 +1177,50 @@ header.scrolled {
 .tech-pill:hover {
   transform: translateY(-2px);
 
-  color: #fff;
+  color: #ffffff;
 
-  background: rgba(77, 171, 255, 0.08);
+  background: rgba(77, 171, 255, 0.07);
+
   border-color: rgba(77, 171, 255, 0.25);
 }
 
 
 /* =====================================================
-   PRICING
+   PRICE + CTA CONTAINER
    ===================================================== */
 
 .pricing-row {
-  width: 100%;
+  width: min(100%, 850px);
 
-  display: flex;
-  justify-content: center;
+  display: grid;
 
-  margin: 5px auto 25px;
+  grid-template-columns: 1fr 1.15fr;
+
+  align-items: stretch;
+
+  gap: 18px;
+
+  margin: 5px auto 20px;
 }
+
+
+/* =====================================================
+   PRICE CARD — LEFT SIDE
+   ===================================================== */
 
 .price-card {
   position: relative;
 
-  width: 430px;
-  max-width: 100%;
+  width: 100%;
+  min-height: 205px;
 
-  padding: 24px 28px 22px;
+  padding: 25px 24px 22px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
 
   text-align: center;
 
@@ -1216,10 +1236,14 @@ header.scrolled {
 
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+
+  overflow: hidden;
+
+  box-sizing: border-box;
 }
 
 
-/* Small blue accent line */
+/* Top accent */
 
 .price-card::before {
   content: "";
@@ -1245,9 +1269,12 @@ header.scrolled {
    ===================================================== */
 
 .price-badge {
-  display: inline-block;
+  display: inline-flex;
 
-  margin-bottom: 13px;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 12px;
 
   padding: 5px 12px;
 
@@ -1263,6 +1290,8 @@ header.scrolled {
   font-weight: 800;
 
   letter-spacing: 1px;
+
+  white-space: nowrap;
 }
 
 
@@ -1273,18 +1302,20 @@ header.scrolled {
 .price-label {
   margin-bottom: 6px;
 
-  color: #8293a6;
+  color: #8191a4;
 
   font-size: 11px;
+
   font-weight: 600;
 
   text-transform: uppercase;
+
   letter-spacing: 1.5px;
 }
 
 
 /* =====================================================
-   PRICE
+   PRICE AMOUNT
    ===================================================== */
 
 .price-amount {
@@ -1297,11 +1328,12 @@ header.scrolled {
 
   margin: 0 0 10px;
 
-  font-family: 'Sora', sans-serif;
+  font-family: "Sora", sans-serif;
 
-  color: #fff;
+  color: #ffffff;
 
   font-size: 52px;
+
   font-weight: 800;
 
   line-height: 1;
@@ -1310,9 +1342,10 @@ header.scrolled {
 .price-del {
   margin-right: 5px;
 
-  color: #637386;
+  color: #627285;
 
   font-size: 17px;
+
   font-weight: 500;
 
   text-decoration: line-through;
@@ -1322,12 +1355,13 @@ header.scrolled {
   color: var(--blue);
 
   font-size: 29px;
+
   font-weight: 700;
 }
 
 
 /* =====================================================
-   SAVINGS
+   SAVINGS BADGE
    ===================================================== */
 
 .savings-badge {
@@ -1346,6 +1380,7 @@ header.scrolled {
   color: #62d8ac;
 
   font-size: 11px;
+
   font-weight: 700;
 }
 
@@ -1357,84 +1392,95 @@ header.scrolled {
 
 
 /* =====================================================
-   CTA SECTION
+   CTA AREA — RIGHT SIDE
    ===================================================== */
 
 .cta-row {
   width: 100%;
-  max-width: 850px;
 
-  display: grid;
+  display: flex;
 
-  grid-template-columns: repeat(3, 1fr);
+  flex-direction: column;
+
+  justify-content: center;
 
   gap: 10px;
 
-  margin: 0 auto 18px;
-}
+  margin: 0;
 
-
-/* All buttons */
-
-.cta-row a {
-  min-height: 46px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  gap: 8px;
-
-  padding: 10px 14px;
-
-  border-radius: 8px;
-
-  font-size: 12px;
-  font-weight: 700;
-
-  text-decoration: none;
-
-  transition:
-    transform .25s ease,
-    background .25s ease,
-    border-color .25s ease,
-    box-shadow .25s ease;
-}
-
-.cta-row a:hover {
-  transform: translateY(-2px);
+  box-sizing: border-box;
 }
 
 
 /* =====================================================
-   REGISTER
+   ALL CTA BUTTONS
+   ===================================================== */
+
+.cta-row a {
+  width: 100%;
+
+  min-height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  padding: 11px 18px;
+
+  border-radius: 9px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+  box-sizing: border-box;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.cta-row a:hover {
+  transform: translateX(3px);
+}
+
+
+/* =====================================================
+   REGISTER BUTTON
    ===================================================== */
 
 .btn-primary {
-  color: #fff;
+  color: #ffffff;
 
   background: var(--blue);
 
   border: 1px solid var(--blue);
 
   box-shadow:
-    0 7px 20px rgba(77, 171, 255, 0.16);
+    0 8px 22px rgba(77, 171, 255, 0.16);
 }
 
 .btn-primary:hover {
   background: #3299ed;
 
   box-shadow:
-    0 10px 25px rgba(77, 171, 255, 0.25);
+    0 11px 28px rgba(77, 171, 255, 0.25);
 }
 
 
 /* =====================================================
-   WHATSAPP
+   WHATSAPP BUTTON
    ===================================================== */
 
 .btn-outline {
-  color: #d5dee8;
+  color: #d8e2ec;
 
   background: rgba(255, 255, 255, 0.035);
 
@@ -1442,7 +1488,7 @@ header.scrolled {
 }
 
 .btn-outline:hover {
-  color: #fff;
+  color: #ffffff;
 
   background: rgba(255, 255, 255, 0.07);
 
@@ -1451,11 +1497,11 @@ header.scrolled {
 
 
 /* =====================================================
-   DOWNLOAD
+   DOWNLOAD SYLLABUS BUTTON
    ===================================================== */
 
 .btn-download {
-  color: #d5dee8;
+  color: #d8e2ec;
 
   background: rgba(255, 255, 255, 0.035);
 
@@ -1463,11 +1509,23 @@ header.scrolled {
 }
 
 .btn-download:hover {
-  color: #fff;
+  color: #ffffff;
 
   background: rgba(77, 171, 255, 0.07);
 
   border-color: rgba(77, 171, 255, 0.25);
+
+  box-shadow:
+    0 8px 20px rgba(77, 171, 255, 0.08);
+}
+
+
+/* =====================================================
+   CTA ICONS
+   ===================================================== */
+
+.cta-row a i {
+  font-size: 14px;
 }
 
 
@@ -1476,6 +1534,8 @@ header.scrolled {
    ===================================================== */
 
 .coming-soon-note {
+  width: 100%;
+
   display: flex;
 
   align-items: center;
@@ -1483,24 +1543,26 @@ header.scrolled {
 
   gap: 7px;
 
-  width: 100%;
-
-  margin-top: 4px;
+  margin: 2px auto 0;
 
   color: #718196;
 
   font-size: 11px;
+
+  line-height: 1.5;
 
   text-align: center;
 }
 
 .coming-soon-note i {
   color: var(--blue);
+
   font-size: 12px;
 }
 
 .coming-soon-note strong {
   color: #dce7f2;
+
   font-weight: 700;
 }
 
@@ -1509,14 +1571,29 @@ header.scrolled {
    TABLET
    ===================================================== */
 
-@media (max-width: 800px) {
+@media (max-width: 850px) {
 
-  .tech-stack {
-    max-width: 680px;
+  .pricing-row {
+    width: min(100%, 720px);
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 14px;
   }
 
-  .cta-row {
-    max-width: 650px;
+  .price-card {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .price-amount {
+    font-size: 46px;
+  }
+
+  .cta-row a {
+    min-height: 45px;
+
+    font-size: 11px;
   }
 }
 
@@ -1525,11 +1602,13 @@ header.scrolled {
    MOBILE
    ===================================================== */
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
 
   .tech-stack {
-    margin-top: 25px;
-    margin-bottom: 25px;
+    width: 100%;
+
+    margin-top: 24px;
+    margin-bottom: 24px;
 
     gap: 7px;
   }
@@ -1552,14 +1631,33 @@ header.scrolled {
   }
 
 
-  /* Pricing */
+  /* Stack price and buttons */
 
-  .price-card {
+  .pricing-row {
     width: 100%;
 
-    padding: 22px 18px 20px;
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin-top: 5px;
+  }
+
+
+  /* Price card */
+
+  .price-card {
+    min-height: 205px;
+
+    padding: 23px 18px 20px;
 
     border-radius: 14px;
+  }
+
+  .price-badge {
+    font-size: 8px;
   }
 
   .price-amount {
@@ -1575,35 +1673,82 @@ header.scrolled {
   }
 
 
-  /* Buttons */
+  /* CTA buttons */
 
   .cta-row {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
+    width: 100%;
 
     gap: 8px;
   }
 
   .cta-row a {
     width: 100%;
-    max-width: 360px;
+
+    min-height: 46px;
+
+    font-size: 12px;
+  }
+
+  .cta-row a:hover {
+    transform: translateY(-2px);
   }
 
 
   /* Batch note */
 
   .coming-soon-note {
-    flex-wrap: wrap;
-
     max-width: 340px;
 
-    margin-left: auto;
-    margin-right: auto;
+    flex-wrap: wrap;
 
-    line-height: 1.6;
+    margin-top: 4px;
+
+    font-size: 10px;
+  }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+   ===================================================== */
+
+@media (max-width: 420px) {
+
+  .tech-stack {
+    gap: 6px;
+  }
+
+  .tech-pill {
+    height: 33px;
+
+    padding: 0 8px;
+
+    font-size: 10px;
+  }
+
+  .tech-pill img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .price-card {
+    padding: 21px 15px 19px;
+  }
+
+  .price-amount {
+    font-size: 40px;
+  }
+
+  .price-del {
+    font-size: 14px;
+  }
+
+  .rupee {
+    font-size: 23px;
+  }
+
+  .savings-badge {
+    font-size: 10px;
   }
 }
 
@@ -2406,39 +2551,55 @@ Independence Day title at HERO section
       </div>
     </div>
 
-    <!-- Price -->
-    <div class="pricing-row">
-      <div class="price-card featured">
-        <div class="price-badge">MOST POPULAR &bull; 20 Seats ONLY</div>
-        <div class="price-label">Program Fee</div>
-        <div class="price-amount">
-          <span class="price-del">₹2,499</span>
-          <span class="rupee">₹</span>999
-        </div>
-        <div class="savings-badge">You save ₹1,500 — 60% OFF</div>
-        <div class="price-note">One-time payment · No hidden charges</div>
+    <div class="pricing-cta-section">
+
+  <!-- PRICE -->
+  <div class="pricing-row">
+    <div class="price-card featured">
+      <div class="price-badge">MOST POPULAR &bull; 20 Seats ONLY</div>
+
+      <div class="price-label">Program Fee</div>
+
+      <div class="price-amount">
+        <span class="price-del">₹2,499</span>
+        <span class="rupee">₹</span>999
+      </div>
+
+      <div class="savings-badge">You save ₹1,500 — 60% OFF</div>
+
+      <div class="price-note">
+        One-time payment · No hidden charges
       </div>
     </div>
+  </div>
 
-    <!-- CTAs -->
-    <div class="cta-row">
-      <!-- REGISTER button → links to Google Form -->
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSc6HghDcE-6r52z0_3wF4KEGx4CluRlMPoD-OwWsuaj6wjwig/viewform?usp=dialog" target="_blank" class="btn-primary">
-        <i class="fa-solid fa-paper-plane"></i> Register Now
-      </a>
-      <!-- WHATSAPP button → edit number in href -->
-      <a href="https://wa.me/917796988650" target="_blank" class="btn-outline">
-        <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
-      </a>
-      <!-- =================================================
-           DOWNLOAD SYLLABUS BUTTON — DATA ANALYST
-           Replace the href value with your actual PDF path.
-           Example: href="Syllabi/DataAnalyst_Syllabus.pdf"
-           ================================================= -->
-      <a href="pdf/DA.pdf" download class="btn-download">
-        <i class="fa-solid fa-download"></i> Download Syllabus PDF
-      </a>
-    </div>
+  <!-- CTAs -->
+  <div class="cta-row">
+
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc6HghDcE-6r52z0_3wF4KEGx4CluRlMPoD-OwWsuaj6wjwig/viewform?usp=dialog"
+       target="_blank"
+       class="btn-primary">
+      <i class="fa-solid fa-paper-plane"></i>
+      Register Now
+    </a>
+
+    <a href="https://wa.me/917796988650"
+       target="_blank"
+       class="btn-outline">
+      <i class="fa-brands fa-whatsapp"></i>
+      Chat on WhatsApp
+    </a>
+
+    <a href="pdf/DA.pdf"
+       download
+       class="btn-download">
+      <i class="fa-solid fa-download"></i>
+      Download Syllabus PDF
+    </a>
+
+  </div>
+
+</div>
 
     <div class="coming-soon-note">
       <i class="fa-solid fa-calendar-check"></i>
