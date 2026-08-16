@@ -78,7 +78,8 @@ header.scrolled{background:rgba(5,15,26,0.98);backdrop-filter:blur(20px);box-sha
 .dark-section{background:var(--bg2);}
 
 /* ===== SERVICES ===== */
-.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.services-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
+.service-card{flex:0 1 calc(33.333% - 14px);max-width:calc(33.333% - 14px);}
 .service-card{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:32px;transition:.3s;position:relative;overflow:hidden;}
 .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),transparent);opacity:0;transition:.3s;}
 .service-card:hover{transform:translateY(-6px);border-color:rgba(77,171,255,0.35);box-shadow:0 20px 50px rgba(0,0,0,0.3);}
@@ -209,12 +210,12 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
 @media(max-width:1024px){
   .about-grid{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:repeat(2,1fr);}
-  .services-grid{grid-template-columns:repeat(2,1fr);}
+  .services-grid .service-card{flex-basis:calc(50% - 10px);max-width:calc(50% - 10px);}
   .features-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media(max-width:768px){
   .internship-grid{grid-template-columns:1fr!important;}
-  .services-grid{grid-template-columns:1fr!important;}
+  .services-grid .service-card{flex-basis:100%;max-width:100%;}
   .events-grid{grid-template-columns:1fr!important;}
   .features-grid{grid-template-columns:1fr!important;}
   .nav-links{position:fixed;top:0;right:-280px;height:100vh;background:var(--bg2);flex-direction:column;width:260px;padding:80px 24px 24px;transition:.35s;border-left:1px solid var(--border);gap:4px;}
