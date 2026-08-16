@@ -110,6 +110,14 @@ header.scrolled{background:rgba(5,15,26,0.98);backdrop-filter:blur(20px);box-sha
 .custom-note a{color:var(--blue);text-decoration:none;font-weight:600;}
 .custom-note a:hover{text-decoration:underline;}
 
+.addon-heading{display:flex;align-items:center;gap:10px;margin:28px 0 16px;font-size:13px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:var(--muted);}
+.addon-heading::after{content:'';flex:1;height:1px;background:var(--border);}
+.addon-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;}
+.addon-card{background:var(--bg4);border:1px solid var(--border);border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;transition:.2s;}
+.addon-card:hover{border-color:rgba(77,171,255,0.35);}
+.addon-name{font-size:13.5px;color:var(--muted);line-height:1.4;}
+.addon-price{font-family:'Sora',sans-serif;font-weight:700;color:var(--blue);font-size:15px;white-space:nowrap;flex-shrink:0;}
+
 /* ===== FAQ ===== */
 .faq-list{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:14px;}
 .faq-item{background:var(--bg3);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.25s;}
@@ -175,6 +183,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
 }
 @media(max-width:768px){
   .tier-grid{grid-template-columns:1fr!important;}
+  .addon-grid{grid-template-columns:1fr;}
   .service-block-header{flex-direction:column;}
   .service-block{padding:28px 22px;}
   .nav-links{position:fixed;top:0;right:-280px;height:100vh;background:var(--bg2);flex-direction:column;width:260px;padding:80px 24px 24px;transition:.35s;border-left:1px solid var(--border);gap:4px;}
@@ -278,10 +287,10 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
   <div class="tier-grid">
     <div class="tier-card">
       <div class="tier-name">Basic</div>
-      <div class="tier-price">₹999<span> onwards</span></div>
-      <div class="tier-price-note">Per program</div>
+      <div class="tier-price">₹599</div>
+      <div class="tier-price-note">Internship + Training, per batch</div>
       <ul class="tier-features">
-        <li><i class="fa-solid fa-check"></i> Access to one training program</li>
+        <li><i class="fa-solid fa-check"></i> Internship + training access per batch</li>
         <li><i class="fa-solid fa-check"></i> Live + recorded sessions</li>
         <li><i class="fa-solid fa-check"></i> Hands-on projects</li>
         <li><i class="fa-solid fa-check"></i> Verified training certificate</li>
@@ -290,24 +299,24 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
     </div>
     <div class="tier-card popular">
       <div class="tier-ribbon">Most Popular</div>
-      <div class="tier-name">Standard</div>
-      <div class="tier-price">₹1999<span> onwards</span></div>
+      <div class="tier-name">Moderate</div>
+      <div class="tier-price">₹1,199</div>
       <div class="tier-price-note">Per program</div>
       <ul class="tier-features">
         <li><i class="fa-solid fa-check"></i> Everything in Basic</li>
-        <li><i class="fa-solid fa-check"></i> Weekly assessment tests</li>
-        <li><i class="fa-solid fa-check"></i> Saturday doubt-solving sessions</li>
-        <li><i class="fa-solid fa-check"></i> Resume building support</li>
+        <li><i class="fa-solid fa-check"></i> Industry-oriented training program</li>
+        <li><i class="fa-solid fa-check"></i> Job-ready in 60 days</li>
+        <li><i class="fa-solid fa-check"></i> Placement support</li>
       </ul>
       <a href="#contact-cta" class="btn-tier">Get Started</a>
     </div>
     <div class="tier-card">
       <div class="tier-name">Advanced</div>
-      <div class="tier-price">₹2999<span> onwards</span></div>
+      <div class="tier-price">₹4,999</div>
       <div class="tier-price-note">Per program</div>
       <ul class="tier-features">
-        <li><i class="fa-solid fa-check"></i> Everything in Standard</li>
-        <li><i class="fa-solid fa-check"></i> 100% Job Support</li>
+        <li><i class="fa-solid fa-check"></i> Everything in Moderate</li>
+        <li><i class="fa-solid fa-check"></i> Technical training (remote/offline)</li>
         <li><i class="fa-solid fa-check"></i> Mock interviews & LinkedIn optimization</li>
         <li><i class="fa-solid fa-check"></i> Placement assistance</li>
       </ul>
@@ -348,7 +357,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
     <div class="tier-card popular">
       <div class="tier-ribbon">Most Popular</div>
       <div class="tier-name">Standard</div>
-      <div class="tier-price">₹9,999</div>
+      <div class="tier-price">₹8,999</div>
       <div class="tier-price-note">One-time</div>
       <ul class="tier-features">
         <li><i class="fa-solid fa-check"></i> Multi-page dynamic website</li>
@@ -360,7 +369,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
     </div>
     <div class="tier-card">
       <div class="tier-name">Advanced</div>
-      <div class="tier-price">₹24,999<span> onwards</span></div>
+      <div class="tier-price">₹14,999<span> onwards</span></div>
       <div class="tier-price-note">One-time</div>
       <ul class="tier-features">
         <li><i class="fa-solid fa-check"></i> Full-stack custom web application</li>
@@ -370,6 +379,12 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
       </ul>
       <a href="#contact-cta" class="btn-tier">Get Started</a>
     </div>
+  </div>
+
+  <div class="addon-heading">Add-Ons</div>
+  <div class="addon-grid">
+    <div class="addon-card"><span class="addon-name">Extra Page</span><span class="addon-price">₹899</span></div>
+    <div class="addon-card"><span class="addon-name">Complete SEO (All-in-one)</span><span class="addon-price">₹6,999</span></div>
   </div>
 </section>
 
@@ -404,7 +419,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
     <div class="tier-card popular">
       <div class="tier-ribbon">Most Popular</div>
       <div class="tier-name">Standard</div>
-      <div class="tier-price">₹9,999<span>/mo</span></div>
+      <div class="tier-price">₹7,999<span>/mo</span></div>
       <div class="tier-price-note">Monthly retainer</div>
       <ul class="tier-features">
         <li><i class="fa-solid fa-check"></i> Everything in Basic</li>
@@ -416,7 +431,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
     </div>
     <div class="tier-card">
       <div class="tier-name">Advanced</div>
-      <div class="tier-price">₹19,999<span>/mo</span></div>
+      <div class="tier-price">₹11,999<span>/mo</span></div>
       <div class="tier-price-note">Monthly retainer</div>
       <ul class="tier-features">
         <li><i class="fa-solid fa-check"></i> Everything in Standard</li>
@@ -472,7 +487,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
     </div>
     <div class="tier-card">
       <div class="tier-name">Advanced</div>
-      <div class="tier-price">₹14,999<span>/mo</span></div>
+      <div class="tier-price">₹10,999<span>/mo</span></div>
       <div class="tier-price-note">Monthly retainer</div>
       <ul class="tier-features">
         <li><i class="fa-solid fa-check"></i> 3+ platforms managed</li>
@@ -504,7 +519,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
   <div class="tier-grid">
     <div class="tier-card">
       <div class="tier-name">Basic</div>
-      <div class="tier-price">₹4,999</div>
+      <div class="tier-price">₹6,999</div>
       <div class="tier-price-note">One-time</div>
       <ul class="tier-features">
         <li><i class="fa-solid fa-check"></i> On-page SEO (up to 5 pages)</li>
@@ -528,7 +543,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
     </div>
     <div class="tier-card">
       <div class="tier-name">Advanced</div>
-      <div class="tier-price">₹17,999<span>/mo</span></div>
+      <div class="tier-price">₹12,999<span>/mo</span></div>
       <div class="tier-price-note">Monthly retainer</div>
       <ul class="tier-features">
         <li><i class="fa-solid fa-check"></i> Everything in Standard</li>
@@ -538,6 +553,14 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
       </ul>
       <a href="#contact-cta" class="btn-tier">Get Started</a>
     </div>
+  </div>
+
+  <div class="addon-heading">Individual SEO Services</div>
+  <div class="addon-grid">
+    <div class="addon-card"><span class="addon-name">On-Page SEO</span><span class="addon-price">₹3,999</span></div>
+    <div class="addon-card"><span class="addon-name">Off-Page SEO</span><span class="addon-price">₹4,999</span></div>
+    <div class="addon-card"><span class="addon-name">Technical SEO</span><span class="addon-price">₹5,999</span></div>
+    <div class="addon-card"><span class="addon-name">Local SEO</span><span class="addon-price">₹2,999</span></div>
   </div>
 </section>
 
@@ -572,7 +595,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
     <div class="tier-card popular">
       <div class="tier-ribbon">Most Popular</div>
       <div class="tier-name">Standard</div>
-      <div class="tier-price">₹9,999<span>/mo</span></div>
+      <div class="tier-price">₹8,999<span>/mo</span></div>
       <div class="tier-price-note">Management fee, ad spend extra</div>
       <ul class="tier-features">
         <li><i class="fa-solid fa-check"></i> Multi-platform campaigns</li>
@@ -583,7 +606,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
     </div>
     <div class="tier-card">
       <div class="tier-name">Advanced</div>
-      <div class="tier-price">₹17,999<span>/mo</span></div>
+      <div class="tier-price">₹12,999<span>/mo</span></div>
       <div class="tier-price-note">Management fee, ad spend extra</div>
       <ul class="tier-features">
         <li><i class="fa-solid fa-check"></i> Full-funnel campaigns</li>
@@ -617,7 +640,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
       <div class="tier-price">₹2,999<span>/mo</span></div>
       <div class="tier-price-note">Monthly retainer</div>
       <ul class="tier-features">
-        <li><i class="fa-solid fa-check"></i> 5 social media creatives/month</li>
+        <li><i class="fa-solid fa-check"></i> 6 social media creatives/month + 1 free post</li>
         <li><i class="fa-solid fa-check"></i> 2 rounds of revisions</li>
       </ul>
       <a href="#contact-cta" class="btn-tier">Get Started</a>
@@ -625,10 +648,10 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
     <div class="tier-card popular">
       <div class="tier-ribbon">Most Popular</div>
       <div class="tier-name">Standard</div>
-      <div class="tier-price">₹6,999<span>/mo</span></div>
+      <div class="tier-price">₹4,999<span>/mo</span></div>
       <div class="tier-price-note">Monthly retainer</div>
       <ul class="tier-features">
-        <li><i class="fa-solid fa-check"></i> 15 creatives/month</li>
+        <li><i class="fa-solid fa-check"></i> 10 creatives/month + 2 free posts</li>
         <li><i class="fa-solid fa-check"></i> Brand style kit</li>
         <li><i class="fa-solid fa-check"></i> Ad banners included</li>
       </ul>
@@ -636,15 +659,22 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
     </div>
     <div class="tier-card">
       <div class="tier-name">Advanced</div>
-      <div class="tier-price">₹12,999<span>/mo</span></div>
+      <div class="tier-price">₹8,999<span>/mo</span></div>
       <div class="tier-price-note">Monthly retainer</div>
       <ul class="tier-features">
-        <li><i class="fa-solid fa-check"></i> Unlimited creatives</li>
+        <li><i class="fa-solid fa-check"></i> 20 creatives/month</li>
         <li><i class="fa-solid fa-check"></i> Full brand identity design</li>
         <li><i class="fa-solid fa-check"></i> Packaging & print design</li>
       </ul>
       <a href="#contact-cta" class="btn-tier">Get Started</a>
     </div>
+  </div>
+
+  <div class="addon-heading">Individual Design Add-Ons</div>
+  <div class="addon-grid">
+    <div class="addon-card"><span class="addon-name">1 Template</span><span class="addon-price">₹499</span></div>
+    <div class="addon-card"><span class="addon-name">Logo Design</span><span class="addon-price">₹1,199</span></div>
+    <div class="addon-card"><span class="addon-name">Brochure</span><span class="addon-price">₹1,499</span></div>
   </div>
 </section>
 
@@ -667,10 +697,10 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
   <div class="tier-grid">
     <div class="tier-card">
       <div class="tier-name">Basic</div>
-      <div class="tier-price">₹3,999<span>/mo</span></div>
+      <div class="tier-price">₹2,999<span>/mo</span></div>
       <div class="tier-price-note">Monthly retainer</div>
       <ul class="tier-features">
-        <li><i class="fa-solid fa-check"></i> 2 videos/month (up to 1 min)</li>
+        <li><i class="fa-solid fa-check"></i> 2 videos/month + 1 free video</li>
         <li><i class="fa-solid fa-check"></i> Basic cuts & transitions</li>
       </ul>
       <a href="#contact-cta" class="btn-tier">Get Started</a>
@@ -678,10 +708,10 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
     <div class="tier-card popular">
       <div class="tier-ribbon">Most Popular</div>
       <div class="tier-name">Standard</div>
-      <div class="tier-price">₹8,999<span>/mo</span></div>
+      <div class="tier-price">₹5,999<span>/mo</span></div>
       <div class="tier-price-note">Monthly retainer</div>
       <ul class="tier-features">
-        <li><i class="fa-solid fa-check"></i> 5 videos/month</li>
+        <li><i class="fa-solid fa-check"></i> 5 videos/month + 1 free video</li>
         <li><i class="fa-solid fa-check"></i> Sound design & captions</li>
         <li><i class="fa-solid fa-check"></i> Custom transitions</li>
       </ul>
@@ -689,16 +719,23 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
     </div>
     <div class="tier-card">
       <div class="tier-name">Advanced</div>
-      <div class="tier-price">₹15,999<span>/mo</span></div>
+      <div class="tier-price">₹9,999<span>/mo</span></div>
       <div class="tier-price-note">Monthly retainer</div>
       <ul class="tier-features">
-        <li><i class="fa-solid fa-check"></i> 10+ videos/month</li>
+        <li><i class="fa-solid fa-check"></i> 10 videos/month + 2 free videos</li>
         <li><i class="fa-solid fa-check"></i> Motion graphics</li>
         <li><i class="fa-solid fa-check"></i> Multi-platform formats</li>
         <li><i class="fa-solid fa-check"></i> Priority turnaround</li>
       </ul>
       <a href="#contact-cta" class="btn-tier">Get Started</a>
     </div>
+  </div>
+
+  <div class="addon-heading">Individual Video Add-Ons</div>
+  <div class="addon-grid">
+    <div class="addon-card"><span class="addon-name">1 Reel (up to 1 min)</span><span class="addon-price">₹799</span></div>
+    <div class="addon-card"><span class="addon-name">Long-Form Video (YouTube)</span><span class="addon-price">₹1,999</span></div>
+    <div class="addon-card"><span class="addon-name">Motion Graphic Intro</span><span class="addon-price">₹3,999</span></div>
   </div>
 
   <div class="custom-note">
