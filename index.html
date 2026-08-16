@@ -86,6 +86,9 @@ header.scrolled{background:rgba(5,15,26,0.98);backdrop-filter:blur(20px);box-sha
 .service-icon{width:52px;height:52px;background:rgba(77,171,255,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:22px;color:var(--blue);}
 .service-card h3{font-size:19px;font-weight:600;margin-bottom:10px;color:var(--text);}
 .service-card p{color:var(--muted);font-size:14.5px;line-height:1.75;}
+.service-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin-top:2px;}
+.service-list li{color:var(--muted);font-size:14px;line-height:1.6;display:flex;align-items:flex-start;gap:9px;}
+.service-list li i{color:var(--blue);font-size:11px;margin-top:5px;flex-shrink:0;}
 
 /* ===== INTERNSHIP CARDS ===== */
 .internship-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;}
@@ -484,42 +487,90 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:70px 7% 
     <div class="service-card">
       <div class="service-icon"><i class="fa-solid fa-layer-group"></i></div>
       <h3>Industry-Oriented Training Program</h3>
-      <p>Industry-oriented programs designed to help students gain practical knowledge, real-world exposure, and develop job-ready technical skills through structured guided learning, backed by 100% job support.</p>
+      <ul class="service-list">
+        <li><i class="fa-solid fa-circle"></i> Live + Recorded sessions</li>
+        <li><i class="fa-solid fa-circle"></i> Practical, job-ready technical skill training</li>
+        <li><i class="fa-solid fa-circle"></i> Real-world exposure through live projects</li>
+        <li><i class="fa-solid fa-circle"></i> Structured, mentor-guided learning</li>
+        <li><i class="fa-solid fa-circle"></i> 100% job support</li>
+      </ul>
     </div>
     <div class="service-card">
       <div class="service-icon"><i class="fa-solid fa-globe"></i></div>
       <h3>Software / Web Development</h3>
-      <p>Complete web and software solutions including a custom domain, 1-year hosting, full-year service support, and SEO optimization — everything you need to launch and grow your online presence.</p>
+      <ul class="service-list">
+        <li><i class="fa-solid fa-circle"></i> Custom website & software development</li>
+        <li><i class="fa-solid fa-circle"></i> Free custom domain included (1 year)</li>
+        <li><i class="fa-solid fa-circle"></i> 1-year hosting provided</li>
+        <li><i class="fa-solid fa-circle"></i> Full year service & maintenance support</li>
+        <li><i class="fa-solid fa-circle"></i> Built-in SEO optimization</li>
+      </ul>
     </div>
     <div class="service-card">
       <div class="service-icon"><i class="fa-solid fa-bullhorn"></i></div>
       <h3>Digital Marketing Services</h3>
-      <p>End-to-end digital marketing services covering strategy, content, and performance reporting to help your brand grow online.</p>
+      <ul class="service-list">
+        <li><i class="fa-solid fa-circle"></i> End-to-end marketing strategy</li>
+        <li><i class="fa-solid fa-circle"></i> Content planning & creation</li>
+        <li><i class="fa-solid fa-circle"></i> Performance tracking & reporting</li>
+        <li><i class="fa-solid fa-circle"></i> Brand growth across digital channels</li>
+        <li><i class="fa-solid fa-circle"></i> Monthly performance reports</li>
+      </ul>
     </div>
     <div class="service-card">
       <div class="service-icon"><i class="fa-solid fa-hashtag"></i></div>
       <h3>Social Media Management & Marketing</h3>
-      <p>Complete social media management and marketing — content planning, posting, community management, and campaigns across all major platforms.</p>
+      <ul class="service-list">
+        <li><i class="fa-solid fa-circle"></i> Content planning & scheduling</li>
+        <li><i class="fa-solid fa-circle"></i> Regular posting across platforms</li>
+        <li><i class="fa-solid fa-circle"></i> Community management</li>
+        <li><i class="fa-solid fa-circle"></i> Campaign planning & execution</li>
+        <li><i class="fa-solid fa-circle"></i> Meta Ads for marketing</li>
+      </ul>
     </div>
     <div class="service-card">
       <div class="service-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
       <h3>SEO Services</h3>
-      <p>Comprehensive SEO services including on-page, technical, and local SEO — for all types of websites and businesses.</p>
+      <ul class="service-list">
+        <li><i class="fa-solid fa-circle"></i> On-page SEO</li>
+        <li><i class="fa-solid fa-circle"></i> Off-page SEO</li>
+        <li><i class="fa-solid fa-circle"></i> Technical SEO</li>
+        <li><i class="fa-solid fa-circle"></i> Local SEO</li>
+        <li><i class="fa-solid fa-circle"></i> Suitable for all website types</li>
+      </ul>
     </div>
     <div class="service-card">
       <div class="service-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
       <h3>Paid Ads</h3>
-      <p>Performance-driven paid advertising campaigns across Google Ads and Meta Ads to drive targeted traffic, leads, and conversions.</p>
+      <ul class="service-list">
+        <li><i class="fa-solid fa-circle"></i> Google Ads</li>
+        <li><i class="fa-solid fa-circle"></i> Meta Ads (Facebook & Instagram)</li>
+        <li><i class="fa-solid fa-circle"></i> Other platforms — LinkedIn, YouTube, X (Twitter)</li>
+        <li><i class="fa-solid fa-circle"></i> Targeted traffic & lead generation</li>
+        <li><i class="fa-solid fa-circle"></i> Conversion-focused ad strategy</li>
+      </ul>
     </div>
     <div class="service-card">
       <div class="service-icon"><i class="fa-solid fa-palette"></i></div>
       <h3>Graphic Designing</h3>
-      <p>Creative graphic design solutions including social media creatives, ad banners, brand assets, and branded content for all your marketing needs.</p>
+      <ul class="service-list">
+        <li><i class="fa-solid fa-circle"></i> Social media creatives</li>
+        <li><i class="fa-solid fa-circle"></i> Ad banners & marketing visuals</li>
+        <li><i class="fa-solid fa-circle"></i> Brand identity & logo designing</li>
+        <li><i class="fa-solid fa-circle"></i> Templates & brochure design</li>
+        <li><i class="fa-solid fa-circle"></i> Branded content for all platforms</li>
+      </ul>
     </div>
     <div class="service-card">
       <div class="service-icon"><i class="fa-solid fa-film"></i></div>
       <h3>Video Editing</h3>
-      <p>Professional video editing services for reels, ads, and promotional content — polished, platform-ready videos that capture attention.</p>
+      <ul class="service-list">
+        <li><i class="fa-solid fa-circle"></i> Reels & short-form video editing</li>
+        <li><i class="fa-solid fa-circle"></i> Ad & promotional video production</li>
+        <li><i class="fa-solid fa-circle"></i> Long-form video editing for YouTube & other channels</li>
+        <li><i class="fa-solid fa-circle"></i> Platform-ready formatting</li>
+        <li><i class="fa-solid fa-circle"></i> Polished, attention-grabbing edits</li>
+      </ul>
     </div>
   </div>
 </section>
