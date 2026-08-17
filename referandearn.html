@@ -1,25 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="icon" href="Logo.png" type="image/x-icon">
+    <meta charset="UTF-8">
 
-<title>Refer & Earn | QuadSync Tech Solutions</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<meta name="description"
-content="Refer your friends to QuadSync Tech Solutions and earn exciting rewards through our Refer & Earn program.">
+    <title>
+        Refer & Earn | QuadSync Tech Solutions
+    </title>
 
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Sora:wght@300;400;600;700&display=swap"
-rel="stylesheet">
+    <meta name="description"
+          content="Refer friends to QuadSync Tech Solutions training programs and earn rewards on successful referrals.">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon"
+          href="Logo.png"
+          type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 
 <style>
 
+/* =========================================================
+   ROOT
+========================================================= */
+
 :root {
+
     --blue: #4dabff;
     --blue-dark: #1e88e5;
     --blue-deeper: #0d47a1;
@@ -33,157 +56,284 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     --muted: #8fa8c4;
 
     --border: rgba(77,171,255,0.18);
+
     --glow: rgba(77,171,255,0.08);
 }
 
+
+/* =========================================================
+   RESET
+========================================================= */
+
 * {
+
     margin: 0;
     padding: 0;
+
     box-sizing: border-box;
+
     scroll-behavior: smooth;
+
 }
+
 
 body {
+
     background: var(--bg);
+
     color: var(--text);
-    font-family: 'Space Grotesk', sans-serif;
+
+    font-family:
+        'Space Grotesk',
+        sans-serif;
+
     overflow-x: hidden;
+
 }
 
+
+/* Background Grid */
+
 body::before {
+
     content: '';
+
     position: fixed;
+
     inset: 0;
 
     background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+
+        linear-gradient(
+            var(--border) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            var(--border) 1px,
+            transparent 1px
+        );
 
     background-size: 60px 60px;
-    opacity: 0.4;
+
+    opacity: 0.35;
+
     pointer-events: none;
-    z-index: 0;
+
+    z-index: -1;
+
 }
 
 
-/* ================= NAVBAR ================= */
+/* =========================================================
+   NAVBAR
+========================================================= */
 
 header {
+
     position: fixed;
+
     width: 100%;
-    z-index: 1000;
+
     top: 0;
 
-    background: rgba(5,15,26,0.96);
+    left: 0;
+
+    z-index: 1000;
+
+    background:
+        rgba(5,15,26,0.96);
+
     backdrop-filter: blur(16px);
 
-    border-bottom: 1px solid var(--border);
+    border-bottom:
+        1px solid var(--border);
+
 }
+
 
 .navbar {
+
     display: flex;
-    justify-content: space-between;
+
     align-items: center;
 
-    padding: 10px 7%;
+    justify-content: space-between;
+
+    padding:
+        10px 7%;
+
 }
+
 
 .logo {
+
     display: flex;
+
     align-items: center;
+
     gap: 10px;
+
     text-decoration: none;
+
 }
+
 
 .logo img {
-    height: 48px;
+
     width: auto;
+
+    height: 48px;
+
     border-radius: 8px;
+
 }
+
 
 .logo-text {
+
     font-family: 'Sora', sans-serif;
-    font-size: 25px;
+
+    font-size: 24px;
+
     font-weight: 700;
+
     color: var(--blue);
+
 }
+
 
 .nav-links {
+
     list-style: none;
+
     display: flex;
-    gap: 4px;
+
     align-items: center;
+
+    gap: 4px;
+
 }
+
 
 .nav-links a {
+
     text-decoration: none;
+
     color: #fff;
 
-    padding: 7px 12px;
-    border-radius: 6px;
+    padding:
+        8px 12px;
+
+    border-radius: 7px;
 
     font-size: 15px;
+
     font-weight: 500;
 
-    transition: .2s;
+    transition: .25s;
+
 }
+
 
 .nav-links a:hover {
+
     color: var(--blue);
-    background: var(--glow);
+
+    background:
+        rgba(77,171,255,0.08);
+
 }
 
-.nav-links .active {
+
+.nav-links a.active {
+
     color: var(--blue);
+
 }
+
 
 .nav-cta {
+
     background: var(--blue);
+
     color: white !important;
-    padding: 8px 16px !important;
-    border-radius: 8px !important;
+
+    padding:
+        8px 16px !important;
+
 }
+
 
 .nav-cta:hover {
-    background: var(--blue-dark) !important;
+
+    background:
+        var(--blue-dark) !important;
+
 }
+
 
 .menu-toggle {
+
     display: none;
-    font-size: 22px;
-    cursor: pointer;
-    color: var(--text);
-    background: none;
+
     border: none;
+
+    background: none;
+
+    color: white;
+
+    font-size: 23px;
+
+    cursor: pointer;
+
 }
 
 
-/* ================= HERO ================= */
+/* =========================================================
+   HERO
+========================================================= */
 
 .hero {
+
     min-height: 78vh;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     text-align: center;
 
-    padding: 150px 7% 90px;
+    padding:
+        150px 7% 90px;
 
     position: relative;
+
     overflow: hidden;
+
 }
+
 
 .hero-orb {
+
     position: absolute;
+
     border-radius: 50%;
+
     filter: blur(80px);
+
     pointer-events: none;
+
 }
 
+
 .orb1 {
+
     width: 600px;
+
     height: 600px;
 
     background:
@@ -193,13 +343,20 @@ header {
             transparent 70%
         );
 
-    top: -200px;
+    top: -250px;
+
     left: 50%;
-    transform: translateX(-50%);
+
+    transform:
+        translateX(-50%);
+
 }
 
+
 .orb2 {
+
     width: 400px;
+
     height: 400px;
 
     background:
@@ -209,253 +366,382 @@ header {
             transparent 70%
         );
 
-    bottom: -150px;
+    bottom: -200px;
+
     right: -100px;
+
 }
+
 
 .hero-content {
+
     position: relative;
-    z-index: 1;
-    max-width: 850px;
+
+    z-index: 2;
+
+    max-width: 900px;
+
 }
 
+
 .hero-badge {
+
     display: inline-flex;
+
     align-items: center;
+
     gap: 8px;
 
-    background: rgba(77,171,255,0.1);
-    border: 1px solid rgba(77,171,255,0.25);
+    padding:
+        8px 18px;
+
+    margin-bottom: 25px;
 
     border-radius: 100px;
 
-    padding: 7px 18px;
+    background:
+        rgba(77,171,255,0.1);
 
-    font-size: 13px;
+    border:
+        1px solid rgba(77,171,255,0.25);
+
     color: var(--blue);
 
-    margin-bottom: 24px;
+    font-size: 13px;
+
+    font-weight: 600;
+
 }
 
-.hero-badge i {
-    font-size: 12px;
-}
 
 .hero h1 {
+
     font-family: 'Sora', sans-serif;
 
-    font-size: clamp(40px, 6vw, 70px);
+    font-size:
+        clamp(42px, 6vw, 72px);
 
     line-height: 1.1;
 
-    letter-spacing: -1.5px;
+    letter-spacing: -2px;
 
     margin-bottom: 22px;
+
 }
+
 
 .hero h1 span {
+
     color: var(--blue);
+
 }
 
-.hero p {
-    max-width: 650px;
 
-    margin: 0 auto 32px;
+.hero p {
+
+    max-width: 700px;
+
+    margin:
+        0 auto 32px;
 
     color: var(--muted);
 
     font-size: 17px;
+
     line-height: 1.8;
+
 }
 
+
 .hero-buttons {
+
     display: flex;
+
     justify-content: center;
+
+    align-items: center;
+
     gap: 14px;
+
     flex-wrap: wrap;
+
 }
+
 
 .btn-primary,
 .btn-outline {
+
     display: inline-flex;
+
     align-items: center;
+
     justify-content: center;
 
-    gap: 8px;
+    gap: 9px;
 
-    padding: 13px 26px;
+    padding:
+        13px 25px;
 
     border-radius: 10px;
 
     text-decoration: none;
 
     font-size: 15px;
+
     font-weight: 600;
 
     transition: .25s;
+
 }
+
 
 .btn-primary {
+
     background: var(--blue);
+
     color: white;
+
 }
+
 
 .btn-primary:hover {
-    background: var(--blue-dark);
-    transform: translateY(-2px);
+
+    background:
+        var(--blue-dark);
+
+    transform:
+        translateY(-2px);
+
 }
+
 
 .btn-outline {
-    border: 1px solid rgba(77,171,255,0.4);
+
+    border:
+        1px solid rgba(77,171,255,0.4);
+
     color: var(--blue);
+
 }
+
 
 .btn-outline:hover {
-    background: var(--glow);
-    border-color: var(--blue);
-    transform: translateY(-2px);
+
+    background:
+        rgba(77,171,255,0.08);
+
+    transform:
+        translateY(-2px);
+
 }
 
 
-/* ================= SECTION ================= */
+/* =========================================================
+   SECTIONS
+========================================================= */
 
 .section {
-    padding: 90px 7%;
+
+    padding:
+        90px 7%;
+
     position: relative;
-    z-index: 1;
+
 }
+
 
 .dark-section {
-    background: var(--bg2);
+
+    background:
+        rgba(7,22,36,0.75);
+
 }
+
 
 .section-header {
+
     text-align: center;
-    margin-bottom: 50px;
+
+    max-width: 800px;
+
+    margin:
+        0 auto 50px;
+
 }
 
-.section-label {
-    color: var(--blue);
-    font-size: 12px;
 
-    letter-spacing: 3px;
-    text-transform: uppercase;
+.section-label {
+
+    color: var(--blue);
+
+    font-size: 12px;
 
     font-weight: 600;
 
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
     margin-bottom: 12px;
+
 }
+
 
 .section-title {
+
     font-family: 'Sora', sans-serif;
 
-    font-size: clamp(28px, 4vw, 40px);
+    font-size:
+        clamp(30px,4vw,42px);
 
     margin-bottom: 14px;
+
 }
 
+
 .section-sub {
+
     color: var(--muted);
 
-    max-width: 620px;
+    line-height: 1.7;
+
+}
+
+
+/* =========================================================
+   HOW IT WORKS
+========================================================= */
+
+.steps-grid {
+
+    max-width: 1100px;
 
     margin: auto;
 
-    line-height: 1.7;
-}
-
-
-/* ================= HOW IT WORKS ================= */
-
-.steps-grid {
     display: grid;
 
     grid-template-columns:
         repeat(4, 1fr);
 
     gap: 20px;
+
 }
 
+
 .step-card {
-    background: var(--bg3);
 
-    border: 1px solid var(--border);
+    position: relative;
 
-    border-radius: 18px;
-
-    padding: 32px 24px;
+    padding: 30px 22px;
 
     text-align: center;
 
+    background: var(--bg3);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 18px;
+
     transition: .3s;
 
-    position: relative;
 }
 
+
 .step-card:hover {
-    transform: translateY(-7px);
+
+    transform:
+        translateY(-6px);
 
     border-color:
         rgba(77,171,255,0.4);
 
-    box-shadow:
-        0 20px 50px rgba(0,0,0,0.3);
 }
 
+
 .step-number {
+
     position: absolute;
 
     top: 15px;
-    right: 18px;
 
-    font-size: 12px;
+    right: 17px;
 
     color: var(--blue);
 
+    font-size: 12px;
+
     font-weight: 700;
+
 }
 
+
 .step-icon {
-    width: 65px;
-    height: 65px;
+
+    width: 62px;
+
+    height: 62px;
+
+    margin:
+        0 auto 20px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
-    margin: 0 auto 20px;
-
-    border-radius: 16px;
+    border-radius: 15px;
 
     background:
         rgba(77,171,255,0.1);
 
     color: var(--blue);
 
-    font-size: 25px;
+    font-size: 24px;
+
 }
+
 
 .step-card h3 {
-    margin-bottom: 10px;
 
     font-size: 18px;
+
+    margin-bottom: 10px;
+
 }
 
+
 .step-card p {
+
     color: var(--muted);
 
     font-size: 14px;
 
     line-height: 1.7;
+
 }
 
 
-/* ================= REWARD ================= */
+/* =========================================================
+   REWARD HIGHLIGHT
+========================================================= */
 
 .reward-box {
-    max-width: 900px;
+
+    max-width: 950px;
 
     margin: auto;
+
+    padding:
+        50px 35px;
+
+    text-align: center;
+
+    border-radius: 22px;
+
+    border:
+        1px solid rgba(77,171,255,0.25);
 
     background:
         linear-gradient(
@@ -464,477 +750,753 @@ header {
             rgba(13,71,161,0.15)
         );
 
-    border: 1px solid
-        rgba(77,171,255,0.25);
-
-    border-radius: 22px;
-
-    padding: 50px 35px;
-
-    text-align: center;
-
-    position: relative;
-    overflow: hidden;
 }
 
-.reward-box::before {
-    content: '';
-
-    position: absolute;
-
-    width: 500px;
-    height: 500px;
-
-    top: -250px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(77,171,255,0.08),
-            transparent 65%
-        );
-}
 
 .reward-icon {
-    position: relative;
 
     width: 75px;
+
     height: 75px;
 
-    margin: 0 auto 20px;
+    margin:
+        0 auto 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
 
     border-radius: 50%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: rgba(77,171,255,0.12);
+    background:
+        rgba(77,171,255,0.1);
 
     color: var(--blue);
 
     font-size: 30px;
+
 }
 
+
 .reward-box h2 {
-    position: relative;
 
     font-family: 'Sora', sans-serif;
 
     font-size: 30px;
 
     margin-bottom: 12px;
+
 }
 
+
 .reward-box p {
-    position: relative;
+
+    max-width: 680px;
+
+    margin: auto;
 
     color: var(--muted);
 
     line-height: 1.7;
 
-    max-width: 600px;
-
-    margin: auto;
 }
 
 
-/* ================= REFERRAL FORM ================= */
+/* =========================================================
+   REFERRAL PROGRAM CARDS
+========================================================= */
 
-.referral-wrapper {
+.referral-program-grid {
+
+    max-width: 1200px;
+
+    margin: auto;
+
     display: grid;
 
     grid-template-columns:
-        1fr 1fr;
+        repeat(3, 1fr);
 
-    gap: 30px;
+    gap: 24px;
 
-    max-width: 1100px;
-
-    margin: auto;
 }
 
-.info-card,
-.form-card {
-    background: var(--bg3);
 
-    border: 1px solid var(--border);
+.referral-card {
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 30px 25px;
+
+    background:
+        var(--bg3);
+
+    border:
+        1px solid var(--border);
 
     border-radius: 20px;
 
-    padding: 35px;
+    transition: .3s;
+
 }
 
-.info-card h3,
-.form-card h3 {
+
+.referral-card:hover {
+
+    transform:
+        translateY(-7px);
+
+    border-color:
+        rgba(77,171,255,0.45);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.3);
+
+}
+
+
+.referral-card.featured {
+
+    border-color:
+        rgba(77,171,255,.5);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(77,171,255,.10),
+            var(--bg3)
+        );
+
+}
+
+
+.referral-badge {
+
+    width: fit-content;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding:
+        5px 12px;
+
+    margin-bottom: 18px;
+
+    border-radius: 50px;
+
+    background:
+        rgba(77,171,255,.1);
+
+    border:
+        1px solid var(--border);
+
+    color: var(--blue);
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+}
+
+
+.referral-icon {
+
+    width: 65px;
+
+    height: 65px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(77,171,255,.1);
+
+    color: var(--blue);
+
+    font-size: 27px;
+
+}
+
+
+.referral-card h3 {
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    margin-bottom: 6px;
+
+}
+
+
+.referral-card h2 {
+
     font-family: 'Sora', sans-serif;
 
-    font-size: 22px;
+    font-size: 24px;
 
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+
 }
 
-.info-card > p {
+
+.referral-card > p {
+
     color: var(--muted);
+
+    font-size: 14px;
 
     line-height: 1.7;
 
     margin-bottom: 25px;
+
 }
 
-.benefit {
-    display: flex;
 
-    align-items: flex-start;
+.referral-details {
 
-    gap: 14px;
+    margin-top: auto;
 
-    margin-bottom: 18px;
+    padding-top: 16px;
+
+    border-top:
+        1px solid var(--border);
+
 }
 
-.benefit-icon {
-    min-width: 38px;
-    height: 38px;
+
+.referral-details > div {
 
     display: flex;
+
+    justify-content: space-between;
+
     align-items: center;
-    justify-content: center;
 
-    border-radius: 9px;
+    gap: 10px;
 
-    background: rgba(77,171,255,0.1);
+    padding: 9px 0;
+
+    font-size: 13px;
+
+}
+
+
+.referral-details span {
+
+    color: var(--muted);
+
+}
+
+
+.referral-details span i {
 
     color: var(--blue);
+
+    margin-right: 6px;
+
 }
 
-.benefit h4 {
-    font-size: 15px;
 
-    margin-bottom: 4px;
-}
-
-.benefit p {
-    color: var(--muted);
-
-    font-size: 13px;
-
-    line-height: 1.5;
-}
-
-.form-group {
-    margin-bottom: 17px;
-}
-
-.form-group label {
-    display: block;
-
-    font-size: 13px;
-
-    color: var(--muted);
-
-    margin-bottom: 7px;
-}
-
-.form-group input,
-.form-group select {
-    width: 100%;
-
-    padding: 12px 14px;
-
-    border-radius: 9px;
-
-    border: 1px solid var(--border);
-
-    background: var(--bg2);
+.referral-details strong {
 
     color: var(--text);
 
-    outline: none;
-
-    font-family: inherit;
-
-    font-size: 14px;
-
-    transition: .2s;
 }
 
-.form-group input:focus,
-.form-group select:focus {
-    border-color: var(--blue);
 
-    box-shadow:
-        0 0 0 3px
-        rgba(77,171,255,0.08);
+.earn-box {
+
+    margin-top: 8px;
+
+    padding: 13px !important;
+
+    border-radius: 10px;
+
+    background:
+        rgba(77,171,255,.08);
+
+    border:
+        1px solid rgba(77,171,255,.2);
+
 }
 
-.form-submit {
-    width: 100%;
 
-    border: none;
+.earn-box strong {
 
-    cursor: pointer;
+    color: var(--blue);
 
-    padding: 13px;
+    font-size: 15px;
+
+}
+
+
+.referral-btn {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 20px;
+
+    padding:
+        12px 18px;
 
     border-radius: 9px;
 
-    background: var(--blue);
+    background:
+        var(--blue);
 
     color: white;
 
-    font-family: inherit;
+    text-decoration: none;
 
     font-size: 14px;
 
     font-weight: 600;
 
     transition: .25s;
-}
 
-.form-submit:hover {
-    background: var(--blue-dark);
-
-    transform: translateY(-1px);
 }
 
 
-/* ================= TERMS ================= */
+.referral-btn:hover {
+
+    background:
+        var(--blue-dark);
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+/* =========================================================
+   REFERRAL BENEFITS
+========================================================= */
+
+.benefits-grid {
+
+    max-width: 1050px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.benefit-card {
+
+    padding: 28px 22px;
+
+    text-align: center;
+
+    background:
+        var(--bg3);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 17px;
+
+}
+
+
+.benefit-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    margin:
+        0 auto 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        rgba(77,171,255,.1);
+
+    color: var(--blue);
+
+    font-size: 21px;
+
+}
+
+
+.benefit-card h3 {
+
+    font-size: 17px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.benefit-card p {
+
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================================
+   TERMS
+========================================================= */
 
 .terms {
+
     max-width: 900px;
 
     margin: auto;
 
     display: grid;
 
-    gap: 14px;
+    gap: 15px;
+
 }
 
+
 .term {
+
     display: flex;
 
-    gap: 12px;
-
     align-items: flex-start;
+
+    gap: 12px;
 
     color: var(--muted);
 
     font-size: 14px;
 
     line-height: 1.7;
+
 }
 
+
 .term i {
+
     color: var(--blue);
 
     margin-top: 4px;
+
 }
 
 
-/* ================= CTA ================= */
+/* =========================================================
+   CTA
+========================================================= */
 
 .cta-box {
+
     max-width: 1000px;
 
     margin: auto;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(77,171,255,0.12),
-            rgba(13,71,161,0.15)
-        );
+    padding:
+        55px 30px;
 
-    border: 1px solid
-        rgba(77,171,255,0.25);
+    text-align: center;
 
     border-radius: 20px;
 
-    padding: 55px 30px;
+    border:
+        1px solid rgba(77,171,255,.25);
 
-    text-align: center;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(77,171,255,.12),
+            rgba(13,71,161,.15)
+        );
+
 }
+
 
 .cta-box h2 {
+
     font-family: 'Sora', sans-serif;
 
-    font-size: clamp(25px, 4vw, 36px);
+    font-size:
+        clamp(26px,4vw,38px);
 
     margin-bottom: 14px;
+
 }
+
 
 .cta-box p {
+
+    max-width: 650px;
+
+    margin:
+        0 auto 25px;
+
     color: var(--muted);
 
-    max-width: 600px;
-
-    margin: 0 auto 25px;
-
     line-height: 1.7;
+
 }
 
 
-/* ================= FOOTER ================= */
+/* =========================================================
+   FOOTER
+========================================================= */
 
 footer {
-    background: var(--bg2);
 
-    border-top: 1px solid var(--border);
+    background:
+        var(--bg2);
 
-    padding: 65px 7% 25px;
+    border-top:
+        1px solid var(--border);
+
+    padding:
+        65px 7% 25px;
+
 }
 
+
 .footer-grid {
+
     display: grid;
 
     grid-template-columns:
         2fr 1fr 1fr 1.4fr;
 
     gap: 45px;
+
 }
 
+
 .footer-brand img {
+
     height: 44px;
 
     border-radius: 8px;
 
     margin-bottom: 14px;
+
 }
 
+
 .footer-brand h3 {
+
     font-family: 'Sora', sans-serif;
 
     font-size: 18px;
 
     margin-bottom: 8px;
+
 }
 
-.footer-brand p,
-.footer-col li,
-.footer-col a {
+
+.footer-brand p {
+
+    max-width: 300px;
+
     color: var(--muted);
 
     font-size: 14px;
 
     line-height: 1.7;
+
 }
 
-.footer-brand p {
-    max-width: 280px;
-}
 
 .footer-col h4 {
+
     color: var(--blue);
 
-    font-size: 14px;
+    font-size: 13px;
 
     letter-spacing: 1px;
 
     text-transform: uppercase;
 
     margin-bottom: 16px;
+
 }
+
 
 .footer-col ul {
+
     list-style: none;
+
 }
+
 
 .footer-col li {
+
     margin-bottom: 9px;
+
 }
+
 
 .footer-col a {
+
+    color: var(--muted);
+
     text-decoration: none;
 
+    font-size: 14px;
+
     transition: .2s;
+
 }
+
 
 .footer-col a:hover {
+
     color: var(--blue);
+
 }
 
+
 .footer-social {
+
     display: flex;
 
     gap: 10px;
 
     margin-top: 18px;
+
 }
 
+
 .footer-social a {
+
     width: 36px;
+
     height: 36px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     border-radius: 8px;
 
     background: var(--bg3);
 
-    border: 1px solid var(--border);
+    border:
+        1px solid var(--border);
 
     color: var(--muted);
 
     text-decoration: none;
 
     transition: .2s;
+
 }
 
+
 .footer-social a:hover {
+
     color: var(--blue);
 
     border-color:
-        rgba(77,171,255,0.4);
+        rgba(77,171,255,.4);
+
 }
 
+
 .footer-bottom {
-    border-top: 1px solid var(--border);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
 
     margin-top: 45px;
 
     padding-top: 20px;
 
-    display: flex;
+    border-top:
+        1px solid var(--border);
 
-    justify-content: space-between;
-
-    gap: 15px;
-
-    flex-wrap: wrap;
 }
 
+
 .footer-bottom p {
+
     color: var(--muted);
 
     font-size: 13px;
+
 }
 
 
-/* ================= WHATSAPP ================= */
+/* =========================================================
+   WHATSAPP
+========================================================= */
 
 .whatsapp-float {
+
     position: fixed;
 
-    bottom: 28px;
     right: 20px;
 
+    bottom: 28px;
+
     width: 54px;
+
     height: 54px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
 
     background: #25D366;
 
     color: white;
 
     border-radius: 50%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     font-size: 26px;
 
@@ -943,133 +1505,269 @@ footer {
     z-index: 9999;
 
     transition: .3s;
+
 }
+
 
 .whatsapp-float:hover {
-    transform: scale(1.1);
 
-    background: #1ebe5d;
+    transform:
+        scale(1.1);
+
 }
 
 
-/* ================= MOBILE ================= */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-@media(max-width: 1024px) {
+@media(max-width: 1050px) {
 
     .steps-grid {
+
         grid-template-columns:
-            repeat(2, 1fr);
+            repeat(2,1fr);
+
     }
 
-    .referral-wrapper {
-        grid-template-columns: 1fr;
+
+    .referral-program-grid {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
     }
+
+
+    .benefits-grid {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
 
     .footer-grid {
+
         grid-template-columns:
-            repeat(2, 1fr);
+            repeat(2,1fr);
+
     }
+
 }
+
 
 @media(max-width: 768px) {
 
     .nav-links {
+
         position: fixed;
 
         top: 0;
+
         right: -280px;
 
-        height: 100vh;
         width: 260px;
 
-        background: var(--bg2);
+        height: 100vh;
+
+        padding:
+            85px 24px 25px;
 
         flex-direction: column;
 
-        padding: 80px 24px 24px;
+        align-items: flex-start;
 
-        border-left: 1px solid var(--border);
+        background:
+            var(--bg2);
+
+        border-left:
+            1px solid var(--border);
 
         transition: .35s;
+
     }
+
 
     .nav-links.open {
+
         right: 0;
+
     }
+
+
+    .nav-links li {
+
+        width: 100%;
+
+    }
+
 
     .nav-links a {
+
+        display: block;
+
         width: 100%;
-        padding: 12px 16px;
+
+        padding:
+            12px 15px;
+
     }
+
 
     .menu-toggle {
+
         display: block;
+
     }
+
+
+    .hero {
+
+        padding-top: 135px;
+
+    }
+
 
     .hero h1 {
-        font-size: 40px;
+
+        font-size: 42px;
+
     }
 
+
     .steps-grid {
+
         grid-template-columns: 1fr;
+
     }
+
+
+    .referral-program-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .benefits-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
 }
+
 
 @media(max-width: 600px) {
 
-    .logo-text {
-        font-size: 18px;
+    .navbar {
+
+        padding:
+            10px 5%;
+
     }
 
-    .hero {
-        padding-top: 130px;
+
+    .logo-text {
+
+        font-size: 18px;
+
     }
+
+
+    .logo img {
+
+        height: 42px;
+
+    }
+
 
     .hero h1 {
+
         font-size: 36px;
+
+        letter-spacing: -1px;
+
     }
+
 
     .hero p {
+
         font-size: 15px;
+
     }
+
 
     .section {
-        padding: 70px 6%;
+
+        padding:
+            70px 6%;
+
     }
 
-    .info-card,
-    .form-card {
-        padding: 25px 20px;
+
+    .reward-box {
+
+        padding:
+            40px 22px;
+
     }
+
+
+    .reward-box h2 {
+
+        font-size: 25px;
+
+    }
+
 
     .footer-grid {
+
         grid-template-columns: 1fr;
+
         text-align: center;
+
     }
+
 
     .footer-brand p {
+
         max-width: 100%;
+
         margin: auto;
+
     }
+
 
     .footer-social {
+
         justify-content: center;
+
     }
 
+
     .footer-bottom {
+
         justify-content: center;
+
         text-align: center;
+
     }
+
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
-<!-- ================= WHATSAPP ================= -->
+<!-- =========================================================
+     WHATSAPP
+========================================================= -->
 
 <a href="https://wa.me/917796988650"
    class="whatsapp-float"
@@ -1081,63 +1779,114 @@ footer {
 </a>
 
 
-<!-- ================= NAVBAR ================= -->
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
 
 <header>
 
 <nav class="navbar">
 
-<a href="index.html" class="logo">
 
-    <img src="Logo.png" alt="QuadSync Logo">
+<a href="index.html"
+   class="logo">
 
-    <div class="logo-text">
+    <img src="Logo.png"
+         alt="QuadSync Tech Solutions Logo">
+
+    <span class="logo-text">
         QuadSync Tech Solutions
-    </div>
+    </span>
 
 </a>
 
 
-<ul class="nav-links" id="navLinks">
+<ul class="nav-links"
+    id="navLinks">
 
-      <li><a href="#home">Home</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="trainingprograms.html">Training Programs</a></li>
-      <li><a href="internship.html">Internships</a></li>
-      <li><a href="referandearn.html">Refer and Earn</a></li>
-      <li><a href="#contact">Contact</a></li>
+
+    <li>
+        <a href="index.html">
+            Home
+        </a>
+    </li>
+
+
+    <li>
+        <a href="services.html">
+            Services
+        </a>
+    </li>
+
+
+    <li>
+        <a href="trainingprograms.html">
+            Training Programs
+        </a>
+    </li>
+
+
+    <li>
+        <a href="internship.html">
+            Internships
+        </a>
+    </li>
+
+
+    <li>
+        <a href="refer-and-earn.html"
+           class="active">
+            Refer & Earn
+        </a>
+    </li>
+
+
+    <li>
+        <a href="index.html#contact">
+            Contact
+        </a>
+    </li>
+
 
 </ul>
 
 
-<button
-    class="menu-toggle"
-    id="menuToggle">
+<button class="menu-toggle"
+        id="menuToggle"
+        aria-label="Open menu">
 
-    ☰
+    <i class="fa-solid fa-bars"></i>
 
 </button>
+
 
 </nav>
 
 </header>
 
 
-<!-- ================= HERO ================= -->
+
+<!-- =========================================================
+     HERO
+========================================================= -->
 
 <section class="hero">
 
+
 <div class="hero-orb orb1"></div>
+
 <div class="hero-orb orb2"></div>
 
 
 <div class="hero-content">
 
+
 <div class="hero-badge">
 
     <i class="fa-solid fa-gift"></i>
 
-    QuadSync Referral Program
+    QuadSync Refer & Earn Program
 
 </div>
 
@@ -1145,6 +1894,7 @@ footer {
 <h1>
 
     Refer Friends.
+
     <br>
 
     <span>Earn Rewards.</span>
@@ -1154,24 +1904,23 @@ footer {
 
 <p>
 
-    Know someone who wants to build
-    industry-ready skills?
-
-    Refer them to QuadSync Tech Solutions
-    and become a part of our growing
-    learning community.
+    Share QuadSync's career-focused training
+    programs with your friends, classmates and
+    network. Earn up to <strong>₹150</strong> for
+    every successful referral.
 
 </p>
 
 
 <div class="hero-buttons">
 
-<a href="#refer"
+
+<a href="#programs"
    class="btn-primary">
 
-    <i class="fa-solid fa-share-nodes"></i>
+    <i class="fa-solid fa-gift"></i>
 
-    Start Referring
+    View Programs & Rewards
 
 </a>
 
@@ -1185,6 +1934,7 @@ footer {
 
 </a>
 
+
 </div>
 
 </div>
@@ -1192,30 +1942,38 @@ footer {
 </section>
 
 
-<!-- ================= HOW IT WORKS ================= -->
+
+<!-- =========================================================
+     HOW IT WORKS
+========================================================= -->
 
 <section class="section dark-section"
          id="how-it-works">
 
+
 <div class="section-header">
+
 
 <div class="section-label">
     Simple Process
 </div>
 
+
 <h2 class="section-title">
     How Refer & Earn Works
 </h2>
 
+
 <p class="section-sub">
 
-    Refer your friends and help them discover
-    practical, industry-oriented learning
-    opportunities with QuadSync.
+    Refer students to QuadSync programs and
+    earn rewards after a successful referral.
 
 </p>
 
+
 </div>
+
 
 
 <div class="steps-grid">
@@ -1227,21 +1985,28 @@ footer {
     01
 </span>
 
+
 <div class="step-icon">
+
     <i class="fa-solid fa-user-plus"></i>
+
 </div>
 
+
 <h3>
-    Register
+    Choose a Program
 </h3>
 
+
 <p>
-    Submit your details through
-    the referral form and get
-    your referral information.
+
+    Select the QuadSync training program
+    you want to recommend to your friends.
+
 </p>
 
 </div>
+
 
 
 <div class="step-card">
@@ -1250,21 +2015,28 @@ footer {
     02
 </span>
 
+
 <div class="step-icon">
+
     <i class="fa-solid fa-share-nodes"></i>
+
 </div>
 
+
 <h3>
-    Share
+    Share the Program
 </h3>
 
+
 <p>
-    Share QuadSync programs
-    with your friends, classmates,
-    colleagues or network.
+
+    Share the program link with your
+    friends, classmates or professional network.
+
 </p>
 
 </div>
+
 
 
 <div class="step-card">
@@ -1273,22 +2045,29 @@ footer {
     03
 </span>
 
+
 <div class="step-icon">
+
     <i class="fa-solid fa-user-check"></i>
+
 </div>
 
+
 <h3>
-    Successful Referral
+    Successful Enrollment
 </h3>
 
+
 <p>
-    Your referral becomes eligible
-    once the referred person
-    successfully completes the
-    required registration process.
+
+    When your referred person successfully
+    enrolls in the selected program, the
+    referral becomes eligible.
+
 </p>
 
 </div>
+
 
 
 <div class="step-card">
@@ -1297,18 +2076,24 @@ footer {
     04
 </span>
 
+
 <div class="step-icon">
+
     <i class="fa-solid fa-gift"></i>
+
 </div>
 
+
 <h3>
-    Earn Rewards
+    Earn Your Reward
 </h3>
 
+
 <p>
-    Eligible referrals are verified
-    by QuadSync and the applicable
-    referral reward is processed.
+
+    Receive the applicable referral reward
+    after successful verification of the referral.
+
 </p>
 
 </div>
@@ -1319,11 +2104,16 @@ footer {
 </section>
 
 
-<!-- ================= REWARD ================= -->
+
+<!-- =========================================================
+     REWARD HIGHLIGHT
+========================================================= -->
 
 <section class="section">
 
+
 <div class="reward-box">
+
 
 <div class="reward-icon">
 
@@ -1333,334 +2123,516 @@ footer {
 
 
 <h2>
-    Turn Your Network Into Rewards
+    Earn Up to ₹150 Per Successful Referral
 </h2>
 
 
 <p>
 
-    Share valuable learning opportunities
-    with your network while becoming a
-    part of QuadSync's referral community.
-
-    Referral rewards are subject to successful
-    verification and the applicable program
-    terms.
+    Choose the right program for your referral,
+    share the program link and earn the applicable
+    referral reward after successful enrollment
+    and verification.
 
 </p>
+
 
 </div>
 
 </section>
 
 
-<!-- ================= REFER FORM ================= -->
+
+<!-- =========================================================
+     PROGRAMS
+========================================================= -->
 
 <section class="section dark-section"
-         id="refer">
+         id="programs">
+
 
 <div class="section-header">
 
+
 <div class="section-label">
-    Join The Program
+    Referral Programs
 </div>
 
+
 <h2 class="section-title">
-    Start Referring Today
+    Choose a Program & Start Referring
 </h2>
+
 
 <p class="section-sub">
 
-    Enter your details below to participate
-    in the QuadSync Refer & Earn program.
+    Select any of the available QuadSync programs
+    below. Check the program fee and referral
+    reward before sharing.
 
 </p>
 
-</div>
-
-
-<div class="referral-wrapper">
-
-
-<!-- BENEFITS -->
-
-<div class="info-card">
-
-<h3>
-    Why Refer?
-</h3>
-
-<p>
-    Help your friends discover practical
-    training opportunities while building
-    your own network with QuadSync.
-</p>
-
-
-<div class="benefit">
-
-<div class="benefit-icon">
-    <i class="fa-solid fa-gift"></i>
-</div>
-
-<div>
-
-<h4>
-    Referral Rewards
-</h4>
-
-<p>
-    Earn applicable rewards for
-    successful and verified referrals.
-</p>
-
-</div>
 
 </div>
 
 
-<div class="benefit">
 
-<div class="benefit-icon">
-    <i class="fa-solid fa-users"></i>
-</div>
+<div class="referral-program-grid">
 
-<div>
 
-<h4>
-    Grow Your Network
-</h4>
 
-<p>
-    Introduce your friends and
-    classmates to industry-oriented
-    learning programs.
-</p>
+<!-- =====================================================
+     DATA ANALYST
+===================================================== -->
 
-</div>
+<div class="referral-card featured">
+
+
+<div class="referral-badge">
+
+    <i class="fa-solid fa-star"></i>
+
+    Most Popular
 
 </div>
 
 
-<div class="benefit">
+<div class="referral-icon">
 
-<div class="benefit-icon">
     <i class="fa-solid fa-chart-line"></i>
-</div>
-
-<div>
-
-<h4>
-    Build Connections
-</h4>
-
-<p>
-    Become an active member of
-    the QuadSync student community.
-</p>
 
 </div>
 
-</div>
-
-
-<div class="benefit">
-
-<div class="benefit-icon">
-    <i class="fa-solid fa-handshake"></i>
-</div>
-
-<div>
-
-<h4>
-    Support Others
-</h4>
-
-<p>
-    Help students and professionals
-    discover relevant career-building
-    opportunities.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- FORM -->
-
-<div class="form-card">
 
 <h3>
-    Referral Registration
+    Industry-Oriented Training Program
 </h3>
 
 
-<form
-    action="#"
-    method="POST"
-    onsubmit="submitReferral(event)">
-
-
-<div class="form-group">
-
-<label>
-    Your Name
-</label>
-
-<input
-    type="text"
-    name="name"
-    placeholder="Enter your full name"
-    required>
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-    Email Address
-</label>
-
-<input
-    type="email"
-    name="email"
-    placeholder="Enter your email"
-    required>
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-    WhatsApp Number
-</label>
-
-<input
-    type="tel"
-    name="phone"
-    placeholder="Enter your WhatsApp number"
-    required>
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-    Program You're Referring
-</label>
-
-<select
-    name="program"
-    required>
-
-<option value="">
-    Select Program
-</option>
-
-<option>
+<h2>
     Data Analyst
-</option>
+</h2>
 
-<option>
-    Digital Marketing
-</option>
 
-<option>
-    AI & Machine Learning
-</option>
+<p>
 
-<option>
-    Web Development
-</option>
+    Master Excel, SQL, Python, NumPy,
+    Pandas, Matplotlib, Seaborn, Power BI,
+    Tableau and AI for Data Analytics through
+    practical training and hands-on projects.
 
-<option>
+</p>
+
+
+
+<div class="referral-details">
+
+
+<div>
+
+    <span>
+        <i class="fa-solid fa-clock"></i>
+        Duration
+    </span>
+
+    <strong>
+        2 Months
+    </strong>
+
+</div>
+
+
+<div>
+
+    <span>
+        <i class="fa-solid fa-indian-rupee-sign"></i>
+        Program Fees
+    </span>
+
+    <strong>
+        ₹999
+    </strong>
+
+</div>
+
+
+<div class="earn-box">
+
+    <span>
+        <i class="fa-solid fa-gift"></i>
+        Referral Earnings
+    </span>
+
+    <strong>
+        ₹150 / Referral
+    </strong>
+
+</div>
+
+
+</div>
+
+
+
+<a href="trainingprograms.html?program=da"
+   class="referral-btn">
+
+    View Program & Refer
+
+    <i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     PYTHON
+===================================================== -->
+
+<div class="referral-card">
+
+
+<div class="referral-icon">
+
+    <i class="fa-brands fa-python"></i>
+
+</div>
+
+
+<h3>
+    Training Based Internship Program
+</h3>
+
+
+<h2>
     Python Programming
-</option>
-
-<option>
-    HR Manager
-</option>
-
-<option>
-    Other
-</option>
-
-</select>
-
-</div>
+</h2>
 
 
-<div class="form-group">
+<p>
 
-<label>
-    Referred Person's Name
-</label>
+    Learn Python programming through
+    structured practical training,
+    hands-on learning and project-based
+    experience.
 
-<input
-    type="text"
-    name="referred_name"
-    placeholder="Enter referred person's name"
-    required>
-
-</div>
+</p>
 
 
-<div class="form-group">
 
-<label>
-    Referred Person's Contact
-</label>
+<div class="referral-details">
 
-<input
-    type="tel"
-    name="referred_phone"
-    placeholder="Enter WhatsApp / contact number"
-    required>
+
+<div>
+
+    <span>
+        <i class="fa-solid fa-clock"></i>
+        Duration
+    </span>
+
+    <strong>
+        1 Month
+    </strong>
 
 </div>
 
 
-<button
-    type="submit"
-    class="form-submit">
+<div>
 
-    <i class="fa-solid fa-paper-plane"></i>
+    <span>
+        <i class="fa-solid fa-indian-rupee-sign"></i>
+        Program Fees
+    </span>
 
-    Submit Referral
-
-</button>
-
-
-</form>
+    <strong>
+        ₹299
+    </strong>
 
 </div>
+
+
+<div class="earn-box">
+
+    <span>
+        <i class="fa-solid fa-gift"></i>
+        Referral Earnings
+    </span>
+
+    <strong>
+        ₹50 / Referral
+    </strong>
+
+</div>
+
+
+</div>
+
+
+
+<a href="internship.html"
+   class="referral-btn">
+
+    View Program & Refer
+
+    <i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     WEB DEVELOPMENT
+===================================================== -->
+
+<div class="referral-card">
+
+
+<div class="referral-icon">
+
+    <i class="fa-solid fa-code"></i>
+
+</div>
+
+
+<h3>
+    Training Based Internship Program
+</h3>
+
+
+<h2>
+    Web Development
+</h2>
+
+
+<p>
+
+    Learn practical web development
+    through structured training,
+    hands-on projects and
+    industry-focused learning.
+
+</p>
+
+
+
+<div class="referral-details">
+
+
+<div>
+
+    <span>
+        <i class="fa-solid fa-clock"></i>
+        Duration
+    </span>
+
+    <strong>
+        1 Month
+    </strong>
+
+</div>
+
+
+<div>
+
+    <span>
+        <i class="fa-solid fa-indian-rupee-sign"></i>
+        Program Fees
+    </span>
+
+    <strong>
+        ₹299
+    </strong>
+
+</div>
+
+
+<div class="earn-box">
+
+    <span>
+        <i class="fa-solid fa-gift"></i>
+        Referral Earnings
+    </span>
+
+    <strong>
+        ₹50 / Referral
+    </strong>
+
+</div>
+
+
+</div>
+
+
+
+<a href="internship.html"
+   class="referral-btn">
+
+    View Program & Refer
+
+    <i class="fa-solid fa-arrow-right"></i>
+
+</a>
+
+
+</div>
+
 
 </div>
 
 </section>
 
 
-<!-- ================= TERMS ================= -->
+
+<!-- =========================================================
+     BENEFITS
+========================================================= -->
 
 <section class="section">
 
+
 <div class="section-header">
+
+
+<div class="section-label">
+    Why Refer
+</div>
+
+
+<h2 class="section-title">
+    More Than Just a Reward
+</h2>
+
+
+<p class="section-sub">
+
+    Help your friends discover practical
+    learning opportunities while earning
+    referral rewards.
+
+</p>
+
+
+</div>
+
+
+
+<div class="benefits-grid">
+
+
+<div class="benefit-card">
+
+
+<div class="benefit-icon">
+
+    <i class="fa-solid fa-gift"></i>
+
+</div>
+
+
+<h3>
+    Earn Rewards
+</h3>
+
+
+<p>
+
+    Earn up to ₹150 for every
+    successful eligible referral.
+
+</p>
+
+
+</div>
+
+
+
+<div class="benefit-card">
+
+
+<div class="benefit-icon">
+
+    <i class="fa-solid fa-users"></i>
+
+</div>
+
+
+<h3>
+    Help Your Network
+</h3>
+
+
+<p>
+
+    Introduce friends and classmates
+    to career-focused training programs.
+
+</p>
+
+
+</div>
+
+
+
+<div class="benefit-card">
+
+
+<div class="benefit-icon">
+
+    <i class="fa-solid fa-graduation-cap"></i>
+
+</div>
+
+
+<h3>
+    Career Opportunities
+</h3>
+
+
+<p>
+
+    Help others build practical,
+    industry-oriented skills.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     TERMS
+========================================================= -->
+
+<section class="section dark-section">
+
+
+<div class="section-header">
+
 
 <div class="section-label">
     Program Guidelines
 </div>
 
+
 <h2 class="section-title">
     Referral Terms
 </h2>
 
+
 </div>
+
 
 
 <div class="terms">
@@ -1668,63 +2640,73 @@ footer {
 
 <div class="term">
 
-<i class="fa-solid fa-circle-check"></i>
+    <i class="fa-solid fa-circle-check"></i>
 
-<span>
-    Referral eligibility is subject to verification
-    by QuadSync Tech Solutions.
-</span>
+    <span>
 
-</div>
+        Referral rewards are applicable only
+        for successful and verified referrals.
 
-
-<div class="term">
-
-<i class="fa-solid fa-circle-check"></i>
-
-<span>
-    A referral is considered successful only after
-    the referred person completes the applicable
-    registration/enrollment requirements.
-</span>
+    </span>
 
 </div>
 
 
 <div class="term">
 
-<i class="fa-solid fa-circle-check"></i>
+    <i class="fa-solid fa-circle-check"></i>
 
-<span>
-    Duplicate, self-referrals or fraudulent
-    referrals may not qualify for rewards.
-</span>
+    <span>
 
-</div>
+        A referral becomes eligible after the
+        referred student successfully enrolls
+        in the applicable program.
 
-
-<div class="term">
-
-<i class="fa-solid fa-circle-check"></i>
-
-<span>
-    Referral rewards are applicable according
-    to the active Refer & Earn campaign and
-    its eligibility conditions.
-</span>
+    </span>
 
 </div>
 
 
 <div class="term">
 
-<i class="fa-solid fa-circle-check"></i>
+    <i class="fa-solid fa-circle-check"></i>
 
-<span>
-    QuadSync Tech Solutions reserves the right
-    to verify referrals and modify or discontinue
-    the referral program when required.
-</span>
+    <span>
+
+        Duplicate, self-referrals or fraudulent
+        referrals may not qualify for rewards.
+
+    </span>
+
+</div>
+
+
+<div class="term">
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span>
+
+        Referral rewards differ according to
+        the selected program and active
+        Refer & Earn terms.
+
+    </span>
+
+</div>
+
+
+<div class="term">
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span>
+
+        QuadSync Tech Solutions reserves the
+        right to verify referrals and modify
+        the referral program when required.
+
+    </span>
 
 </div>
 
@@ -1734,14 +2716,19 @@ footer {
 </section>
 
 
-<!-- ================= CTA ================= -->
 
-<section class="section dark-section">
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section class="section">
+
 
 <div class="cta-box">
 
+
 <div class="section-label">
-    Refer. Grow. Earn.
+    Start Referring
 </div>
 
 
@@ -1752,194 +2739,264 @@ footer {
 
 <p>
 
-    Share the opportunity with your friends
-    and help them take the next step toward
-    building practical, industry-ready skills.
+    Choose a program above, share its link
+    with your friends and earn rewards for
+    successful referrals.
 
 </p>
 
 
-<a href="#refer"
+<a href="#programs"
    class="btn-primary">
 
     <i class="fa-solid fa-share-nodes"></i>
 
-    Refer Now
+    View Referral Programs
 
 </a>
+
 
 </div>
 
 </section>
 
 
-<!-- ================= FOOTER ================= -->
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
 
 <footer>
+
 
 <div class="footer-grid">
 
 
+
+<!-- BRAND -->
+
 <div class="footer-brand">
 
+
 <img src="Logo.png"
-     alt="QuadSync Logo">
+     alt="QuadSync Tech Solutions Logo">
+
 
 <h3>
     QuadSync Tech Solutions
 </h3>
 
+
 <p>
+
     Synchronizing Innovations with Success —
     empowering students and businesses through
-    technology and structured Training Programs.
+    technology and structured training programs.
+
 </p>
+
 
 
 <div class="footer-social">
 
+
 <a href="https://www.linkedin.com/company/quadsynctechsolutions"
-   target="_blank">
+   target="_blank"
+   aria-label="LinkedIn">
 
     <i class="fa-brands fa-linkedin-in"></i>
 
 </a>
 
+
 <a href="https://www.instagram.com/quadsynctechsolutions"
-   target="_blank">
+   target="_blank"
+   aria-label="Instagram">
 
     <i class="fa-brands fa-instagram"></i>
 
 </a>
 
+
 <a href="https://www.youtube.com/channel/UCi5KiF0xqmgYBEHAP5LLYIg"
-   target="_blank">
+   target="_blank"
+   aria-label="YouTube">
 
     <i class="fa-brands fa-youtube"></i>
 
 </a>
 
+
 <a href="https://github.com/quadsynctechsolutions"
-   target="_blank">
+   target="_blank"
+   aria-label="GitHub">
 
     <i class="fa-brands fa-github"></i>
 
 </a>
 
-</div>
 
 </div>
 
+</div>
+
+
+
+<!-- QUICK LINKS -->
 
 <div class="footer-col">
+
 
 <h4>
     Quick Links
 </h4>
 
+
 <ul>
 
-<li>
-<a href="index.html">
-    Home
-</a>
-</li>
 
 <li>
-<a href="services.html">
-    Services
-</a>
+    <a href="index.html">
+        Home
+    </a>
 </li>
 
-<li>
-<a href="trainingprograms.html">
-    Training Programs
-</a>
-</li>
 
 <li>
-<a href="internship.html">
-    Internships
-</a>
+    <a href="services.html">
+        Services
+    </a>
 </li>
 
+
 <li>
-<a href="refer-and-earn.html">
-    Refer & Earn
-</a>
+    <a href="trainingprograms.html">
+        Training Programs
+    </a>
 </li>
+
+
+<li>
+    <a href="internship.html">
+        Internships
+    </a>
+</li>
+
+
+<li>
+    <a href="refer-and-earn.html">
+        Refer & Earn
+    </a>
+</li>
+
+
+<li>
+    <a href="index.html#contact">
+        Contact
+    </a>
+</li>
+
 
 </ul>
 
 </div>
 
 
+
+<!-- PROGRAMS -->
+
 <div class="footer-col">
+
 
 <h4>
     Programs
 </h4>
 
+
 <ul>
 
-<li>
-<a href="trainingprograms.html?program=da">
-    Data Analyst
-</a>
-</li>
 
 <li>
-<a href="trainingprograms.html">
-    AI & ML
-</a>
+    <a href="trainingprograms.html?program=da">
+        Data Analyst
+    </a>
 </li>
 
-<li>
-<a href="trainingprograms.html">
-    Web Development
-</a>
-</li>
 
 <li>
-<a href="trainingprograms.html">
-    Python
-</a>
+    <a href="trainingprograms.html">
+        AI & ML
+    </a>
 </li>
 
+
 <li>
-<a href="trainingprograms.html">
-    HR Manager
-</a>
+    <a href="internship.html">
+        Web Development
+    </a>
 </li>
+
+
+<li>
+    <a href="internship.html">
+        Python
+    </a>
+</li>
+
+
+<li>
+    <a href="internship.html">
+        HR Manager
+    </a>
+</li>
+
 
 </ul>
 
 </div>
 
 
+
+<!-- CONTACT -->
+
 <div class="footer-col">
+
 
 <h4>
     Contact
 </h4>
 
+
 <ul>
 
-<li>
-    <i class="fa-solid fa-globe"></i>
-    <a href="https://www.quadsynctechsolutions.in"
-       target="_blank">
-        quadsynctechsolutions.in
-    </a>
-</li>
 
 <li>
+
+    <i class="fa-solid fa-globe"></i>
+
+    <a href="https://www.quadsynctechsolutions.in"
+       target="_blank">
+
+        quadsynctechsolutions.in
+
+    </a>
+
+</li>
+
+
+<li>
+
     <i class="fa-brands fa-whatsapp"></i>
+
     <a href="https://wa.me/917796988650"
        target="_blank">
+
         WhatsApp Support
+
     </a>
+
 </li>
+
 
 </ul>
 
@@ -1949,28 +3006,42 @@ footer {
 </div>
 
 
+
 <div class="footer-bottom">
 
+
 <p>
+
     © 2026 QuadSync Tech Solutions.
     All Rights Reserved.
+
 </p>
+
 
 <p>
+
     Refer & Earn Program
+
 </p>
 
+
 </div>
+
 
 </footer>
 
 
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script>
 
-/* ================= MOBILE MENU ================= */
 
 const menuToggle =
     document.getElementById("menuToggle");
+
 
 const navLinks =
     document.getElementById("navLinks");
@@ -1978,7 +3049,7 @@ const navLinks =
 
 menuToggle.addEventListener(
     "click",
-    () => {
+    function () {
 
         navLinks.classList.toggle("open");
 
@@ -1986,38 +3057,25 @@ menuToggle.addEventListener(
 );
 
 
-/* Close menu after clicking link */
+document
+    .querySelectorAll(".nav-links a")
+    .forEach(function(link) {
 
-document.querySelectorAll(
-    ".nav-links a"
-).forEach(link => {
+        link.addEventListener(
+            "click",
+            function() {
 
-    link.addEventListener(
-        "click",
-        () => {
+                navLinks.classList.remove("open");
 
-            navLinks.classList.remove("open");
+            }
+        );
 
-        }
-    );
+    });
 
-});
-
-
-/* ================= FORM ================= */
-
-function submitReferral(event) {
-
-    event.preventDefault();
-
-    alert(
-        "Thank you for joining the QuadSync Refer & Earn program. Your referral details have been submitted."
-    );
-
-}
 
 </script>
 
 
 </body>
+
 </html>
